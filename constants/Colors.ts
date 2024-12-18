@@ -6,6 +6,7 @@ export default {
     background: "#F6F6F6",
     tint: tintColorLight,
     error_500: "#C65468",
+    error_600: "#AA3D5A",
     tabIconDefault: "#ccc",
     tabIconSelected: tintColorLight,
     secondary_300: "#ACB5BB",

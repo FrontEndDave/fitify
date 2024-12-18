@@ -1,8 +1,10 @@
-import Hero from "@/components/home/Hero";
-import WorkoutProgress from "@/components/home/WorkoutProgress";
 import Colors from "@/constants/Colors";
 import { SafeAreaView, ScrollView, StatusBar, Text, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+
+import Hero from "@/components/home/Hero";
+import WorkoutProgress from "@/components/home/WorkoutProgress";
+import TodayActivity from "@/components/home/TodayActivity";
 
 export default function TabOneScreen() {
     return (
@@ -18,6 +20,7 @@ export default function TabOneScreen() {
                     <View style={{ flex: 1, paddingHorizontal: 25 }}>
                         <Hero />
                         <WorkoutProgress />
+                        <TodayActivity />
                     </View>
                 </ScrollView>
             </SafeAreaView>

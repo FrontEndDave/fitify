@@ -1,37 +1,46 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Tabs } from "expo-router";
 import React from "react";
+import { Tabs } from "expo-router";
 
-import { useClientOnlyValue } from "@/components/useClientOnlyValue";
 import Colors from "@/constants/Colors";
 
-function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>["name"]; color: string }) {
-    return (
-        <FontAwesome
-            size={28}
-            style={{ marginBottom: -3 }}
-            {...props}
-        />
-    );
-}
+import { ActiveHomeIcon, HomeIcon } from "@/assets/svg/Home";
+import { ActiveDiscoverIcon, DiscoverIcon } from "@/assets/svg/Discover";
+import { ActiveStatisticsIcon, StatisticsIcon } from "@/assets/svg/Statistics";
+import { ActiveSettingsIcon, SettingsIcon } from "@/assets/svg/Settings";
 
 export default function TabLayout() {
     return (
         <Tabs
             screenOptions={{
                 tabBarActiveTintColor: Colors.tint,
-                headerShown: useClientOnlyValue(false, true),
+                headerShown: false,
+                tabBarShowLabel: false,
+                tabBarStyle: {
+                    borderTopWidth: 0,
+                    shadowColor: "transparent",
+                    height: 95,
+                    paddingTop: 22,
+                },
             }}>
             <Tabs.Screen
                 name='index'
                 options={{
                     headerShown: false,
                     title: "Home",
-                    tabBarIcon: ({ color }) => (
-                        <TabBarIcon
-                            name='code'
-                            color={color}
-                        />
+                    tabBarIcon: ({ focused }) => (
+                        <>
+                            {focused ? (
+                                <ActiveHomeIcon
+                                    width={28}
+                                    height={28}
+                                />
+                            ) : (
+                                <HomeIcon
+                                    width={28}
+                                    height={28}
+                                />
+                            )}
+                        </>
                     ),
                 }}
             />
@@ -39,12 +48,21 @@ export default function TabLayout() {
                 name='discover'
                 options={{
                     headerShown: false,
-                    title: "Tab Two",
-                    tabBarIcon: ({ color }) => (
-                        <TabBarIcon
-                            name='code'
-                            color={color}
-                        />
+                    title: "Discover",
+                    tabBarIcon: ({ focused }) => (
+                        <>
+                            {focused ? (
+                                <ActiveDiscoverIcon
+                                    width={28}
+                                    height={28}
+                                />
+                            ) : (
+                                <DiscoverIcon
+                                    width={28}
+                                    height={28}
+                                />
+                            )}
+                        </>
                     ),
                 }}
             />
@@ -53,11 +71,20 @@ export default function TabLayout() {
                 options={{
                     headerShown: false,
                     title: "Statistics",
-                    tabBarIcon: ({ color }) => (
-                        <TabBarIcon
-                            name='code'
-                            color={color}
-                        />
+                    tabBarIcon: ({ focused }) => (
+                        <>
+                            {focused ? (
+                                <ActiveStatisticsIcon
+                                    width={28}
+                                    height={28}
+                                />
+                            ) : (
+                                <StatisticsIcon
+                                    width={28}
+                                    height={28}
+                                />
+                            )}
+                        </>
                     ),
                 }}
             />
@@ -66,11 +93,20 @@ export default function TabLayout() {
                 options={{
                     headerShown: false,
                     title: "Settings",
-                    tabBarIcon: ({ color }) => (
-                        <TabBarIcon
-                            name='code'
-                            color={color}
-                        />
+                    tabBarIcon: ({ focused }) => (
+                        <>
+                            {focused ? (
+                                <ActiveSettingsIcon
+                                    width={28}
+                                    height={28}
+                                />
+                            ) : (
+                                <SettingsIcon
+                                    width={28}
+                                    height={28}
+                                />
+                            )}
+                        </>
                     ),
                 }}
             />
