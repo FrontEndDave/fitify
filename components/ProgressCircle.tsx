@@ -32,7 +32,7 @@ const ProgressCircle: React.FC<ProgressCircleProps> = ({ size, progress }) => {
                 cx={size / 2}
                 cy={size / 2}
                 r={radius}
-                stroke={Colors.Success_400}
+                stroke={Colors.success_400}
                 strokeWidth={strokeWidth}
                 fill='none'
                 strokeDasharray={circumference}

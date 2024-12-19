@@ -1,6 +1,6 @@
+import { ScrollView, StatusBar, View } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Colors from "@/constants/Colors";
-import { SafeAreaView, ScrollView, StatusBar, Text, View } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import Hero from "@/components/home/Hero";
 import WorkoutProgress from "@/components/home/WorkoutProgress";
@@ -11,6 +11,7 @@ export default function TabOneScreen() {
         <SafeAreaProvider>
             <SafeAreaView style={{ flex: 1, width: "100%", backgroundColor: Colors.background }}>
                 <StatusBar
+                    barStyle='dark-content'
                     animated={true}
                     backgroundColor='transparent'
                 />
