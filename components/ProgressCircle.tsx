@@ -5,9 +5,10 @@ import Colors from "@/constants/Colors";
 interface ProgressCircleProps {
     size: number;
     progress: number;
+    backgroundColor?: string;
 }
 
-const ProgressCircle: React.FC<ProgressCircleProps> = ({ size, progress }) => {
+const ProgressCircle: React.FC<ProgressCircleProps> = ({ size, progress, backgroundColor }) => {
     const radius = (size - 10) / 2;
     const strokeWidth = 8;
     const circumference = 2 * Math.PI * radius;
@@ -24,7 +25,7 @@ const ProgressCircle: React.FC<ProgressCircleProps> = ({ size, progress }) => {
                 cx={size / 2}
                 cy={size / 2}
                 r={radius}
-                stroke={Colors.secondary_400}
+                stroke={backgroundColor ? backgroundColor : Colors.secondary_400}
                 strokeWidth={strokeWidth}
                 fill='none'
             />

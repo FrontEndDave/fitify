@@ -5,6 +5,8 @@ import Colors from "@/constants/Colors";
 import Hero from "@/components/home/Hero";
 import WorkoutProgress from "@/components/home/WorkoutProgress";
 import TodayActivity from "@/components/home/TodayActivity";
+import MyGoals from "@/components/home/MyGoals";
+import Chat from "@/components/home/Chat";
 
 export default function TabOneScreen() {
     return (
@@ -22,6 +24,8 @@ export default function TabOneScreen() {
                         <Hero />
                         <WorkoutProgress />
                         <TodayActivity />
+                        <MyGoals />
+                        <Chat />
                     </View>
                 </ScrollView>
             </SafeAreaView>
