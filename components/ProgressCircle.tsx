@@ -1,16 +1,16 @@
 import React from "react";
 import Svg, { Circle } from "react-native-svg";
 import Colors from "@/constants/Colors";
-
 interface ProgressCircleProps {
     size: number;
+    color?: string;
     progress: number;
     backgroundColor?: string;
 }
 
-const ProgressCircle: React.FC<ProgressCircleProps> = ({ size, progress, backgroundColor }) => {
+const ProgressCircle = ({ size, color, progress, backgroundColor }: ProgressCircleProps) => {
     const radius = (size - 10) / 2;
-    const strokeWidth = 8;
+    const strokeWidth = size / 9;
     const circumference = 2 * Math.PI * radius;
 
     const strokeDashoffset = circumference - (progress / 100) * circumference;
@@ -33,7 +33,7 @@ const ProgressCircle: React.FC<ProgressCircleProps> = ({ size, progress, backgro
                 cx={size / 2}
                 cy={size / 2}
                 r={radius}
-                stroke={Colors.success_400}
+                stroke={color ? color : Colors.success_400}
                 strokeWidth={strokeWidth}
                 fill='none'
                 strokeDasharray={circumference}

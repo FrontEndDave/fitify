@@ -11,8 +11,8 @@ export default function RightArrow({ ...props }) {
             {...props}>
             <Path
                 d='M8.417 3.96l3.541 3.54-3.54 3.54M2.042 7.5h9.817'
-                stroke='#6C7278'
-                strokeWidth={1.9}
+                stroke={props.color ? props.color : "#6C7278"}
+                strokeWidth={props.strokeWidth ? props.strokeWidth : 1.9}
                 strokeMiterlimit={10}
                 strokeLinecap='round'
                 strokeLinejoin='round'

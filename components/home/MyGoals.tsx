@@ -31,7 +31,7 @@ const GoalCard = ({ title, description, progress, type }: GoalCardProps) => {
 
             <View style={{ width: 70, height: 70, display: "flex", justifyContent: "center", alignItems: "center" }}>
                 <ProgressCircle
-                    size={65}
+                    size={60}
                     backgroundColor={Colors.secondary_100}
                     progress={progress}
                 />
