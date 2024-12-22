@@ -25,7 +25,7 @@ export default function TabOneScreen() {
                         <WorkoutProgress />
                         <TodayActivity />
                         <MyGoals />
-                        <Chat />
+                        {/* <Chat /> */}
                     </View>
                 </ScrollView>
             </SafeAreaView>

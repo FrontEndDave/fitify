@@ -67,7 +67,7 @@ export default function OurCollection() {
     return (
         <View style={{ marginTop: 20, width: "100%", paddingRight: 25 }}>
             <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                <Text style={{ fontFamily: "Manrope-Bold", fontSize: 22, color: Colors.secondary_500 }}>Our Collection</Text>
+                <Text style={{ fontFamily: "Manrope-Bold", fontSize: 20, color: Colors.secondary_500 }}>Our Collection</Text>
             </View>
 
             <View style={{ display: "flex", flexDirection: "column", gap: 16, marginTop: 20, paddingBottom: 40 }}>

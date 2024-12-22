@@ -10,7 +10,7 @@ export default function PopularExercises() {
     return (
         <View>
             <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingRight: 25 }}>
-                <Text style={{ fontFamily: "Manrope-Bold", fontSize: 22, color: Colors.secondary_500 }}>Popular Exercises</Text>
+                <Text style={{ fontFamily: "Manrope-Bold", fontSize: 21, color: Colors.secondary_500 }}>Popular Exercises</Text>
                 <TouchableOpacity style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 7 }}>
                     <Text style={{ fontFamily: "Manrope-Semibold", fontSize: 17, color: Colors.secondary_400 }}>See more</Text>
                     <RightArrow

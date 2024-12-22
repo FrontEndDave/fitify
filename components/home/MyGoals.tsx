@@ -45,9 +45,9 @@ export default function MyGoals() {
     return (
         <View style={{ marginTop: 32, paddingBottom: 30 }}>
             <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                <Text style={{ fontFamily: "Manrope-Bold", fontSize: 22, color: Colors.secondary_500 }}>My Goals</Text>
+                <Text style={{ fontFamily: "Manrope-Bold", fontSize: 19, color: Colors.secondary_500 }}>My Goals</Text>
                 <TouchableOpacity style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 7 }}>
-                    <Text style={{ fontFamily: "Manrope-Semibold", fontSize: 17, color: Colors.secondary_400 }}>See all</Text>
+                    <Text style={{ fontFamily: "Manrope-Semibold", fontSize: 16, color: Colors.secondary_400 }}>See all</Text>
                     <RightArrow
                         width={18}
                         height={19}

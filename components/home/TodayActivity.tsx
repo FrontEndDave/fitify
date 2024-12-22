@@ -1,8 +1,10 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
+import React, { useEffect, useState } from "react";
 import Colors from "@/constants/Colors";
 import RightArrow from "@/assets/svg/RightArrow";
 import CaloriesActivity from "./CaloriesActivity";
+import { getTodayStepCount } from "@/services/stepCounter";
+import { Accelerometer, Pedometer } from "expo-sensors";
 
 type ActivityCardProps = {
     title: string;
@@ -33,12 +35,57 @@ const ActicityCard = ({ title, description, value, type, color }: ActivityCardPr
 };
 
 export default function TodayActivity() {
+    const [steps, setSteps] = useState<number>(0);
+    const [activity, setActivity] = useState<string>("Standing");
+    const [lastY, setLastY] = useState<number>(0);
+    const [lastTimestamp, setLastTimestamp] = useState<number>(0);
+    const [lastMovementTime, setLastMovementTime] = useState<number>(Date.now());
+    const [lastStepTime, setLastStepTime] = useState<number>(Date.now());
+    const stepInterval = 800;
+    const sensitivity = 1.1;
+
+    useEffect(() => {
+        Accelerometer.setUpdateInterval(100);
+
+        const subscription = Accelerometer.addListener((accelerometerData) => {
+            const { x, y, z } = accelerometerData;
+
+            const magnitude = Math.sqrt(x * x + y * y + z * z);
+
+            const currentTimestamp = Date.now();
+            if (magnitude > sensitivity) {
+                const interval = currentTimestamp - lastTimestamp;
+                const stepIntervalElapsed = currentTimestamp - lastStepTime;
+
+                if (interval > 250 && stepIntervalElapsed > stepInterval) {
+                    setSteps((prevSteps) => prevSteps + 1);
+                    setLastTimestamp(currentTimestamp);
+                    setLastStepTime(currentTimestamp);
+                    setLastMovementTime(currentTimestamp);
+                    setActivity("Walking");
+                }
+            } else {
+                if (currentTimestamp - lastMovementTime > 3000) {
+                    setActivity("Standing");
+                }
+            }
+
+            setLastY(y);
+        });
+
+        return () => {
+            subscription.remove();
+        };
+    }, [lastY, lastTimestamp, lastMovementTime, lastStepTime]);
+
+    const resetSteps = () => setSteps(0);
+
     return (
         <View style={{ marginTop: 32 }}>
             <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                <Text style={{ fontFamily: "Manrope-Bold", fontSize: 22, color: Colors.secondary_500 }}>Today’s Activity</Text>
+                <Text style={{ fontFamily: "Manrope-Bold", fontSize: 19, color: Colors.secondary_500 }}>Today’s Activity</Text>
                 <TouchableOpacity style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 7 }}>
-                    <Text style={{ fontFamily: "Manrope-Semibold", fontSize: 17, color: Colors.secondary_400 }}>See details</Text>
+                    <Text style={{ fontFamily: "Manrope-Semibold", fontSize: 16, color: Colors.secondary_400 }}>See details</Text>
                     <RightArrow
                         width={18}
                         height={19}
@@ -66,7 +113,7 @@ export default function TodayActivity() {
                     <ActicityCard
                         title='Steps'
                         description='10K steps'
-                        value={6421}
+                        value={steps}
                         type='steps'
                         color={Colors.warning_300}
                     />
