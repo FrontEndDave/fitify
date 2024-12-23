@@ -2,6 +2,7 @@ import { Text, View } from "react-native";
 import Colors from "@/constants/Colors";
 import ProgressCircle from "../ProgressCircle";
 import { LinearGradient } from "expo-linear-gradient";
+import CountingText from "../common/CountingText";
 
 export default function WorkoutProgress() {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -49,7 +50,10 @@ export default function WorkoutProgress() {
                             color={Colors.primary}
                             backgroundColor={Colors.secondary_300}
                         />
-                        <Text style={{ fontFamily: "Manrope-Bold", fontSize: 21, color: Colors.primary, position: "absolute" }}>65%</Text>
+                        <CountingText
+                            customStyle={{ fontFamily: "Manrope-Bold", fontSize: 21, color: Colors.primary, position: "absolute" }}
+                            value={"65"}
+                        />
                     </View>
                 </View>
             </LinearGradient>
