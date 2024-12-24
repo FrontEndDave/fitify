@@ -3,7 +3,7 @@ import React from "react";
 import RightArrow from "@/assets/svg/RightArrow";
 import Colors from "@/constants/Colors";
 import PersonLiftingWeights from "@/assets/svg/PersonLiftingWeights";
-import ProgressCircle from "../ProgressCircle";
+import ProgressCircle from "../common/ProgressCircle";
 
 type GoalCardProps = {
     title: string;
@@ -34,6 +34,7 @@ const GoalCard = ({ title, description, progress, type }: GoalCardProps) => {
                     size={60}
                     backgroundColor={Colors.secondary_100}
                     progress={progress}
+                    color={Colors.success_400}
                 />
                 <Text style={{ fontFamily: "Manrope-Bold", fontSize: 16, color: Colors.secondary_500, position: "absolute" }}>{progress}%</Text>
             </View>

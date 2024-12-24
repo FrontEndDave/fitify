@@ -51,6 +51,10 @@ function RootLayoutNav() {
                 name='modal'
                 options={{ presentation: "modal" }}
             />
+            <Stack.Screen
+                name='[workout-details]'
+                options={{ headerShown: false }}
+            />
         </Stack>
     );
 }

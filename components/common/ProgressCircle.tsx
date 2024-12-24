@@ -1,19 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Svg, { Circle } from "react-native-svg";
-import Colors from "@/constants/Colors";
+import Animated, { useSharedValue, useAnimatedProps, withTiming, Easing } from "react-native-reanimated";
+
 interface ProgressCircleProps {
     size: number;
     color?: string;
     progress: number;
     backgroundColor?: string;
+    duration?: number;
 }
 
-const ProgressCircle = ({ size, color, progress, backgroundColor }: ProgressCircleProps) => {
+const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+
+const ProgressCircle = ({ size, color, progress, backgroundColor, duration = 2000 }: ProgressCircleProps) => {
     const radius = (size - 10) / 2;
     const strokeWidth = size / 9;
     const circumference = 2 * Math.PI * radius;
 
-    const strokeDashoffset = circumference - (progress / 100) * circumference;
+    const animatedProgress = useSharedValue(0);
+
+    useEffect(() => {
+        animatedProgress.value = withTiming(progress, {
+            duration,
+            easing: Easing.out(Easing.linear),
+        });
+    }, [progress, duration]);
+
+    const animatedProps = useAnimatedProps(() => {
+        const strokeDashoffset = circumference - (animatedProgress.value / 100) * circumference;
+        return {
+            strokeDashoffset,
+        };
+    });
 
     return (
         <Svg
@@ -25,19 +43,19 @@ const ProgressCircle = ({ size, color, progress, backgroundColor }: ProgressCirc
                 cx={size / 2}
                 cy={size / 2}
                 r={radius}
-                stroke={backgroundColor ? backgroundColor : Colors.secondary_400}
+                stroke={backgroundColor || "#d3d3d3"}
                 strokeWidth={strokeWidth}
                 fill='none'
             />
-            <Circle
+            <AnimatedCircle
                 cx={size / 2}
                 cy={size / 2}
                 r={radius}
-                stroke={color ? color : Colors.success_400}
+                stroke={color || "#4caf50"}
                 strokeWidth={strokeWidth}
                 fill='none'
                 strokeDasharray={circumference}
-                strokeDashoffset={strokeDashoffset}
+                animatedProps={animatedProps}
                 strokeLinecap='round'
             />
         </Svg>

@@ -5,6 +5,7 @@ import Colors from "@/constants/Colors";
 import { SecondGradient } from "@/assets/svg/SecGradient";
 import Svg, { FeColorMatrix, Filter, Image } from "react-native-svg";
 import PersonLiftingWeights from "@/assets/svg/PersonLiftingWeights";
+import { router } from "expo-router";
 
 export default function PopularExercises() {
     return (
@@ -26,6 +27,7 @@ export default function PopularExercises() {
                 style={{ marginTop: 20 }}>
                 {[1, 2, 3, 4, 5].map((item, index) => (
                     <TouchableOpacity
+                        onPress={() => router.push(`/[workout-details]?workout=Hand+Workout`)}
                         key={index}
                         style={{
                             width: 240,

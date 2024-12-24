@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import Colors from "@/constants/Colors";
-import ProgressCircle from "../ProgressCircle";
+import ProgressCircle from "../common/ProgressCircle";
 import { LinearGradient } from "expo-linear-gradient";
 import CountingText from "../common/CountingText";
 
@@ -49,6 +49,7 @@ export default function WorkoutProgress() {
                             progress={65}
                             color={Colors.primary}
                             backgroundColor={Colors.secondary_300}
+                            duration={2000}
                         />
                         <CountingText
                             customStyle={{ fontFamily: "Manrope-Bold", fontSize: 21, color: Colors.primary, position: "absolute" }}

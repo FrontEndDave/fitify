@@ -4,6 +4,7 @@ import Colors from "@/constants/Colors";
 import { SecondGradient } from "@/assets/svg/SecGradient";
 import PersonLiftingWeights from "@/assets/svg/PersonLiftingWeights";
 import Svg, { FeColorMatrix, Filter, Image } from "react-native-svg";
+import { router } from "expo-router";
 
 type ExerciseCardProps = {
     title: string;
@@ -14,6 +15,7 @@ type ExerciseCardProps = {
 const ExerciseCard = ({ title, color, accentColor }: ExerciseCardProps) => {
     return (
         <TouchableOpacity
+            onPress={() => router.push(`/[workout-details]?workout=Chest+abdominal+exercises`)}
             style={{
                 width: "100%",
                 height: 160,
