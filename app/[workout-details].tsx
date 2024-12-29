@@ -7,6 +7,8 @@ import Colors from "@/constants/Colors";
 
 import Hero from "@/components/workout-details/Hero";
 import Description from "@/components/workout-details/Description";
+import Episodes from "@/components/workout-details/Episodes";
+import WorkoutButton from "@/components/workout-details/WorkoutButton";
 
 export default function WorkoutDetails() {
     const { workout } = useLocalSearchParams();
@@ -27,8 +29,10 @@ export default function WorkoutDetails() {
                     <View style={{ flex: 1, paddingHorizontal: 25 }}>
                         <Hero name={workoutName} />
                         <Description />
+                        <Episodes />
                     </View>
                 </ScrollView>
+                <WorkoutButton />
             </SafeAreaView>
         </SafeAreaProvider>
     );
