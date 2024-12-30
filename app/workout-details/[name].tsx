@@ -11,8 +11,8 @@ import Episodes from "@/components/workout-details/Episodes";
 import WorkoutButton from "@/components/workout-details/WorkoutButton";
 
 export default function WorkoutDetails() {
-    const { workout } = useLocalSearchParams();
-    const workoutName = Array.isArray(workout) ? workout[0] : workout;
+    const { name } = useLocalSearchParams();
+    const workoutName = name ? (Array.isArray(name) ? name[0] : name) : "Unknown Workout";
 
     console.log(workoutName);
 

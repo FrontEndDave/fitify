@@ -1,7 +1,7 @@
 import React from "react";
 import { Path, Svg } from "react-native-svg";
 
-export default function LeftArrow({ ...props }) {
+export function LeftArrow({ ...props }) {
     return (
         <Svg
             width={24}
@@ -12,6 +12,26 @@ export default function LeftArrow({ ...props }) {
             <Path
                 d='M15 19.92L8.48 13.4c-.77-.77-.77-2.03 0-2.8L15 4.08'
                 stroke={props.color ? props.color : "#fff"}
+                strokeWidth={1.5}
+                strokeMiterlimit={10}
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+        </Svg>
+    );
+}
+
+export function UpArrow({ ...props }) {
+    return (
+        <Svg
+            width={25}
+            height={24}
+            viewBox='0 0 25 24'
+            fill='none'
+            {...props}>
+            <Path
+                d='M20.42 15.05L13.9 8.53c-.77-.77-2.03-.77-2.8 0l-6.52 6.52'
+                stroke='#DCE4E8'
                 strokeWidth={1.5}
                 strokeMiterlimit={10}
                 strokeLinecap='round'

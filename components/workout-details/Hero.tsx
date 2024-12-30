@@ -4,7 +4,7 @@ import Colors from "@/constants/Colors";
 import { SecondGradient } from "@/assets/svg/SecGradient";
 import Svg, { FeColorMatrix, Filter, Image } from "react-native-svg";
 import PersonLiftingWeights from "@/assets/svg/PersonLiftingWeights";
-import LeftArrow from "@/assets/svg/LeftArrow";
+import { LeftArrow } from "@/assets/svg/Arrow";
 import More from "@/assets/svg/More";
 import { router } from "expo-router";
 

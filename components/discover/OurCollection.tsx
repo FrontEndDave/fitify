@@ -15,7 +15,12 @@ type ExerciseCardProps = {
 const ExerciseCard = ({ title, color, accentColor }: ExerciseCardProps) => {
     return (
         <TouchableOpacity
-            onPress={() => router.push(`/[workout-details]?workout=Chest+abdominal+exercises`)}
+            onPress={() =>
+                router.push({
+                    pathname: "/workout-details/[name]",
+                    params: { name: "Hand Workout" },
+                })
+            }
             style={{
                 width: "100%",
                 height: 160,

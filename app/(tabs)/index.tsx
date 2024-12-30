@@ -6,7 +6,6 @@ import Hero from "@/components/home/Hero";
 import WorkoutProgress from "@/components/home/WorkoutProgress";
 import TodayActivity from "@/components/home/TodayActivity";
 import MyGoals from "@/components/home/MyGoals";
-import Chat from "@/components/home/Chat";
 import { StatusBar } from "expo-status-bar";
 
 export default function TabOneScreen() {
@@ -25,7 +24,6 @@ export default function TabOneScreen() {
                         <WorkoutProgress />
                         <TodayActivity />
                         <MyGoals />
-                        {/* <Chat /> */}
                     </View>
                 </ScrollView>
             </SafeAreaView>

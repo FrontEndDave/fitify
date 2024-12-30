@@ -27,7 +27,12 @@ export default function PopularExercises() {
                 style={{ marginTop: 20 }}>
                 {[1, 2, 3, 4, 5].map((item, index) => (
                     <TouchableOpacity
-                        onPress={() => router.push(`/[workout-details]?workout=Hand+Workout`)}
+                        onPress={() =>
+                            router.push({
+                                pathname: "/workout-details/[name]",
+                                params: { name: "Hand Workout" },
+                            })
+                        }
                         key={index}
                         style={{
                             width: 240,

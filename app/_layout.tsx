@@ -1,3 +1,4 @@
+import { usePushNotifications } from "@/services/usePushNotifications";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -13,6 +14,13 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+    const { expoPushToken, notification } = usePushNotifications();
+
+    const data = JSON.stringify(notification, undefined, 2);
+
+    console.log("Token: ", expoPushToken?.data ?? "No token");
+    console.log("Data: ", data);
+
     const [loaded, error] = useFonts({
         "Manrope-ExtraBold": require("../assets/fonts/Manrope-ExtraBold.ttf"), // 800
         "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"), // 700
@@ -42,7 +50,7 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
     return (
-        <Stack>
+        <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen
                 name='(tabs)'
                 options={{ headerShown: false }}
@@ -52,7 +60,11 @@ function RootLayoutNav() {
                 options={{ presentation: "modal" }}
             />
             <Stack.Screen
-                name='[workout-details]'
+                name='/workout/[name]'
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name='/workout-details/[name]'
                 options={{ headerShown: false }}
             />
         </Stack>
