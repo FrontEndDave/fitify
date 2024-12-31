@@ -1,18 +1,24 @@
-import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
-import Colors from "@/constants/Colors";
 import { UpArrow } from "@/assets/svg/Arrow";
 import { PauseIcon, PlayIcon } from "@/assets/svg/Controls";
+import Colors from "@/constants/Colors";
+import React, { useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 
-export default function ExerciseDetails() {
+export default function ExerciseDetails({ isPlaying, player }: { isPlaying: boolean; player: any }) {
     const [paused, setPaused] = useState(false);
 
     const handleButtonPress = () => {
-        setPaused((prev) => !prev);
+        if (isPlaying) {
+            player.pause();
+            setPaused(true);
+        } else {
+            player.play();
+            setPaused(false);
+        }
     };
 
     return (
-        <View style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+        <View style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", paddingHorizontal: 25, gap: 30 }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 14, width: "100%" }}>
                 <View style={{ flex: 1, backgroundColor: "rgba(245,245,245,0.10)", padding: 14, borderRadius: 20, width: 110, height: 80, display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center" }}>
                     <Text style={{ fontFamily: "Manrope-Regular", fontSize: 14.5, color: Colors.secondary_300 }}>Time Workout</Text>

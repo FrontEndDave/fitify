@@ -14,12 +14,9 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-    const { expoPushToken, notification } = usePushNotifications();
+    // const { expoPushToken, notification } = usePushNotifications();
 
-    const data = JSON.stringify(notification, undefined, 2);
-
-    console.log("Token: ", expoPushToken?.data ?? "No token");
-    console.log("Data: ", data);
+    // console.log("Token: ", expoPushToken?.data ?? "No token");
 
     const [loaded, error] = useFonts({
         "Manrope-ExtraBold": require("../assets/fonts/Manrope-ExtraBold.ttf"), // 800
@@ -60,11 +57,11 @@ function RootLayoutNav() {
                 options={{ presentation: "modal" }}
             />
             <Stack.Screen
-                name='/workout/[name]'
+                name='workout/[name]'
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name='/workout-details/[name]'
+                name='workout-details/[name]'
                 options={{ headerShown: false }}
             />
         </Stack>

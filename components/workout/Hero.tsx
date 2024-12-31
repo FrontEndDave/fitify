@@ -11,12 +11,12 @@ type HeroProps = {
 
 export default function Hero({ title }: HeroProps) {
     return (
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginTop: 20, paddingHorizontal: 25, position: "relative" }}>
             <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                 <TouchableOpacity onPress={() => router.back()}>
                     <LeftArrow />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Manrope-ExtraBold", fontSize: 17, color: Colors.primary }}>{title}</Text>
+                <Text style={{ fontFamily: "Manrope-ExtraBold", fontSize: 18, color: Colors.primary }}>{title}</Text>
                 <TouchableOpacity>
                     <More />
                 </TouchableOpacity>

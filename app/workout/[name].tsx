@@ -19,10 +19,10 @@ export default function WorkoutDetails() {
                     style='light'
                     animated
                 />
-                <View style={{ flex: 1, paddingHorizontal: 25 }}>
+                <View style={{ flex: 1 }}>
                     <Hero title={workoutName} />
                     <Video />
-                    <ExerciseDetails />
+                    {/* <ExerciseDetails /> */}
                 </View>
             </SafeAreaView>
         </SafeAreaProvider>
