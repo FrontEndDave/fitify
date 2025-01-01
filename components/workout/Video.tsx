@@ -31,7 +31,7 @@ export default function VideoScreen() {
                 <LinearGradient
                     start={[0.5, 0.03]}
                     end={[0.5, 0.95]}
-                    colors={["rgba(19,22,25,1)", "rgba(16,17,16,0)", "rgba(19,22,25,1)"]}
+                    colors={["rgba(19,22,25,1)", "rgba(16,17,16,0)", "rgba(16,17,16,0)", "rgba(19,22,25,1)"]}
                     style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
                 />
             </View>

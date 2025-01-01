@@ -7,6 +7,7 @@ import Hero from "@/components/workout/Hero";
 import { View } from "react-native";
 import Video from "@/components/workout/Video";
 import ExerciseDetails from "@/components/workout/ExerciseDetails";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function WorkoutDetails() {
     const { name } = useLocalSearchParams();
@@ -19,11 +20,11 @@ export default function WorkoutDetails() {
                     style='light'
                     animated
                 />
-                <View style={{ flex: 1 }}>
+                <GestureHandlerRootView style={{ flex: 1 }}>
                     <Hero title={workoutName} />
                     <Video />
                     {/* <ExerciseDetails /> */}
-                </View>
+                </GestureHandlerRootView>
             </SafeAreaView>
         </SafeAreaProvider>
     );
