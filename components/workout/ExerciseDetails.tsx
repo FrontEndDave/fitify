@@ -1,22 +1,13 @@
-import { Animated, Dimensions, Text, TouchableOpacity, View } from "react-native";
-import React, { useCallback, useRef, useState } from "react";
 import { PauseIcon, PlayIcon } from "@/assets/svg/Controls";
-import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-handler";
+import React, { useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { PanGestureHandler } from "react-native-gesture-handler";
 
-import Colors from "@/constants/Colors";
 import { UpArrow } from "@/assets/svg/Arrow";
-import BottomSheet, { BottomSheetView, useBottomSheet } from "@gorhom/bottom-sheet";
-import CustomBottomSheet from "./CustomBottomSheet";
+import Colors from "@/constants/Colors";
 
-const ScreenHeight = Dimensions.get("window").height;
-
-export default function ExerciseDetails({ isPlaying, player }: { isPlaying: boolean; player: any }) {
-    const bottomSheetRef = useRef<BottomSheet>(null);
-
+export default function ExerciseDetails({ isPlaying, player, handleSwipeUp }: { isPlaying: boolean; player: any; handleSwipeUp: any }) {
     const [paused, setPaused] = useState(false);
-    const [swipedUp, setSwipedUp] = useState(false);
-
-    const translateY = useRef(new Animated.Value(ScreenHeight)).current;
 
     const handleButtonPress = () => {
         if (isPlaying) {
@@ -25,12 +16,6 @@ export default function ExerciseDetails({ isPlaying, player }: { isPlaying: bool
         } else {
             player.play();
             setPaused(false);
-        }
-    };
-
-    const handleSwipeUp = (event: any) => {
-        if (event.nativeEvent.translationY < -50) {
-            bottomSheetRef.current?.expand();
         }
     };
 
@@ -76,7 +61,9 @@ export default function ExerciseDetails({ isPlaying, player }: { isPlaying: bool
                     </View>
                 </View>
 
-                <PanGestureHandler onGestureEvent={handleSwipeUp}>
+                <PanGestureHandler
+                    onGestureEvent={handleSwipeUp}
+                    onHandlerStateChange={handleSwipeUp}>
                     <View style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
                         <UpArrow
                             width={26}

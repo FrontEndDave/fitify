@@ -2,16 +2,25 @@ import { useLocalSearchParams } from "expo-router/build/hooks";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-import Colors from "@/constants/Colors";
+import CustomBottomSheet from "@/components/workout/CustomBottomSheet";
 import Hero from "@/components/workout/Hero";
-import { View } from "react-native";
 import Video from "@/components/workout/Video";
-import ExerciseDetails from "@/components/workout/ExerciseDetails";
+import Colors from "@/constants/Colors";
+import BottomSheet from "@gorhom/bottom-sheet";
+import { useRef } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function WorkoutDetails() {
     const { name } = useLocalSearchParams();
     const workoutName = name ? (Array.isArray(name) ? name[0] : name) : "Unknown Workout";
+
+    const bottomSheetRef = useRef<BottomSheet>(null);
+
+    const handleSwipeUp = (event: any) => {
+        if (event.nativeEvent.translationY < -50) {
+            bottomSheetRef.current?.expand();
+        }
+    };
 
     return (
         <SafeAreaProvider>
@@ -22,8 +31,8 @@ export default function WorkoutDetails() {
                 />
                 <GestureHandlerRootView style={{ flex: 1 }}>
                     <Hero title={workoutName} />
-                    <Video />
-                    {/* <ExerciseDetails /> */}
+                    <Video handleSwipeUp={handleSwipeUp} />
+                    <CustomBottomSheet ref={bottomSheetRef} />
                 </GestureHandlerRootView>
             </SafeAreaView>
         </SafeAreaProvider>

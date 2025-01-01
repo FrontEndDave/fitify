@@ -8,12 +8,14 @@ const ScreenHeight = Dimensions.get("window").height;
 
 const videoSource = "https://video-previews.elements.envatousercontent.com/69528e41-1ef1-48e6-9226-1b56ac753426/watermarked_preview/watermarked_preview.mp4";
 
-export default function VideoScreen() {
+export default function VideoScreen({ handleSwipeUp }: { handleSwipeUp: any }) {
     const player = useVideoPlayer(videoSource, (player) => {
         player.loop = true;
         player.muted = true;
         player.play();
     });
+
+    // console.log(handleSwipeUp);
 
     const { isPlaying } = useEvent(player, "playingChange", { isPlaying: player.playing });
 
@@ -38,6 +40,7 @@ export default function VideoScreen() {
             <ExerciseDetails
                 isPlaying={isPlaying}
                 player={player}
+                handleSwipeUp={handleSwipeUp}
             />
         </View>
     );
