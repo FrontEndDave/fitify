@@ -1,27 +1,21 @@
-import { ScrollView, View } from "react-native";
+import { ScrollView, StatusBar, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Colors from "@/constants/Colors";
 
-import Hero from "@/components/discover/Hero";
-import PopularExercises from "@/components/discover/PopularExercises";
-import OurCollection from "@/components/discover/OurCollection";
-import { StatusBar } from "expo-status-bar";
-
-export default function DiscoverScreen() {
+export default function SleepTrackerScreen() {
     return (
         <SafeAreaProvider>
             <SafeAreaView style={{ flex: 1, width: "100%", backgroundColor: Colors.background }}>
                 <StatusBar
-                    style='dark'
-                    animated
+                    barStyle='dark-content'
+                    animated={true}
+                    backgroundColor='transparent'
                 />
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                     style={{ width: "100%" }}>
                     <View style={{ flex: 1, paddingLeft: 25 }}>
-                        <Hero />
-                        <PopularExercises />
-                        <OurCollection />
+                        <Text>Sleep Tracker</Text>
                     </View>
                 </ScrollView>
             </SafeAreaView>

@@ -64,6 +64,14 @@ function RootLayoutNav() {
                 name='workout-details/[name]'
                 options={{ headerShown: false }}
             />
+            <Stack.Screen
+                name='water-tracker/water'
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name='sleep-tracker/sleep'
+                options={{ headerShown: false }}
+            />
         </Stack>
     );
 }

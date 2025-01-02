@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
+import { RelativePathString, router } from "expo-router";
 import Colors from "@/constants/Colors";
 import RightArrow from "@/assets/svg/RightArrow";
 import CaloriesActivity from "./CaloriesActivity";
@@ -15,8 +16,16 @@ type ActivityCardProps = {
 };
 
 const ActicityCard = ({ title, description, value, type, color }: ActivityCardProps) => {
+    const routePath: { water: "/water-tracker/water"; sleep: "/sleep-tracker/sleep"; steps: "/step-tracker/steps" } = {
+        water: "/water-tracker/water",
+        sleep: "/sleep-tracker/sleep",
+        steps: "/step-tracker/steps",
+    };
+
     return (
-        <View style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 16, paddingTop: 15 }}>
+        <TouchableOpacity
+            onPress={() => router.push(routePath[type] as RelativePathString)}
+            style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 16, paddingTop: 15 }}>
             <View style={{ display: "flex", flexDirection: "row", alignItems: "flex-start", gap: 12 }}>
                 <View style={{ backgroundColor: color, width: 9, height: 22, borderRadius: 8 }}></View>
                 <View>
@@ -30,7 +39,7 @@ const ActicityCard = ({ title, description, value, type, color }: ActivityCardPr
                 {type === "steps" ? <Text style={{ fontFamily: "Manrope-Medium", fontSize: 18, color: Colors.secondary_300, paddingBottom: 2.1 }}></Text> : null}
                 {type === "sleep" ? <Text style={{ fontFamily: "Manrope-Medium", fontSize: 18, color: Colors.secondary_300, paddingBottom: 2.1 }}>hr</Text> : null}
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 

@@ -11,8 +11,8 @@ export function IncompleteIcon({ ...props }) {
             {...props}>
             <Path
                 d='M12 21a9 9 0 100-18 9 9 0 000 18z'
-                fill='#fff'
-                stroke='#ACB5BB'
+                fill={props.color ? props.color : "#FFF"}
+                stroke={props.color ? props.strokeColor : "#ACB5BB"}
                 strokeWidth={1.5}
                 strokeMiterlimit={10}
                 strokeLinecap='round'

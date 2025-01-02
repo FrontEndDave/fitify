@@ -1,10 +1,12 @@
 import { View, Text, TouchableOpacity, ImageBackground } from "react-native";
-import React from "react";
+import { router } from "expo-router";
 import Colors from "@/constants/Colors";
+
+import formatExerciseTime from "@/services/formatTime";
+
+import { PlayIcon } from "@/assets/svg/Controls";
 import { VideoIcon } from "@/assets/svg/Video";
 import { CompleteIcon, IncompleteIcon } from "@/assets/svg/Status";
-import formatExerciseTime from "@/services/formatTime";
-import { PlayIcon } from "@/assets/svg/Controls";
 
 interface EpisodeCardProps {
     title: string;
@@ -15,7 +17,14 @@ interface EpisodeCardProps {
 
 export default function EpisodeCard({ title, time, completed, thumbnail }: EpisodeCardProps) {
     return (
-        <TouchableOpacity style={{ backgroundColor: Colors.primary, width: "100%", padding: 18, borderRadius: 24, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+        <TouchableOpacity
+            onPress={() =>
+                router.push({
+                    pathname: "/workout/[name]",
+                    params: { name: "Diamond pushup" },
+                })
+            }
+            style={{ backgroundColor: Colors.primary, width: "100%", padding: 18, borderRadius: 24, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
             <View style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 10 }}>
                 {completed ? (
                     <CompleteIcon

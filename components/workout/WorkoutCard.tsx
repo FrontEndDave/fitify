@@ -27,6 +27,8 @@ export default function WorkoutCard({ title, time, completed, thumbnail }: Episo
                     <IncompleteIcon
                         width={28}
                         height={28}
+                        color={Colors.secondary_400}
+                        strokeColor={"rgba(59,52,55,0.95)"}
                     />
                 )}
                 <View style={{ display: "flex", flexDirection: "column", gap: 6 }}>
