@@ -6,7 +6,7 @@ const AnimatedText = Animated.createAnimatedComponent(RNText);
 
 type CountingTextProps = {
     value: string;
-    customStyle: object;
+    customStyle?: string;
 };
 
 export default function CountingText({ value, customStyle }: CountingTextProps) {
@@ -26,5 +26,5 @@ export default function CountingText({ value, customStyle }: CountingTextProps) 
         return () => clearInterval(interval);
     }, []);
 
-    return <AnimatedText style={[customStyle]}>{displayValue}</AnimatedText>;
+    return <AnimatedText className={customStyle}>{displayValue}</AnimatedText>;
 }

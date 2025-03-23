@@ -1,6 +1,26 @@
 import React from "react";
 import { Path, Svg } from "react-native-svg";
 
+export function SecondRightArrow({ ...props }) {
+    return (
+        <Svg
+            width={15}
+            height={16}
+            viewBox='0 0 15 16'
+            fill='none'
+            {...props}>
+            <Path
+                d='M5.569 12.95l4.075-4.075a1.241 1.241 0 000-1.75L5.569 3.05'
+                stroke='#ACB5BB'
+                strokeWidth={1.5}
+                strokeMiterlimit={10}
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+        </Svg>
+    );
+}
+
 export function LeftArrow({ ...props }) {
     return (
         <Svg

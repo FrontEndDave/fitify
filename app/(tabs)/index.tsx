@@ -1,25 +1,37 @@
-import { ScrollView, View } from "react-native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import Colors from "@/constants/Colors";
-
+import MyGoals from "@/components/common/MyGoals";
+import TodayActivity from "@/components/common/TodayActivity";
 import Hero from "@/components/home/Hero";
 import WorkoutProgress from "@/components/home/WorkoutProgress";
-import TodayActivity from "@/components/home/TodayActivity";
-import MyGoals from "@/components/home/MyGoals";
-import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import { RefreshControl, ScrollView, StatusBar, Text, View } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-export default function TabOneScreen() {
+export default function Index() {
+    const [refreshing, setRefreshing] = useState(false);
+
+    const onRefresh = () => {
+        setRefreshing(true);
+        setTimeout(() => {
+            setRefreshing(false);
+        }, 1500);
+    };
+
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={{ flex: 1, width: "100%", backgroundColor: Colors.background }}>
+            <SafeAreaView className='flex-1 w-full bg-background'>
                 <StatusBar
-                    style='dark'
+                    barStyle='dark-content'
                     animated
                 />
                 <ScrollView
                     showsVerticalScrollIndicator={false}
-                    style={{ width: "100%" }}>
-                    <View style={{ flex: 1, paddingHorizontal: 25 }}>
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={refreshing}
+                            onRefresh={onRefresh}
+                        />
+                    }>
+                    <View className='flex-1 px-6'>
                         <Hero />
                         <WorkoutProgress />
                         <TodayActivity />

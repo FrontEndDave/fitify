@@ -1,27 +1,27 @@
-import { StyleSheet, Text, View } from "react-native";
+import Hero from "@/components/settings/Hero";
+import Settings from "@/components/settings/Settings";
+import React from "react";
+import { ScrollView, StatusBar, View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-export default function SettingsScreen() {
+const profile = () => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Settings screen</Text>
-            <View style={styles.separator} />
-        </View>
+        <SafeAreaProvider>
+            <StatusBar
+                barStyle='dark-content'
+                animated
+                translucent
+            />
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                bounces={false}>
+                <View className='flex-1'>
+                    <Hero />
+                    <Settings />
+                </View>
+            </ScrollView>
+        </SafeAreaProvider>
     );
-}
+};
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: "bold",
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: "80%",
-    },
-});
+export default profile;

@@ -1,30 +1,14 @@
-import { ScrollView, View } from "react-native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import Colors from "@/constants/Colors";
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 
-import Hero from "@/components/discover/Hero";
-import PopularExercises from "@/components/discover/PopularExercises";
-import OurCollection from "@/components/discover/OurCollection";
-import { StatusBar } from "expo-status-bar";
-
-export default function DiscoverScreen() {
+const discover = () => {
     return (
-        <SafeAreaProvider>
-            <SafeAreaView style={{ flex: 1, width: "100%", backgroundColor: Colors.background }}>
-                <StatusBar
-                    style='dark'
-                    animated
-                />
-                <ScrollView
-                    showsVerticalScrollIndicator={false}
-                    style={{ width: "100%" }}>
-                    <View style={{ flex: 1, paddingLeft: 25 }}>
-                        <Hero />
-                        <PopularExercises />
-                        <OurCollection />
-                    </View>
-                </ScrollView>
-            </SafeAreaView>
-        </SafeAreaProvider>
+        <View>
+            <Text>discover</Text>
+        </View>
     );
-}
+};
+
+export default discover;
+
+const styles = StyleSheet.create({});

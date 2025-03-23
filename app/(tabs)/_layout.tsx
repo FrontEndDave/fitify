@@ -1,18 +1,15 @@
 import React from "react";
+import { ActiveDiscoverIcon, DiscoverIcon } from "@/assets/svg/Discover";
+import { ActiveHomeIcon, HomeIcon } from "@/assets/svg/Home";
+import { ActiveSettingsIcon, SettingsIcon } from "@/assets/svg/Settings";
+import { ActiveStatisticsIcon, StatisticsIcon } from "@/assets/svg/Statistics";
 import { Tabs } from "expo-router";
 
-import Colors from "@/constants/Colors";
-
-import { ActiveHomeIcon, HomeIcon } from "@/assets/svg/Home";
-import { ActiveDiscoverIcon, DiscoverIcon } from "@/assets/svg/Discover";
-import { ActiveStatisticsIcon, StatisticsIcon } from "@/assets/svg/Statistics";
-import { ActiveSettingsIcon, SettingsIcon } from "@/assets/svg/Settings";
-
-export default function TabLayout() {
+const _layout = () => {
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor: Colors.tint,
+                tabBarActiveTintColor: "#2f95dc",
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: {
@@ -112,4 +109,6 @@ export default function TabLayout() {
             />
         </Tabs>
     );
-}
+};
+
+export default _layout;

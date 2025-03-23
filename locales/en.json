@@ -1,0 +1,9 @@
+{
+    "welcome-back": "Welcome back",
+    "hero-title": "How’s your workout vibe today?",
+    "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "workout-progress": {
+        "title": "Workout progress",
+        "completed": "Done"
+    }
+}

@@ -1,27 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 
-export default function StatisticsScreen() {
+const statistics = () => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Statistics screen</Text>
-            <View style={styles.separator} />
+        <View>
+            <Text>statistics</Text>
         </View>
     );
-}
+};
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: "bold",
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: "80%",
-    },
-});
+export default statistics;
+
+const styles = StyleSheet.create({});

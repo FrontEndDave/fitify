@@ -1,58 +1,50 @@
+import React from "react";
 import { Text, View } from "react-native";
-import Colors from "@/constants/Colors";
-import ProgressCircle from "../common/ProgressCircle";
 import { LinearGradient } from "expo-linear-gradient";
+import ProgressCircle from "../common/ProgressCircle";
 import CountingText from "../common/CountingText";
+import { useTranslation } from "react-i18next";
 
 export default function WorkoutProgress() {
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const { t } = useTranslation();
 
     const currentDate = new Date();
     const dayOfMonth = currentDate.getDate();
-    const monthName = months[currentDate.getMonth()];
+    const monthIndex = currentDate.getMonth();
+    const monthName = t(`months.${monthIndex}`);
 
     return (
-        <View style={{ width: "100%", height: 135, borderRadius: 25, overflow: "hidden" }}>
+        <View className='w-full h-[135px] rounded-3xl overflow-hidden mt-5'>
             <LinearGradient
                 colors={["#12100E", "#2D3436"]}
                 start={[0, 1]}
                 end={[1, 0]}
-                style={{ flex: 1 }}>
-                <View
-                    style={{
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: 25,
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        paddingHorizontal: 20,
-                    }}>
-                    <View style={{ display: "flex", flexDirection: "column", gap: 8, justifyContent: "flex-start", alignItems: "flex-start" }}>
-                        <View style={{ backgroundColor: "#4f4f54", opacity: 1, paddingHorizontal: 9, paddingVertical: 3, borderRadius: 1000 }}>
-                            <Text style={{ fontFamily: "Manrope-SemiBold", fontSize: 13, color: Colors.primary }}>
+                className='flex-1'>
+                <View className='w-full h-full rounded-3xl flex flex-row justify-between items-center px-5'>
+                    <View className='flex flex-col gap-2.5 items-start'>
+                        <View className='bg-gray-700 px-2 py-1 rounded-full'>
+                            <Text className='font-manrope-semibold text-md text-white'>
                                 {monthName} {dayOfMonth}
                             </Text>
                         </View>
 
-                        <Text style={{ fontFamily: "Manrope-Bold", fontSize: 17, color: Colors.primary }}>Workout Progress</Text>
+                        <Text className='font-manrope-bold text-[17px] text-white'>{t("workout-progress.title")}</Text>
 
-                        <View style={{ display: "flex", flexDirection: "row", alignItems: "flex-end", gap: 5 }}>
-                            <Text style={{ fontFamily: "Manrope-Bold", fontSize: 23, color: Colors.primary }}>30/40</Text>
-                            <Text style={{ fontFamily: "Manrope-SemiBold", fontSize: 16, color: Colors.primary, opacity: 0.8, paddingBottom: 2 }}>Done</Text>
+                        <View className='flex flex-row items-end gap-1'>
+                            <Text className='font-manrope-bold text-xl text-white'>30/40</Text>
+                            <Text className='font-manrope-semibold text-md text-white opacity-80 pb-0.5'>{t("workout-progress.completed")}</Text>
                         </View>
                     </View>
-                    <View style={{ width: 70, height: 70, display: "flex", justifyContent: "center", alignItems: "center", marginRight: 10 }}>
+                    <View className='w-[70px] h-[70px] flex justify-center items-center mr-2.5'>
                         <ProgressCircle
                             size={90}
                             progress={65}
-                            color={Colors.primary}
-                            backgroundColor={Colors.secondary_300}
+                            color='white'
+                            backgroundColor='gray'
                             duration={2000}
                         />
                         <CountingText
-                            customStyle={{ fontFamily: "Manrope-Bold", fontSize: 21, color: Colors.primary, position: "absolute" }}
+                            customStyle='font-manrope-bold text-xl text-white absolute'
                             value={"65"}
                         />
                     </View>

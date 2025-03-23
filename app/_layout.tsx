@@ -1,23 +1,12 @@
-import { usePushNotifications } from "@/services/usePushNotifications";
-import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
+import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
-import "react-native-reanimated";
+import "./globals.css";
+import React, { useEffect } from "react";
 
-export { ErrorBoundary } from "expo-router";
-
-export const unstable_settings = {
-    initialRouteName: "(tabs)",
-};
-
-SplashScreen.preventAutoHideAsync();
+import "@/services/i18next";
 
 export default function RootLayout() {
-    // const { expoPushToken, notification } = usePushNotifications();
-
-    // console.log("Token: ", expoPushToken?.data ?? "No token");
-
     const [loaded, error] = useFonts({
         "Manrope-ExtraBold": require("../assets/fonts/Manrope-ExtraBold.ttf"), // 800
         "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"), // 700
@@ -47,30 +36,24 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
     return (
-        <Stack screenOptions={{ headerShown: false }}>
+        <Stack>
             <Stack.Screen
                 name='(tabs)'
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name='modal'
-                options={{ presentation: "modal" }}
+                options={{
+                    headerShown: false,
+                }}
             />
             <Stack.Screen
                 name='workout/[name]'
-                options={{ headerShown: false }}
+                options={{
+                    headerShown: false,
+                }}
             />
             <Stack.Screen
-                name='workout-details/[name]'
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name='water-tracker/water'
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name='sleep-tracker/sleep'
-                options={{ headerShown: false }}
+                name='(settings)'
+                options={{
+                    headerShown: false,
+                }}
             />
         </Stack>
     );

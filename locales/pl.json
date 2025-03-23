@@ -1,0 +1,51 @@
+{
+    "see-more": "Zobacz więcej",
+    "welcome-back": "Witaj ponownie",
+    "hero-title": "Jaki masz dzisiaj nastrój treningowy?",
+    "months": ["Sty", "Lut", "Mar", "Kwi", "Maj", "Cze", "Lip", "Sie", "Wrz", "Paź", "Lis", "Gru"],
+    "workout-progress": {
+        "title": "Postępy w treningu",
+        "completed": "Ukończono"
+    },
+    "today-activity": {
+        "title": "Dzisiejsza aktywność",
+        "steps": "Kroki",
+        "water": "Woda",
+        "calories": "Kalorie"
+    },
+    "settings": {
+        "title": "Ustawienia",
+        "logout": "Wyloguj",
+        "language": "Język",
+        "notifications": "Powiadomienia",
+        "dark-mode": "Tryb ciemny"
+    },
+    "info": {
+        "title": "Informacje o Aplikacji",
+        "about": "O nas",
+        "contact": "Kontakt",
+        "terms": "Warunki",
+        "privacy": "Prywatność"
+    },
+    "goal": {
+        "title": "Ustaw mój cel",
+        "daily": "Dzienny cel",
+        "weekly": "Tygodniowy cel",
+        "monthly": "Miesięczny cel"
+    },
+    "profile": {
+        "title": "Edytuj Profil",
+        "name": "Imię",
+        "email": "Email",
+        "phone": "Telefon",
+        "address": "Adres",
+        "city": "Miasto",
+        "country": "Kraj",
+        "zip": "Kod pocztowy"
+    },
+    "language": {
+        "title": "Ustaw Język",
+        "english": "Angielski",
+        "polish": "Polski"
+    }
+}
