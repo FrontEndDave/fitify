@@ -1,9 +1,60 @@
 {
+    "see-more": "See more",
     "welcome-back": "Welcome back",
     "hero-title": "How’s your workout vibe today?",
     "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     "workout-progress": {
-        "title": "Workout progress",
-        "completed": "Done"
+        "title": "Workout Progress",
+        "completed": "Completed"
+    },
+    "today-activity": {
+        "title": "Today's Activity",
+        "steps": "Steps",
+        "water": "Water",
+        "calories": "Calories"
+    },
+    "settings": {
+        "title": "Settings",
+        "logout": "Logout",
+        "language": "Language",
+        "notifications": "Notifications",
+        "dark-mode": "Dark Mode"
+    },
+    "info": {
+        "title": "App Information",
+        "authors": "Authors",
+        "technology": "Technology",
+        "technology-content": "The app was built using React Native, Expo, Firebase, and Redux.",
+        "version": "Version",
+        "description": "Description",
+        "description-content": "The FitApp was created to help users track their physical activity and maintain a healthy lifestyle."
+    },
+    "goal": {
+        "title": "Set My Goal",
+        "subtitle": "Set Your Goal",
+        "daily": "Daily Goal",
+        "weekly": "Weekly Goal",
+        "monthly": "Monthly Goal"
+    },
+    "profile": {
+        "title": "Edit Profile",
+        "subtitle": "Account Information",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address",
+        "city": "City",
+        "country": "Country",
+        "zip": "Postal Code"
+    },
+    "language": {
+        "title": "Select Language",
+        "subtitle": "Choose Language",
+        "english": "English",
+        "polish": "Polish",
+        "SearchPlaceholder": "Search language"
+    },
+    "discover": {
+        "title": "Discover"
     }
 }

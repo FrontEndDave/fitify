@@ -18,23 +18,28 @@
         "logout": "Wyloguj",
         "language": "Język",
         "notifications": "Powiadomienia",
-        "dark-mode": "Tryb ciemny"
+        "dark-mode": "Tryb ciemny",
+        "delete-account": "Usuń konto"
     },
     "info": {
         "title": "Informacje o Aplikacji",
-        "about": "O nas",
-        "contact": "Kontakt",
-        "terms": "Warunki",
-        "privacy": "Prywatność"
+        "authors": "Autorzy",
+        "technology": "Technologie",
+        "technology-content": "Aplikacja została stworzona przy użyciu React Native, Expo, Firebase oraz Redux.",
+        "version": "Wersja",
+        "description": "Opis",
+        "description-content": "Aplikacja FitApp została stworzona w celu pomocy użytkownikom w monitorowaniu ich aktywności fizycznej oraz zdrowego trybu życia."
     },
     "goal": {
         "title": "Ustaw mój cel",
+        "subtitle": "Ustaw swój cel",
         "daily": "Dzienny cel",
         "weekly": "Tygodniowy cel",
         "monthly": "Miesięczny cel"
     },
     "profile": {
         "title": "Edytuj Profil",
+        "subtitle": "Informacje o koncie",
         "name": "Imię",
         "email": "Email",
         "phone": "Telefon",
@@ -45,7 +50,12 @@
     },
     "language": {
         "title": "Ustaw Język",
+        "subtitle": "Wybierz język",
         "english": "Angielski",
-        "polish": "Polski"
+        "polish": "Polski",
+        "SearchPlaceholder": "Wyszukaj język"
+    },
+    "discover": {
+        "title": "Odkrywaj"
     }
 }

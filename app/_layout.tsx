@@ -5,6 +5,9 @@ import "./globals.css";
 import React, { useEffect } from "react";
 
 import "@/services/i18next";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import i18n from "@/services/i18next";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function RootLayout() {
     const [loaded, error] = useFonts({
@@ -23,6 +26,7 @@ export default function RootLayout() {
 
     useEffect(() => {
         if (loaded) {
+            fetchLanguage();
             SplashScreen.hideAsync();
         }
     }, [loaded]);
@@ -31,7 +35,18 @@ export default function RootLayout() {
         return null;
     }
 
-    return <RootLayoutNav />;
+    const fetchLanguage = async () => {
+        const savedLanguage = await AsyncStorage.getItem("appLanguage");
+        if (savedLanguage) {
+            await i18n.changeLanguage(savedLanguage);
+        }
+    };
+
+    return (
+        <SafeAreaProvider>
+            <RootLayoutNav />
+        </SafeAreaProvider>
+    );
 }
 
 function RootLayoutNav() {
@@ -44,7 +59,19 @@ function RootLayoutNav() {
                 }}
             />
             <Stack.Screen
+                name='workout-details/[name]'
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
                 name='workout/[name]'
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name='exercises'
                 options={{
                     headerShown: false,
                 }}

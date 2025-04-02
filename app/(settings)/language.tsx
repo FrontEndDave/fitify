@@ -1,10 +1,19 @@
+import DetailsHero from "@/components/common/DetailsHero";
+import LanguageContent from "@/components/settings/LanguageContent";
 import React from "react";
-import { View, Text } from "react-native";
+import { useTranslation } from "react-i18next";
+import { ScrollView } from "react-native";
 
 export default function LanguageSettings() {
+    const { t } = useTranslation();
+
     return (
-        <View>
-            <Text>Language settings screen</Text>
-        </View>
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            bounces={false}
+            contentContainerStyle={{ flexGrow: 1 }}>
+            <DetailsHero text={t("language.subtitle")} />
+            <LanguageContent />
+        </ScrollView>
     );
 }

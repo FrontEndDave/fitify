@@ -2,10 +2,13 @@ import { Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import useTimeSpentTracker from "@/hooks/useTimeSpentTracker";
+import formatTime from "@/utils/formatTime";
 
 const Hero = () => {
     const { t } = useTranslation();
     const insets = useSafeAreaInsets();
+    const minutes = useTimeSpentTracker();
 
     return (
         <View
@@ -17,7 +20,7 @@ const Hero = () => {
             <View className='flex flex-row items-center justify-between w-full px-6'>
                 <Text className='font-manrope-bold text-[1.4rem] text-secondary-500 leading-7'>{t("settings.title")}</Text>
                 <TouchableOpacity>
-                    <Text className='font-manrope-bold text-[1.3rem] text-error-500 leading-7'>{t("settings.logout")}</Text>
+                    <Text className='font-manrope-bold text-[1.4rem] text-error-500 leading-7'>{t("settings.delete-account")}</Text>
                 </TouchableOpacity>
             </View>
 
@@ -31,7 +34,7 @@ const Hero = () => {
                     <View className='flex flex-row items-start gap-3'>
                         <View className='bg-success-500 rounded-sm h-5 w-[0.35rem]  mt-1' />
                         <View className='flex flex-col'>
-                            <Text className='font-manrope-bold text-2xl text-secondary-500'>10 h 52 m</Text>
+                            <Text className='font-manrope-bold text-2xl text-secondary-500'>{formatTime(minutes)}</Text>
                             <Text className='font-manrope-medium text-lg text-secondary-400'>Time Spending</Text>
                         </View>
                     </View>
@@ -41,8 +44,8 @@ const Hero = () => {
                     <View className='flex flex-row items-start gap-3'>
                         <View className='bg-primary-500 rounded-sm h-5 w-[0.35rem] mt-1' />
                         <View className='flex flex-col'>
-                            <Text className='font-manrope-bold text-2xl text-secondary-500'>10 h 52 m</Text>
-                            <Text className='font-manrope-medium text-lg text-secondary-400'>Time Spending</Text>
+                            <Text className='font-manrope-bold text-2xl text-secondary-500'>10</Text>
+                            <Text className='font-manrope-medium text-lg text-secondary-400'>Total Workouts</Text>
                         </View>
                     </View>
                 </View>

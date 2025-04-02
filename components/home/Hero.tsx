@@ -1,5 +1,4 @@
 import React from "react";
-import NotificationIcon from "@/assets/svg/Notification";
 import { Image, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 
@@ -7,7 +6,7 @@ export default function Hero() {
     const { t } = useTranslation();
 
     return (
-        <View className='mt-3 w-full pb-35'>
+        <View className='mt-3 w-full'>
             <View className='flex-row justify-between items-center w-full'>
                 <View className='flex-row items-center gap-3'>
                     <Image
@@ -19,8 +18,6 @@ export default function Hero() {
                         <Text className='font-manrope-bold text-2xl text-secondary-500 leading-7'>Dawid Piela!</Text>
                     </View>
                 </View>
-
-                {/* <Notifications /> */}
             </View>
 
             <View className='mt-4'>
