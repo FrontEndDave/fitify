@@ -4,6 +4,7 @@ import RightArrow from "@/assets/svg/RightArrow";
 import PersonLiftingWeights from "@/assets/svg/PersonLiftingWeights";
 import ProgressCircle from "./ProgressCircle";
 import colors from "@/constants/colors";
+import { useTranslation } from "react-i18next";
 
 type GoalCardProps = {
     title: string;
@@ -12,6 +13,8 @@ type GoalCardProps = {
 };
 
 const WorkoutCard = ({ title, exercise, progress }: GoalCardProps) => {
+    const { t } = useTranslation();
+
     return (
         <View className='flex flex-row items-center justify-between bg-primary px-4 py-1 rounded-[20px] w-full'>
             <View className='flex flex-row items-center gap-5'>
@@ -24,7 +27,9 @@ const WorkoutCard = ({ title, exercise, progress }: GoalCardProps) => {
 
                 <View className='flex flex-col items-start gap-0.5'>
                     <Text className='font-manrope-bold text-lg text-secondary-500'>{title}</Text>
-                    <Text className='font-manrope-medium text-base text-secondary-400'>{exercise} Exercise</Text>
+                    <Text className='font-manrope-medium text-base text-secondary-400'>
+                        {exercise} {t("workout.exercises")}
+                    </Text>
                 </View>
             </View>
 
@@ -42,10 +47,12 @@ const WorkoutCard = ({ title, exercise, progress }: GoalCardProps) => {
 };
 
 export default function MyWorkout() {
+    const { t } = useTranslation();
+
     return (
         <View className='mt-8 pb-7'>
             <View className='flex flex-row justify-between items-center'>
-                <Text className='font-manrope-bold text-[19px] text-secondary-500'>My Workout</Text>
+                <Text className='font-manrope-bold text-[19px] text-secondary-500'>{t("workout.title")}</Text>
             </View>
 
             <View className='w-full mt-5 gap-3'>

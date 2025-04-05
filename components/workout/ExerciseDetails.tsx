@@ -4,6 +4,7 @@ import { PauseIcon, PlayIcon } from "@/assets/svg/Controls";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { UpArrow } from "@/assets/svg/Arrow";
 import formatExerciseTime from "@/utils/formatExerciseTime";
+import { useTranslation } from "react-i18next";
 
 type ExerciseDetailsProps = {
     duration: number;
@@ -15,6 +16,7 @@ type ExerciseDetailsProps = {
 };
 
 const ExerciseDetails = ({ isPlaying, player, handleSwipeUp, reps, sets, duration }: ExerciseDetailsProps) => {
+    const { t } = useTranslation();
     const [paused, setPaused] = useState(false);
 
     const handleButtonPress = () => {
@@ -34,7 +36,7 @@ const ExerciseDetails = ({ isPlaying, player, handleSwipeUp, reps, sets, duratio
 
                 <View className='flex flex-row items-center gap-3.5 w-full'>
                     <View className='flex-1 bg-[rgba(245,245,245,0.10)] p-3.5 rounded-2xl w-[110px] h-20 flex flex-col items-start justify-center'>
-                        <Text className='font-manrope-medium text-[14.5px] text-secondary-300'>Time Workout</Text>
+                        <Text className='font-manrope-medium text-[14.5px] text-secondary-300'>{t("workout.duration")}</Text>
                         <Text className='font-manrope-bold text-lg text-primary'>{formatExerciseTime(duration)}</Text>
                     </View>
 
@@ -55,7 +57,7 @@ const ExerciseDetails = ({ isPlaying, player, handleSwipeUp, reps, sets, duratio
                     </TouchableOpacity>
 
                     <View className='flex-1 bg-[rgba(245,245,245,0.10)] p-3.5 rounded-2xl w-[110px] h-20 flex flex-col items-start justify-center'>
-                        <Text className='font-manrope-regular text-[14.5px] text-secondary-300'>Exercise</Text>
+                        <Text className='font-manrope-regular text-[14.5px] text-secondary-300'>{t("workout.exercise")}</Text>
                         <Text className='font-manrope-bold text-lg text-primary'>
                             {reps}X{sets}
                         </Text>
@@ -70,7 +72,7 @@ const ExerciseDetails = ({ isPlaying, player, handleSwipeUp, reps, sets, duratio
                             width={26}
                             height={26}
                         />
-                        <Text className='font-manrope-regular text-lg text-secondary-300'>Swipe for more episodes</Text>
+                        <Text className='font-manrope-regular text-lg text-secondary-300'>{t("workout.swipe")}</Text>
                     </View>
                 </PanGestureHandler>
             </View>

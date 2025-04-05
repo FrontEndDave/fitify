@@ -8,6 +8,7 @@ import "@/services/i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18n from "@/services/i18next";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { initializeUser } from "@/services/firebase/user";
 
 export default function RootLayout() {
     const [loaded, error] = useFonts({
@@ -26,8 +27,12 @@ export default function RootLayout() {
 
     useEffect(() => {
         if (loaded) {
-            fetchLanguage();
-            SplashScreen.hideAsync();
+            const initApp = async () => {
+                await fetchLanguage();
+                await initializeUser();
+                SplashScreen.hideAsync();
+            };
+            initApp();
         }
     }, [loaded]);
 

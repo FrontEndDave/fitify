@@ -5,11 +5,13 @@ import { SecondGradient } from "@/assets/svg/SecGradient";
 import Svg, { FeColorMatrix, Filter, Image } from "react-native-svg";
 import { router } from "expo-router";
 import { useExercises } from "@/hooks/useExercises";
+import { useTranslation } from "react-i18next";
 
 const ScreenHeight = Dimensions.get("window").height;
 
 const List = () => {
     const { exercises } = useExercises();
+    const { t } = useTranslation();
 
     return (
         <View className='flex flex-col gap-4 pt-4 pb-6'>
@@ -59,7 +61,9 @@ const List = () => {
                                     height={20}
                                 />
                             </View>
-                            <Text className='font-manrope-medium text-[15.5px] text-primary'>{item.exercises} Exercise</Text>
+                            <Text className='font-manrope-medium text-[15.5px] text-primary'>
+                                {item.exercises} {t("workout.exercises")}
+                            </Text>
                         </View>
                     </View>
 

@@ -2,8 +2,8 @@ import React from "react";
 import { ActiveDiscoverIcon, DiscoverIcon } from "@/assets/svg/Discover";
 import { ActiveHomeIcon, HomeIcon } from "@/assets/svg/Home";
 import { ActiveSettingsIcon, SettingsIcon } from "@/assets/svg/Settings";
-import { ActiveStatisticsIcon, StatisticsIcon } from "@/assets/svg/Statistics";
 import { Tabs } from "expo-router";
+import { Stack } from "expo-router";
 
 const _layout = () => {
     return (
@@ -23,8 +23,7 @@ const _layout = () => {
                 name='index'
                 options={{
                     headerShown: false,
-                    title: "Home",
-                    tabBarIcon: ({ focused }) => (
+                    tabBarIcon: ({ focused }: { focused: boolean }) => (
                         <>
                             {focused ? (
                                 <ActiveHomeIcon
@@ -46,7 +45,7 @@ const _layout = () => {
                 options={{
                     headerShown: false,
                     title: "Discover",
-                    tabBarIcon: ({ focused }) => (
+                    tabBarIcon: ({ focused }: { focused: boolean }) => (
                         <>
                             {focused ? (
                                 <ActiveDiscoverIcon
@@ -64,33 +63,11 @@ const _layout = () => {
                 }}
             />
             <Tabs.Screen
-                name='statistics'
-                options={{
-                    headerShown: false,
-                    title: "Statistics",
-                    tabBarIcon: ({ focused }) => (
-                        <>
-                            {focused ? (
-                                <ActiveStatisticsIcon
-                                    width={28}
-                                    height={28}
-                                />
-                            ) : (
-                                <StatisticsIcon
-                                    width={28}
-                                    height={28}
-                                />
-                            )}
-                        </>
-                    ),
-                }}
-            />
-            <Tabs.Screen
                 name='settings'
                 options={{
                     headerShown: false,
                     title: "Settings",
-                    tabBarIcon: ({ focused }) => (
+                    tabBarIcon: ({ focused }: { focused: boolean }) => (
                         <>
                             {focused ? (
                                 <ActiveSettingsIcon

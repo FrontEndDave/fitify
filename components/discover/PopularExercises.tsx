@@ -6,14 +6,16 @@ import Svg, { FeColorMatrix, Filter, Image } from "react-native-svg";
 import PersonLiftingWeights from "@/assets/svg/PersonLiftingWeights";
 import { router } from "expo-router";
 import { useExercises } from "@/hooks/useExercises";
+import { useTranslation } from "react-i18next";
 
 export default function PopularExercises() {
     const { exercises, loading, error } = useExercises();
+    const { t } = useTranslation();
 
     return (
         <View>
             <View className='flex flex-row justify-between items-center px-6'>
-                <Text className='font-manrope-bold text-[21px] text-secondary-500'>Popular Exercises</Text>
+                <Text className='font-manrope-bold text-[21px] text-secondary-500'>{t("discover.popular")}</Text>
                 <TouchableOpacity
                     onPress={() =>
                         router.push({
@@ -21,7 +23,7 @@ export default function PopularExercises() {
                         })
                     }
                     className='flex flex-row items-center gap-2'>
-                    <Text className='font-manrope-semibold text-lg text-secondary-400'>See more</Text>
+                    <Text className='font-manrope-semibold text-lg text-secondary-400'>{t("see-more")}</Text>
                     <RightArrow
                         width={18}
                         height={19}
@@ -93,7 +95,7 @@ export default function PopularExercises() {
                                         color: item.textColor === "white" ? "#FFFFFF" : "#0D1015",
                                     }}
                                     className={`font-manrope-medium text-[15.5px] `}>
-                                    {item.exercises} Exercise
+                                    {item.exercises} {t("workout.exercises")}
                                 </Text>
                             </View>
                         </View>

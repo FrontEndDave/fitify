@@ -1,5 +1,6 @@
 {
     "see-more": "Zobacz więcej",
+    "see-less": "Zobacz mniej",
     "welcome-back": "Witaj ponownie",
     "hero-title": "Jaki masz dzisiaj nastrój treningowy?",
     "months": ["Sty", "Lut", "Mar", "Kwi", "Maj", "Cze", "Lip", "Sie", "Wrz", "Paź", "Lis", "Gru"],
@@ -19,7 +20,10 @@
         "language": "Język",
         "notifications": "Powiadomienia",
         "dark-mode": "Tryb ciemny",
-        "delete-account": "Usuń konto"
+        "delete-account": "Usuń konto",
+        "time": "Spędzony czas",
+        "total-workouts": "Liczba treningów",
+        "join": "Członek od"
     },
     "info": {
         "title": "Informacje o Aplikacji",
@@ -30,12 +34,13 @@
         "description": "Opis",
         "description-content": "Aplikacja FitApp została stworzona w celu pomocy użytkownikom w monitorowaniu ich aktywności fizycznej oraz zdrowego trybu życia."
     },
-    "goal": {
-        "title": "Ustaw mój cel",
-        "subtitle": "Ustaw swój cel",
-        "daily": "Dzienny cel",
-        "weekly": "Tygodniowy cel",
-        "monthly": "Miesięczny cel"
+    "workout": {
+        "title": "Moje Ćwiczenia",
+        "exercises": "ćwiczeń",
+        "all-exercises": "Wszystkie ćwiczenia",
+        "swipe": "Przesuń w górę, by zobaczyć więcej",
+        "duration": "Czas trwania",
+        "exercise": "Ćwiczenie"
     },
     "profile": {
         "title": "Edytuj Profil",
@@ -56,6 +61,14 @@
         "SearchPlaceholder": "Wyszukaj język"
     },
     "discover": {
-        "title": "Odkrywaj"
+        "title": "Odkrywaj",
+        "popular": "Popularne Ćwiczenia",
+        "collection": "Nasza Kolekcja"
+    },
+    "workout-details": {
+        "title": "Szczegóły Treningu",
+        "description": "Opis",
+        "episodes": "Wszystkie cwiczenia",
+        "continue": "Kontynuuj trening"
     }
 }

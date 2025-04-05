@@ -6,6 +6,7 @@ import PersonLiftingWeights from "@/assets/svg/PersonLiftingWeights";
 import { LeftArrow } from "@/assets/svg/Arrow";
 import More from "@/assets/svg/More";
 import { router } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 interface Props {
     exercise: {
@@ -20,6 +21,8 @@ interface Props {
 }
 
 export default function Hero({ exercise }: Props) {
+    const { t } = useTranslation();
+
     return (
         <View
             style={{
@@ -31,7 +34,7 @@ export default function Hero({ exercise }: Props) {
                     <TouchableOpacity onPress={() => router.back()}>
                         <LeftArrow />
                     </TouchableOpacity>
-                    <Text className='font-manrope-extrabold text-[17px] text-primary'>Details</Text>
+                    <Text className='font-manrope-extrabold text-[17px] text-primary'>{t("workout-details.title")}</Text>
                     <TouchableOpacity>
                         <More />
                     </TouchableOpacity>
@@ -70,7 +73,9 @@ export default function Hero({ exercise }: Props) {
                             height={20}
                         />
                     </View>
-                    <Text className='font-manrope-bold text-[15.5px] text-primary'>{exercise.exercises} Exercise</Text>
+                    <Text className='font-manrope-bold text-[15.5px] text-primary'>
+                        {exercise.exercises} {t("workout.exercises")}
+                    </Text>
                 </View>
             </View>
 

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
 export default function Description({ content }: { content: string }) {
+    const { t } = useTranslation();
     const [isExpanded, setIsExpanded] = useState(false);
 
     const toggleText = () => {
@@ -11,7 +13,7 @@ export default function Description({ content }: { content: string }) {
     return (
         <View className='mt-5'>
             <View className='flex flex-col gap-2.5'>
-                <Text className='font-manrope-regular text-xl text-secondary-400'>Description</Text>
+                <Text className='font-manrope-regular text-xl text-secondary-400'>{t("workout-details.description")}</Text>
 
                 <View className='flex flex-row flex-wrap items-center justify-start'>
                     <Text
@@ -22,7 +24,7 @@ export default function Description({ content }: { content: string }) {
                     <Text
                         onPress={toggleText}
                         className='text-information-500 font-manrope-bold text-lg'>
-                        {isExpanded ? " See Less" : " See More"}
+                        {isExpanded ? t("see-less") : t("see-more")}
                     </Text>
                 </View>
             </View>

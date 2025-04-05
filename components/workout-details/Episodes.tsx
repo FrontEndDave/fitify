@@ -3,6 +3,7 @@ import React from "react";
 import { VideoIcon } from "@/assets/svg/Video";
 import EpisodeCard from "./EpisodeCard";
 import { Episode } from "@/types";
+import { useTranslation } from "react-i18next";
 
 function formatExerciseTime(milliseconds: number): string {
     const totalSeconds = Math.floor(milliseconds / 1000);
@@ -22,6 +23,8 @@ function formatExerciseTime(milliseconds: number): string {
 }
 
 export default function Episodes({ episode }: Episode) {
+    const { t } = useTranslation();
+
     const getEpisodeTime = (episode: { duration: number; name: string; video?: string }[]) => {
         return episode.reduce((acc, episode) => acc + episode.duration * 60 * 1000, 0);
     };
@@ -29,7 +32,7 @@ export default function Episodes({ episode }: Episode) {
     return (
         <View className='mt-8'>
             <View className='flex flex-row justify-between items-center'>
-                <Text className='font-manrope-bold text-[19px] text-secondary-500'>All Episode</Text>
+                <Text className='font-manrope-bold text-[19px] text-secondary-500'>{t("workout-details.episodes")}</Text>
                 <View className='flex flex-row items-center space-x-2'>
                     <VideoIcon
                         width={14}

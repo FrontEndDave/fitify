@@ -26,7 +26,9 @@ const Hero = () => {
 
             <View className='flex justify-center items-center'>
                 <Text className='font-manrope-bold text-4xl text-secondary-500'>Dawid Piela</Text>
-                <Text className='font-manrope-medium text-lg text-secondary-400'>Join since {new Date().getFullYear()}</Text>
+                <Text className='font-manrope-medium text-lg text-secondary-400'>
+                    {t("settings.join")} {new Date().getFullYear()}
+                </Text>
             </View>
 
             <View className='flex flex-row items-center justify-between w-full px-5 gap-5'>
@@ -35,7 +37,7 @@ const Hero = () => {
                         <View className='bg-success-500 rounded-sm h-5 w-[0.35rem]  mt-1' />
                         <View className='flex flex-col'>
                             <Text className='font-manrope-bold text-2xl text-secondary-500'>{formatTime(minutes)}</Text>
-                            <Text className='font-manrope-medium text-lg text-secondary-400'>Time Spending</Text>
+                            <Text className='font-manrope-medium text-lg text-secondary-400'>{t("settings.time")}</Text>
                         </View>
                     </View>
                 </View>
@@ -45,7 +47,7 @@ const Hero = () => {
                         <View className='bg-primary-500 rounded-sm h-5 w-[0.35rem] mt-1' />
                         <View className='flex flex-col'>
                             <Text className='font-manrope-bold text-2xl text-secondary-500'>10</Text>
-                            <Text className='font-manrope-medium text-lg text-secondary-400'>Total Workouts</Text>
+                            <Text className='font-manrope-medium text-lg text-secondary-400'>{t("settings.total-workouts")}</Text>
                         </View>
                     </View>
                 </View>

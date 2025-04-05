@@ -4,6 +4,7 @@ import { SecondGradient } from "@/assets/svg/SecGradient";
 import PersonLiftingWeights from "@/assets/svg/PersonLiftingWeights";
 import Svg, { FeColorMatrix, Filter, Image } from "react-native-svg";
 import { router } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 type ExerciseCardProps = {
     title: string;
@@ -12,6 +13,8 @@ type ExerciseCardProps = {
 };
 
 const ExerciseCard = ({ title, color, accentColor }: ExerciseCardProps) => {
+    const { t } = useTranslation();
+
     return (
         <TouchableOpacity
             onPress={() =>
@@ -53,7 +56,7 @@ const ExerciseCard = ({ title, color, accentColor }: ExerciseCardProps) => {
                             height={20}
                         />
                     </View>
-                    <Text className='font-medium text-base text-secondary-500'>12 Exercise</Text>
+                    <Text className='font-medium text-base text-secondary-500'>12 {t("workout.exercises")}</Text>
                 </View>
             </View>
 
@@ -65,10 +68,12 @@ const ExerciseCard = ({ title, color, accentColor }: ExerciseCardProps) => {
 };
 
 export default function OurCollection() {
+    const { t } = useTranslation();
+
     return (
         <View className='mt-10 w-full px-6'>
             <View className='flex flex-row justify-between items-center'>
-                <Text className='font-manrope-bold text-[21px] text-secondary-500'>Our Collection</Text>
+                <Text className='font-manrope-bold text-[21px] text-secondary-500'>{t("discover.collection")}</Text>
             </View>
 
             <View className='flex flex-col gap-4 mt-3 pb-10'>
