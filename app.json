@@ -3,30 +3,28 @@
         "name": "fitify",
         "slug": "fitify-8ucpeyzea-x-fy1howzko",
         "version": "1.0.1",
+        "runtimeVersion": "1.0.0",
         "orientation": "portrait",
         "icon": "./assets/images/icon.png",
         "scheme": "myapp",
         "userInterfaceStyle": "automatic",
         "newArchEnabled": true,
         "ios": {
-            "supportsTablet": true
-        },
-        "android": {
-            "adaptiveIcon": {
-                "foregroundImage": "./assets/images/adaptive-icon.png",
-                "backgroundColor": "#ffffff"
-            }
-        },
-        "web": {
-            "bundler": "metro",
-            "output": "static",
-            "favicon": "./assets/images/favicon.png"
+            "supportsTablet": true,
+            "NSAppTransportSecurity": {
+                "NSAllowsArbitraryLoads": true,
+                "NSExceptionDomains": {
+                    "firebaseio.com": {
+                        "NSIncludesSubdomains": true,
+                        "NSExceptionAllowsInsecureHTTPLoads": true
+                    }
+                }
+            },
+            "bundleIdentifier": "com.ciemnykoksu.fitify-8ucpeyzea-x-fy1howzko"
         },
         "plugins": [
             "expo-router",
             "expo-localization",
-            "@react-native-firebase/app",
-            "@react-native-firebase/auth",
             [
                 "expo-build-properties",
                 {
@@ -57,9 +55,6 @@
             }
         },
         "owner": "ciemnykoksu",
-        "runtimeVersion": {
-            "policy": "appVersion"
-        },
         "updates": {
             "url": "https://u.expo.dev/08690bee-c307-4de2-ac27-ec2c3bfa9df9"
         }

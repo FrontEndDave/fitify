@@ -1,5 +1,5 @@
 import { database } from "./config";
-import { ref, push, set, onValue, remove, update, query, orderByChild, equalTo, get } from "firebase/database";
+import { ref, onValue, query, orderByChild, equalTo, get } from "firebase/database";
 import { Exercise } from "../../types";
 
 const exercisePaths = {
@@ -8,15 +8,6 @@ const exercisePaths = {
 };
 
 export const exerciseService = {
-    async addExercise(exercise: Omit<Exercise, "id" | "createdAt">): Promise<string> {
-        const newExerciseRef = push(ref(database, exercisePaths.exercises()));
-        await set(newExerciseRef, {
-            ...exercise,
-            createdAt: Date.now(),
-        });
-        return newExerciseRef.key!;
-    },
-
     subscribeToExercises(callback: (exercises: Exercise[]) => void) {
         const exercisesRef = ref(database, exercisePaths.exercises());
 
@@ -30,16 +21,6 @@ export const exerciseService = {
         });
 
         return unsubscribe;
-    },
-
-    async updateExercise(id: string, updates: Partial<Exercise>) {
-        const exerciseRef = ref(database, exercisePaths.exerciseById(id));
-        await update(exerciseRef, updates);
-    },
-
-    async deleteExercise(id: string) {
-        const exerciseRef = ref(database, exercisePaths.exerciseById(id));
-        await remove(exerciseRef);
     },
 
     async getExerciseByName(name: string): Promise<Exercise | null> {

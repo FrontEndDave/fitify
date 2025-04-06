@@ -1,17 +1,35 @@
+import { signInAnonymously } from "firebase/auth";
 import { get, ref, set } from "firebase/database";
-import { database } from "./config";
-import auth from "@react-native-firebase/auth";
+import { auth, database } from "./config";
 
 const initializeUser = async () => {
     try {
-        const createdUser = await auth().signInAnonymously();
-        console.log("User created:", createdUser);
+        console.log("[1] Rozpoczęcie inicjalizacji użytkownika...");
 
-        const userRef = ref(database, `users/${createdUser.user.uid}`);
-        const snapshot = await get(userRef);
+        const userCredential = await signInAnonymously(auth);
+        console.log("[2] Autentykacja zakończona:", userCredential);
+
+        const user = userCredential.user;
+        if (!user) {
+            console.error("[ERROR] Brak obiektu user w userCredential");
+            throw new Error("Nie udało się utworzyć użytkownika.");
+        }
+        console.log("[3] Użytkownik otrzymany:", user.uid);
+
+        const userRef = ref(database, `users/${user.uid}`);
+        console.log("[4] Referencja do bazy utworzona:", userRef.toString());
+
+        console.log("[5] Próba pobrania snapshotu...");
+        const snapshot = await get(userRef).catch((error) => {
+            console.error("[CRITICAL] Błąd odczytu bazy:", error);
+            throw error;
+        });
+        console.log("[6] Snapshot otrzymany:", snapshot.exists());
 
         if (!snapshot.exists()) {
+            console.log("[7] Tworzenie nowego rekordu...");
             await set(userRef, {
+                uid: user.uid,
                 createdAt: Date.now(),
                 totalCalories: 0,
                 totalMinutes: 0,
@@ -20,21 +38,37 @@ const initializeUser = async () => {
                 completedExercises: {},
                 dailyActivity: {},
             });
+            console.log("[8] Rekord utworzony");
         }
 
-        return createdUser.user.uid;
+        return user;
     } catch (error) {
-        console.error("Error initializing user:", error);
+        console.error("[FINAL ERROR] Całościowy błąd:", error);
         throw error;
     }
 };
 
 const getUserData = async () => {
-    const user = auth().currentUser;
-    if (!user) return null;
+    const user = auth.currentUser;
 
-    const snapshot = await get(ref(database, `users/${user.uid}`));
-    return snapshot.val();
+    if (!user) {
+        console.warn("Brak zalogowanego użytkownika.");
+        return null;
+    }
+
+    const userRef = ref(database, `users/${user.uid}`);
+    const snapshot = await get(userRef);
+
+    if (!snapshot.exists()) {
+        console.warn("Brak danych użytkownika.");
+        return null;
+    }
+
+    const userData = snapshot.val();
+
+    console.log("Pobrane dane użytkownika:", userData);
+
+    return userData;
 };
 
 export { initializeUser, getUserData };

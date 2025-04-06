@@ -3,7 +3,6 @@ import { ActiveDiscoverIcon, DiscoverIcon } from "@/assets/svg/Discover";
 import { ActiveHomeIcon, HomeIcon } from "@/assets/svg/Home";
 import { ActiveSettingsIcon, SettingsIcon } from "@/assets/svg/Settings";
 import { Tabs } from "expo-router";
-import { Stack } from "expo-router";
 
 const _layout = () => {
     return (

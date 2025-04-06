@@ -2,7 +2,8 @@ import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import "./globals.css";
-import React, { useEffect } from "react";
+import * as React from "react";
+import { useEffect } from "react";
 
 import "@/services/i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -27,14 +28,18 @@ export default function RootLayout() {
 
     useEffect(() => {
         if (loaded) {
-            const initApp = async () => {
+            const initializeApp = async () => {
                 await fetchLanguage();
                 await initializeUser();
                 SplashScreen.hideAsync();
             };
-            initApp();
+            initializeApp();
         }
     }, [loaded]);
+
+    if (!loaded) {
+        return null;
+    }
 
     if (!loaded) {
         return null;

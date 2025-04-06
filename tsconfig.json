@@ -2,11 +2,17 @@
     "extends": "expo/tsconfig.base",
     "compilerOptions": {
         "strict": true,
-        "jsx": "react",
+        "esModuleInterop": true,
+        "jsx": "preserve",
+        "moduleResolution": "node",
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
         "paths": {
-            "@/*": ["./*"]
+            "@/*": ["./*"],
+            "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
         }
     },
-    "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", "babel.config.js", "tailwind.config.js", "nativewind-env.d.ts"],
+    "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", "babel.config.js", "tailwind.config.js", "nativewind-env.d.ts", "app.config.js"],
+    "exclude": ["node_modules/@types/react-test-renderer", "**/node_modules/@types/react-test-renderer"],
     "types": ["jest", "react-native", "react"]
 }

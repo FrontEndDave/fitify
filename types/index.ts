@@ -28,6 +28,13 @@ export interface Episode {
     }[];
 }
 
+export interface User {
+    uid: string;
+    createdAt: number;
+    totalCalories: number;
+    totalMinutes: number;
+}
+
 export type FirebaseExercisePaths = {
     exercises: () => string;
     exerciseById: (id: string) => string;

@@ -1,6 +1,5 @@
 import { SafeAreaView, ScrollView, StatusBar, Text, View } from "react-native";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import Hero from "@/components/discover/Hero";
 import PopularExercises from "@/components/discover/PopularExercises";
 import OurCollection from "@/components/discover/OurCollection";
