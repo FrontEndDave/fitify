@@ -1,6 +1,7 @@
 {
-    "see-more": "See more",
-    "welcome-back": "Welcome back",
+    "see-more": "See More",
+    "see-less": "See Less",
+    "welcome-back": "Welcome Back",
     "hero-title": "How’s your workout vibe today?",
     "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     "workout-progress": {
@@ -15,26 +16,31 @@
     },
     "settings": {
         "title": "Settings",
-        "logout": "Logout",
+        "logout": "Log Out",
         "language": "Language",
         "notifications": "Notifications",
-        "dark-mode": "Dark Mode"
+        "dark-mode": "Dark Mode",
+        "delete-account": "Delete Account",
+        "time": "Time Spent",
+        "total-workouts": "Total Workouts",
+        "join": "Member Since"
     },
     "info": {
         "title": "App Information",
         "authors": "Authors",
-        "technology": "Technology",
-        "technology-content": "The app was built using React Native, Expo, Firebase, and Redux.",
+        "technology": "Technologies",
+        "technology-content": "The app was created using React Native, Expo, Firebase, and Redux.",
         "version": "Version",
         "description": "Description",
-        "description-content": "The FitApp was created to help users track their physical activity and maintain a healthy lifestyle."
+        "description-content": "FitApp was created to help users monitor their physical activity and maintain a healthy lifestyle."
     },
-    "goal": {
-        "title": "Set My Goal",
-        "subtitle": "Set Your Goal",
-        "daily": "Daily Goal",
-        "weekly": "Weekly Goal",
-        "monthly": "Monthly Goal"
+    "workout": {
+        "title": "My Exercises",
+        "exercises": "exercises",
+        "all-exercises": "All Exercises",
+        "swipe": "Swipe up to see more",
+        "duration": "Duration",
+        "exercise": "Exercise"
     },
     "profile": {
         "title": "Edit Profile",
@@ -45,16 +51,25 @@
         "address": "Address",
         "city": "City",
         "country": "Country",
-        "zip": "Postal Code"
+        "zip": "Zip Code"
     },
     "language": {
-        "title": "Select Language",
-        "subtitle": "Choose Language",
+        "title": "Set Language",
+        "subtitle": "Choose a Language",
         "english": "English",
         "polish": "Polish",
-        "SearchPlaceholder": "Search language"
+        "SearchPlaceholder": "Search Language"
     },
     "discover": {
-        "title": "Discover"
+        "title": "Discover",
+        "popular": "Popular Exercises",
+        "collection": "Our Collection"
+    },
+    "workout-details": {
+        "title": "Workout Details",
+        "description": "Description",
+        "episodes": "All Exercises",
+        "continue": "Continue Workout",
+        "start": "Start Workout"
     }
 }

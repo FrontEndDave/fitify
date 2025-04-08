@@ -28,7 +28,13 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>myapp</string>
-          <string>com.ciemnykoksu.fitify-8ucpeyzea-x-fy1howzko</string>
+          <string>fitapp-e4fe2.firebasestorage.app</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.981660846876-j7o2mk80vle79p44l7smdrunnoieuf96</string>
         </array>
       </dict>
     </array>
@@ -42,30 +48,8 @@
     <dict>
       <key>NSAllowsArbitraryLoads</key>
       <false/>
-      <key>NSExceptionDomains</key>
-      <dict>
-        <key>firebaseio.com</key>
-        <dict>
-          <key>NSIncludesSubdomains</key>
-          <true/>
-          <key>NSExceptionAllowsInsecureHTTPLoads</key>
-          <true/>
-        </dict>
-        <key>googleapis.com</key>
-        <dict>
-          <key>NSIncludesSubdomains</key>
-          <true/>
-          <key>NSExceptionAllowsInsecureHTTPLoads</key>
-          <true/>
-        </dict>
-        <key>appspot.com</key>
-        <dict>
-          <key>NSIncludesSubdomains</key>
-          <true/>
-          <key>NSExceptionAllowsInsecureHTTPLoads</key>
-          <true/>
-        </dict>
-      </dict>
+      <key>NSAllowsLocalNetworking</key>
+      <true/>
     </dict>
     <key>NSUserActivityTypes</key>
     <array>

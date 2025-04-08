@@ -69,6 +69,7 @@
         "title": "Szczegóły Treningu",
         "description": "Opis",
         "episodes": "Wszystkie cwiczenia",
-        "continue": "Kontynuuj trening"
+        "continue": "Kontynuuj trening",
+        "start": "Rozpocznij trening"
     }
 }

@@ -1,0 +1,78 @@
+[debug] [2025-04-08T16:59:54.269Z] ----------------------------------------------------------------------
+[debug] [2025-04-08T16:59:54.271Z] Command:       /usr/local/bin/node /usr/local/bin/firebase emulators:start --import=./dir
+[debug] [2025-04-08T16:59:54.271Z] CLI Version:   14.1.0
+[debug] [2025-04-08T16:59:54.271Z] Platform:      darwin
+[debug] [2025-04-08T16:59:54.271Z] Node Version:  v22.14.0
+[debug] [2025-04-08T16:59:54.271Z] Time:          Tue Apr 08 2025 18:59:54 GMT+0200 (Central European Summer Time)
+[debug] [2025-04-08T16:59:54.271Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-04-08T16:59:54.354Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-08T16:59:54.354Z] > authorizing via signed-in user (dawidpiela58@gmail.com)
+[debug] [2025-04-08T16:59:54.388Z] openjdk version "23.0.2" 2025-01-21
+
+[debug] [2025-04-08T16:59:54.388Z] OpenJDK Runtime Environment Homebrew (build 23.0.2)
+OpenJDK 64-Bit Server VM Homebrew (build 23.0.2, mixed mode, sharing)
+
+[debug] [2025-04-08T16:59:54.390Z] Parsed Java major version: 23
+[info] i  emulators: Starting emulators: auth, database, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, database, storage"}}
+[debug] [2025-04-08T16:59:54.640Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-04-08T16:59:54.640Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-04-08T16:59:54.640Z] assigned listening specs for emulators {"user":{"auth":[{"address":"0.0.0.0","family":"IPv4","port":9099}],"database":[{"address":"0.0.0.0","family":"IPv4","port":9000}],"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[warn] ⚠  emulators: It seems that you are running multiple instances of the emulator suite for project fitapp-e4fe2. This may result in unexpected behavior. 
+[debug] [2025-04-08T16:59:54.642Z] [hub] writing locator at /var/folders/g0/hysf347j6jgc462q39xdj2fh0000gn/T/hub-fitapp-e4fe2.json
+[debug] [2025-04-08T16:59:54.646Z] Checked if tokens are valid: true, expires at: 1744134390306
+[debug] [2025-04-08T16:59:54.646Z] Checked if tokens are valid: true, expires at: 1744134390306
+[debug] [2025-04-08T16:59:54.647Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/fitapp-e4fe2 [none]
+[debug] [2025-04-08T16:59:54.974Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/fitapp-e4fe2 200
+[debug] [2025-04-08T16:59:54.974Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/fitapp-e4fe2 {"projectId":"fitapp-e4fe2","projectNumber":"981660846876","displayName":"fitapp","name":"projects/fitapp-e4fe2","resources":{"hostingSite":"fitapp-e4fe2","realtimeDatabaseInstance":"fitapp-e4fe2-default-rtdb"},"state":"ACTIVE","etag":"1_97dd2362-906d-42a4-a5d7-35ae6edde337"}
+[debug] [2025-04-08T16:59:54.974Z] database rules config:  [{"instance":"fitapp-e4fe2-default-rtdb","rules":"/Users/dawid/Desktop/programming/mobile-apps/fitify/database.rules.json"}]
+[debug] [2025-04-08T16:59:54.977Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2025-04-08T16:59:54.977Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2025-04-08T16:59:54.977Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
+[debug] [2025-04-08T16:59:54.977Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","/Users/dawid/.cache/firebase/emulators/firebase-database-emulator-v4.11.2.jar","--host","0.0.0.0","--port",9000,"--single_project_mode","Warning"],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host","single_project_mode"],"joinArgs":false,"shell":false,"port":9000} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"/Users/dawid/.cache/firebase/emulators/firebase-database-emulator-v4.11.2.jar\",\"--host\",\"0.0.0.0\",\"--port\",9000,\"--single_project_mode\",\"Warning\"],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false,\"port\":9000}"}}
+[info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
+[debug] [2025-04-08T16:59:55.382Z] 18:59:55.382 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+ {"metadata":{"emulator":{"name":"database"},"message":"18:59:55.382 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started\n"}}
+[debug] [2025-04-08T16:59:55.437Z] 18:59:55.436 [main] INFO com.firebase.server.forge.App$ - Listening at 0.0.0.0:9000
+ {"metadata":{"emulator":{"name":"database"},"message":"18:59:55.436 [main] INFO com.firebase.server.forge.App$ - Listening at 0.0.0.0:9000\n"}}
+[info] i  database: Importing data from /Users/dawid/Desktop/programming/mobile-apps/fitify/dir/database_export/fitapp-e4fe2-default-rtdb.json {"metadata":{"emulator":{"name":"database"},"message":"Importing data from /Users/dawid/Desktop/programming/mobile-apps/fitify/dir/database_export/fitapp-e4fe2-default-rtdb.json"}}
+[debug] [2025-04-08T16:59:55.701Z] 18:59:55.701 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - fitapp-e4fe2-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 47ms, init: 0ms
+ {"metadata":{"emulator":{"name":"database"},"message":"18:59:55.701 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - fitapp-e4fe2-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 47ms, init: 0ms\n"}}
+[info] i  auth: Importing config from /Users/dawid/Desktop/programming/mobile-apps/fitify/dir/auth_export/config.json {"metadata":{"emulator":{"name":"auth"},"message":"Importing config from /Users/dawid/Desktop/programming/mobile-apps/fitify/dir/auth_export/config.json"}}
+[info] i  auth: Importing accounts from /Users/dawid/Desktop/programming/mobile-apps/fitify/dir/auth_export/accounts.json {"metadata":{"emulator":{"name":"auth"},"message":"Importing accounts from /Users/dawid/Desktop/programming/mobile-apps/fitify/dir/auth_export/accounts.json"}}
+[debug] [2025-04-08T16:59:57.714Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2025-04-08T16:59:58.010Z] Temp file directory for storage emulator: /var/folders/g0/hysf347j6jgc462q39xdj2fh0000gn/T/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /var/folders/g0/hysf347j6jgc462q39xdj2fh0000gn/T/firebase/storage/blobs"}}
+[debug] [2025-04-08T16:59:58.014Z] >>> [apiv2][query] PUT http://127.0.0.1:9000/.settings/rules.json ns=fitapp-e4fe2-default-rtdb
+[debug] [2025-04-08T16:59:58.014Z] >>> [apiv2][body] PUT http://127.0.0.1:9000/.settings/rules.json "{\n    \"rules\": {\n        \".read\": true,\n        \".write\": true\n    }\n}\n"
+[debug] [2025-04-08T16:59:58.026Z] 18:59:58.026 [NamespaceSystem-blocking-namespace-operation-dispatcher-7] INFO com.firebase.core.namespace.StateManager - Namespace fitapp-e4fe2-default-rtdb status Active to Active
+ {"metadata":{"emulator":{"name":"database"},"message":"18:59:58.026 [NamespaceSystem-blocking-namespace-operation-dispatcher-7] INFO com.firebase.core.namespace.StateManager - Namespace fitapp-e4fe2-default-rtdb status Active to Active\n"}}
+[debug] [2025-04-08T16:59:58.028Z] <<< [apiv2][status] PUT http://127.0.0.1:9000/.settings/rules.json 200
+[debug] [2025-04-08T16:59:58.028Z] <<< [apiv2][body] PUT http://127.0.0.1:9000/.settings/rules.json {"status":"ok"}
+[debug] [2025-04-08T16:59:58.030Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI            │
+├────────────────┼────────────────┼────────────────────────────────┤
+│ Authentication │ 0.0.0.0:9099   │ http://127.0.0.1:4000/auth     │
+├────────────────┼────────────────┼────────────────────────────────┤
+│ Database       │ 0.0.0.0:9000   │ http://127.0.0.1:4000/database │
+├────────────────┼────────────────┼────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage  │
+└────────────────┴────────────────┴────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2025-04-08T16:59:59.137Z] 18:59:59.133 [FirebaseWorkerPool-1-1] WARN com.firebase.core.persistence.backend.dummy.EmulatorMetadataPersistence - Multiple projectIds are not recommended in single project mode. Requested 
+namespace fitapp-e4fe2, but the emulator is configured for fitapp-e4fe2-default-rtdb. To 
+opt-out of single project mode add/set the singleProjectMode: false property in 
+the firebase.json emulators config. 
+ {"metadata":{"emulator":{"name":"database"},"message":"18:59:59.133 [FirebaseWorkerPool-1-1] WARN com.firebase.core.persistence.backend.dummy.EmulatorMetadataPersistence - Multiple projectIds are not recommended in single project mode. Requested \nnamespace fitapp-e4fe2, but the emulator is configured for fitapp-e4fe2-default-rtdb. To \nopt-out of single project mode add/set the singleProjectMode: false property in \nthe firebase.json emulators config. \n"}}
+[debug] [2025-04-08T16:59:59.146Z] 18:59:59.145 [NamespaceSystem-akka.actor.default-dispatcher-11] INFO com.firebase.core.namespace.NamespaceActor - fitapp-e4fe2 successfully activated FBKV (SurveyIdle(0)) wait: 3ms, init: 0ms
+ {"metadata":{"emulator":{"name":"database"},"message":"18:59:59.145 [NamespaceSystem-akka.actor.default-dispatcher-11] INFO com.firebase.core.namespace.NamespaceActor - fitapp-e4fe2 successfully activated FBKV (SurveyIdle(0)) wait: 3ms, init: 0ms\n"}}

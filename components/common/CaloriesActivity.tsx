@@ -3,9 +3,11 @@ import React from "react";
 import { Gradient } from "@/assets/svg/Gradient";
 import { GymIcon } from "@/assets/svg/Gym";
 import { useTranslation } from "react-i18next";
+import { useUser } from "@/hooks/useUser";
 
 export default function CaloriesActivity() {
     const { t } = useTranslation();
+    const { user } = useUser();
 
     return (
         <View className='h-full w-[110px] bg-success-500 rounded-[30px] flex flex-col justify-start items-center p-4 gap-3 relative overflow-hidden'>
@@ -17,7 +19,7 @@ export default function CaloriesActivity() {
             </View>
 
             <View className='flex justify-center items-center flex-col'>
-                <Text className='font-manrope-bold text-[26px] text-primary'>{`1.350`}</Text>
+                <Text className='font-manrope-bold text-[26px] text-primary'>{user?.totalCalories}</Text>
                 <Text className='font-manrope-medium text-[17px] text-primary opacity-70'>{t("today-activity.calories")}</Text>
             </View>
 

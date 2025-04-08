@@ -10,17 +10,9 @@
         "userInterfaceStyle": "automatic",
         "newArchEnabled": true,
         "ios": {
+            "googleServicesFile": "./GoogleService-Info.plist",
             "supportsTablet": true,
-            "NSAppTransportSecurity": {
-                "NSAllowsArbitraryLoads": true,
-                "NSExceptionDomains": {
-                    "firebaseio.com": {
-                        "NSIncludesSubdomains": true,
-                        "NSExceptionAllowsInsecureHTTPLoads": true
-                    }
-                }
-            },
-            "bundleIdentifier": "com.ciemnykoksu.fitify-8ucpeyzea-x-fy1howzko"
+            "bundleIdentifier": "fitapp-e4fe2.firebasestorage.app"
         },
         "plugins": [
             "expo-router",

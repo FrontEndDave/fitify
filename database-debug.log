@@ -1,0 +1,9 @@
+18:59:55.382 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+18:59:55.436 [main] INFO com.firebase.server.forge.App$ - Listening at 0.0.0.0:9000
+18:59:55.701 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - fitapp-e4fe2-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 47ms, init: 0ms
+18:59:58.026 [NamespaceSystem-blocking-namespace-operation-dispatcher-7] INFO com.firebase.core.namespace.StateManager - Namespace fitapp-e4fe2-default-rtdb status Active to Active
+18:59:59.133 [FirebaseWorkerPool-1-1] WARN com.firebase.core.persistence.backend.dummy.EmulatorMetadataPersistence - Multiple projectIds are not recommended in single project mode. Requested 
+namespace fitapp-e4fe2, but the emulator is configured for fitapp-e4fe2-default-rtdb. To 
+opt-out of single project mode add/set the singleProjectMode: false property in 
+the firebase.json emulators config. 
+18:59:59.145 [NamespaceSystem-akka.actor.default-dispatcher-11] INFO com.firebase.core.namespace.NamespaceActor - fitapp-e4fe2 successfully activated FBKV (SurveyIdle(0)) wait: 3ms, init: 0ms

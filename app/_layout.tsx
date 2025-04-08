@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18n from "@/services/i18next";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { initializeUser } from "@/services/firebase/user";
+import useTimeSpentTracker from "@/hooks/useTimeSpentTracker";
 
 export default function RootLayout() {
     const [loaded, error] = useFonts({
@@ -25,6 +26,8 @@ export default function RootLayout() {
     useEffect(() => {
         if (error) throw error;
     }, [error]);
+
+    const timeSpentMinutes = useTimeSpentTracker();
 
     useEffect(() => {
         if (loaded) {

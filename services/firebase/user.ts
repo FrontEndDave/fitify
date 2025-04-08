@@ -1,62 +1,62 @@
-import { signInAnonymously } from "firebase/auth";
+import { onAuthStateChanged, signInAnonymously } from "firebase/auth";
 import { get, ref, set } from "firebase/database";
-import { auth, database } from "./config";
+import { FIREBASE_DATABASE, FIREBASE_AUTH } from "./config";
+
+let userInitializationPromise: Promise<unknown> | null = null;
 
 const initializeUser = async () => {
-    try {
-        console.log("[1] Rozpoczęcie inicjalizacji użytkownika...");
-
-        const userCredential = await signInAnonymously(auth);
-        console.log("[2] Autentykacja zakończona:", userCredential);
-
-        const user = userCredential.user;
-        if (!user) {
-            console.error("[ERROR] Brak obiektu user w userCredential");
-            throw new Error("Nie udało się utworzyć użytkownika.");
-        }
-        console.log("[3] Użytkownik otrzymany:", user.uid);
-
-        const userRef = ref(database, `users/${user.uid}`);
-        console.log("[4] Referencja do bazy utworzona:", userRef.toString());
-
-        console.log("[5] Próba pobrania snapshotu...");
-        const snapshot = await get(userRef).catch((error) => {
-            console.error("[CRITICAL] Błąd odczytu bazy:", error);
-            throw error;
-        });
-        console.log("[6] Snapshot otrzymany:", snapshot.exists());
-
-        if (!snapshot.exists()) {
-            console.log("[7] Tworzenie nowego rekordu...");
-            await set(userRef, {
-                uid: user.uid,
-                createdAt: Date.now(),
-                totalCalories: 0,
-                totalMinutes: 0,
-                weight: null,
-                height: null,
-                completedExercises: {},
-                dailyActivity: {},
-            });
-            console.log("[8] Rekord utworzony");
-        }
-
-        return user;
-    } catch (error) {
-        console.error("[FINAL ERROR] Całościowy błąd:", error);
-        throw error;
+    if (userInitializationPromise) {
+        return userInitializationPromise;
     }
+
+    userInitializationPromise = new Promise((resolve, reject) => {
+        const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, async (user) => {
+            if (user) {
+                unsubscribe();
+                resolve(user);
+            } else {
+                try {
+                    const userCredential = await signInAnonymously(FIREBASE_AUTH);
+
+                    const userRef = ref(FIREBASE_DATABASE, `users/${userCredential.user.uid}`);
+                    const snapshot = await get(userRef);
+
+                    if (!snapshot.exists()) {
+                        await set(userRef, {
+                            uid: userCredential.user.uid,
+                            createdAt: Date.now(),
+                            totalCalories: 0,
+                            totalMinutes: 0,
+                            weight: null,
+                            height: null,
+                            completedExercises: {},
+                            dailyActivity: {},
+                        });
+                    }
+
+                    unsubscribe();
+                    resolve(userCredential.user);
+                } catch (error) {
+                    unsubscribe();
+                    console.error("Błąd podczas inicjalizacji użytkownika:", error);
+                    reject(error);
+                }
+            }
+        });
+    });
+
+    return userInitializationPromise;
 };
 
 const getUserData = async () => {
-    const user = auth.currentUser;
+    const user = FIREBASE_AUTH.currentUser;
 
     if (!user) {
         console.warn("Brak zalogowanego użytkownika.");
         return null;
     }
 
-    const userRef = ref(database, `users/${user.uid}`);
+    const userRef = ref(FIREBASE_DATABASE, `users/${user.uid}`);
     const snapshot = await get(userRef);
 
     if (!snapshot.exists()) {

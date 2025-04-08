@@ -1,53 +1,62 @@
 import { useState, useEffect, useRef } from "react";
 import { AppState, AppStateStatus } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useUser } from "./useUser";
+import "firebase/database";
+import { FIREBASE_DATABASE } from "@/services/firebase/config";
+import { get, ref, set, update } from "firebase/database";
 
 const useTimeSpentTracker = () => {
     const [timeSpentMinutes, setTimeSpentMinutes] = useState<number>(0);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
     const appStateRef = useRef(AppState.currentState);
+    const { user } = useUser();
     const isMounted = useRef(true);
 
     useEffect(() => {
         const loadSavedTime = async () => {
             try {
-                const savedTime = await AsyncStorage.getItem("timeSpent");
-                if (savedTime) setTimeSpentMinutes(parseInt(savedTime, 10));
+                const userId = user?.uid;
+                if (userId) {
+                    const userRef = ref(FIREBASE_DATABASE, `users/${user.uid}`);
+                    const snapshot = await get(userRef);
+
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        setTimeSpentMinutes(data.totalMinutes);
+                    } else {
+                        console.warn("Brak danych użytkownika.");
+                    }
+                }
             } catch (error) {
-                console.error("Błąd przy wczytywaniu czasu:", error);
+                console.error("Error loading time from Firebase:", error);
             }
         };
 
         loadSavedTime();
-
         return () => {
             isMounted.current = false;
         };
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         const handleAppStateChange = async (nextAppState: AppStateStatus) => {
-            try {
-                if (appStateRef.current.match(/active/) && nextAppState === "background") {
-                    await AsyncStorage.setItem("timeSpent", timeSpentMinutes.toString());
+            if (appStateRef.current.match(/inactive|background/) && nextAppState === "active") {
+                if (user?.uid) {
+                    const userRef = ref(FIREBASE_DATABASE, `users/${user.uid}`);
+                    set(userRef, {
+                        totalMinutes: timeSpentMinutes,
+                    });
                 }
+            }
 
-                appStateRef.current = nextAppState;
-
-                if (nextAppState === "active") {
-                    intervalRef.current = setInterval(() => {
-                        setTimeSpentMinutes((prev) => {
-                            const newTime = prev + 1;
-                            AsyncStorage.setItem("timeSpent", newTime.toString());
-                            return newTime;
-                        });
-                    }, 60000);
-                } else if (intervalRef.current) {
-                    clearInterval(intervalRef.current);
-                    intervalRef.current = null;
-                }
-            } catch (error) {
-                console.error("Błąd zmiany stanu aplikacji:", error);
+            if (nextAppState === "active") {
+                if (intervalRef.current) clearInterval(intervalRef.current);
+                intervalRef.current = setInterval(() => {
+                    update(ref(FIREBASE_DATABASE, `users/${user?.uid}`), {
+                        totalMinutes: timeSpentMinutes + 1,
+                    });
+                    setTimeSpentMinutes((prev) => prev + 1);
+                }, 60 * 1000);
             }
         };
 
@@ -58,7 +67,7 @@ const useTimeSpentTracker = () => {
             subscription.remove();
             if (intervalRef.current) clearInterval(intervalRef.current);
         };
-    }, []);
+    }, [user, timeSpentMinutes]);
 
     return timeSpentMinutes;
 };
