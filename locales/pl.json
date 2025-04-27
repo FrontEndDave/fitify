@@ -71,5 +71,21 @@
         "episodes": "Wszystkie cwiczenia",
         "continue": "Kontynuuj trening",
         "start": "Rozpocznij trening"
+    },
+    "chat": {
+        "title": "Trener Personalny",
+        "button": "Rozpocznij czat",
+        "subtitle": "<gray>Cześć {{user}},</gray> jak mogę Ci dziś pomóc?",
+        "message": "💪 Cześć! Jestem Twoim wirtualnym trenerem. Zapytaj mnie o cokolwiek związanego z fitnessem!",
+        "placeholder": "Napisz wiadomość...",
+        "you": "Ty",
+        "workout": "Plany treningowe",
+        "workout_description": "Twórz i dostosowuj plany treningowe do swoich potrzeb.",
+        "nutrition": "Plany żywieniowe",
+        "nutrition_description": "Odkryj plany żywieniowe, które pomogą Ci osiągnąć cele.",
+        "progress": "Postępy",
+        "progress_description": "Monitoruj swoje postępy i osiągnięcia.",
+        "exercise_tutorials": "Instrukcje ćwiczeń",
+        "exercise_tutorials_description": "Filmy instruktażowe i prawidłowa technika wykonania"
     }
 }

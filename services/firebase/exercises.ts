@@ -1,4 +1,4 @@
-import { FIREBASE_DATABASE } from "./config";
+import { database } from "./config";
 import { ref, onValue, query, orderByChild, equalTo, get } from "firebase/database";
 import { Exercise } from "../../types";
 
@@ -9,7 +9,7 @@ const exercisePaths = {
 
 export const exerciseService = {
     subscribeToExercises(callback: (exercises: Exercise[]) => void) {
-        const exercisesRef = ref(FIREBASE_DATABASE, exercisePaths.exercises());
+        const exercisesRef = ref(database, exercisePaths.exercises());
 
         const unsubscribe = onValue(exercisesRef, (snapshot) => {
             const exercisesData = snapshot.val() || {};
@@ -25,7 +25,7 @@ export const exerciseService = {
 
     async getExerciseByName(name: string): Promise<Exercise | null> {
         try {
-            const exercisesRef = ref(FIREBASE_DATABASE, exercisePaths.exercises());
+            const exercisesRef = ref(database, exercisePaths.exercises());
             const queryRef = query(exercisesRef, orderByChild("name"), equalTo(name));
             const snapshot = await get(queryRef);
 

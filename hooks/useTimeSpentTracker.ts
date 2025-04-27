@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { AppState, AppStateStatus } from "react-native";
 import { useUser } from "./useUser";
 import "firebase/database";
-import { FIREBASE_DATABASE } from "@/services/firebase/config";
+import { database } from "@/services/firebase/config";
 import { get, ref, set, update } from "firebase/database";
 
 const useTimeSpentTracker = () => {
@@ -17,7 +17,7 @@ const useTimeSpentTracker = () => {
             try {
                 const userId = user?.uid;
                 if (userId) {
-                    const userRef = ref(FIREBASE_DATABASE, `users/${user.uid}`);
+                    const userRef = ref(database, `users/${user.uid}`);
                     const snapshot = await get(userRef);
 
                     if (snapshot.exists()) {
@@ -42,7 +42,7 @@ const useTimeSpentTracker = () => {
         const handleAppStateChange = async (nextAppState: AppStateStatus) => {
             if (appStateRef.current.match(/inactive|background/) && nextAppState === "active") {
                 if (user?.uid) {
-                    const userRef = ref(FIREBASE_DATABASE, `users/${user.uid}`);
+                    const userRef = ref(database, `users/${user.uid}`);
                     set(userRef, {
                         totalMinutes: timeSpentMinutes,
                     });
@@ -52,7 +52,7 @@ const useTimeSpentTracker = () => {
             if (nextAppState === "active") {
                 if (intervalRef.current) clearInterval(intervalRef.current);
                 intervalRef.current = setInterval(() => {
-                    update(ref(FIREBASE_DATABASE, `users/${user?.uid}`), {
+                    update(ref(database, `users/${user?.uid}`), {
                         totalMinutes: timeSpentMinutes + 1,
                     });
                     setTimeSpentMinutes((prev) => prev + 1);

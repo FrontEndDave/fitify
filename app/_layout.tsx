@@ -2,7 +2,6 @@ import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import "./globals.css";
-import * as React from "react";
 import { useEffect } from "react";
 
 import "@/services/i18next";

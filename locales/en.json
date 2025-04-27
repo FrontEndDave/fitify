@@ -71,5 +71,12 @@
         "episodes": "All Exercises",
         "continue": "Continue Workout",
         "start": "Start Workout"
+    },
+    "chat": {
+        "title": "Personal Trainer",
+        "subtitle": "<gray>Hi {{user}},</gray> How can I help you today?",
+        "message": "💪 Hi! I'm your virtual trainer. Ask me anything related to fitness!",
+        "placeholder": "Type your message here...",
+        "you": "You"
     }
 }

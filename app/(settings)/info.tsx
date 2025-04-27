@@ -1,6 +1,5 @@
 import DetailsHero from "@/components/common/DetailsHero";
 import InfoContent from "@/components/settings/InfoContent";
-import React from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native";
 

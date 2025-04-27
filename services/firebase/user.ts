@@ -1,6 +1,6 @@
 import { onAuthStateChanged, signInAnonymously } from "firebase/auth";
 import { get, ref, set } from "firebase/database";
-import { FIREBASE_DATABASE, FIREBASE_AUTH } from "./config";
+import { auth, database } from "./config";
 
 let userInitializationPromise: Promise<unknown> | null = null;
 
@@ -10,15 +10,15 @@ const initializeUser = async () => {
     }
 
     userInitializationPromise = new Promise((resolve, reject) => {
-        const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, async (user) => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 unsubscribe();
                 resolve(user);
             } else {
                 try {
-                    const userCredential = await signInAnonymously(FIREBASE_AUTH);
+                    const userCredential = await signInAnonymously(auth);
 
-                    const userRef = ref(FIREBASE_DATABASE, `users/${userCredential.user.uid}`);
+                    const userRef = ref(database, `users/${userCredential.user.uid}`);
                     const snapshot = await get(userRef);
 
                     if (!snapshot.exists()) {
@@ -49,14 +49,14 @@ const initializeUser = async () => {
 };
 
 const getUserData = async () => {
-    const user = FIREBASE_AUTH.currentUser;
+    const user = auth.currentUser;
 
     if (!user) {
         console.warn("Brak zalogowanego użytkownika.");
         return null;
     }
 
-    const userRef = ref(FIREBASE_DATABASE, `users/${user.uid}`);
+    const userRef = ref(database, `users/${user.uid}`);
     const snapshot = await get(userRef);
 
     if (!snapshot.exists()) {

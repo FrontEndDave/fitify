@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { FIREBASE_DATABASE } from "@/services/firebase/config";
+import { database } from "@/services/firebase/config";
 import { ref, onValue } from "firebase/database";
 import { initializeUser } from "@/services/firebase/user";
 import { User } from "@/types";
@@ -20,7 +20,7 @@ const useUserStore = create<UserState>((set, get) => ({
     initialize: async () => {
         try {
             const user = await initializeUser();
-            const userRef = ref(FIREBASE_DATABASE, `users/${(user as User).uid}`);
+            const userRef = ref(database, `users/${(user as User).uid}`);
 
             const unsubscribe = onValue(
                 userRef,

@@ -1,7 +1,6 @@
 import { create } from "zustand";
-import { FIREBASE_DATABASE } from "@/services/firebase/config";
+import { database, auth } from "@/services/firebase/config";
 import { ref, push, update, onValue } from "firebase/database";
-import { FIREBASE_AUTH } from "@/services/firebase/config";
 
 interface Exercise {
     id?: string;
@@ -38,9 +37,9 @@ const useWorkoutStore = create<WorkoutState>((set, get) => ({
     unsubscribe: () => {},
 
     initializeWorkoutListener: () => {
-        const user = FIREBASE_AUTH.currentUser;
+        const user = auth.currentUser;
         if (!user) return;
-        const workoutsRef = ref(FIREBASE_DATABASE, `users/${user.uid}/active-workouts`);
+        const workoutsRef = ref(database, `users/${user.uid}/active-workouts`);
 
         const unsubscribe = onValue(
             workoutsRef,
@@ -61,10 +60,10 @@ const useWorkoutStore = create<WorkoutState>((set, get) => ({
     startActiveWorkout: async (workoutId: string, exerciseId: string) => {
         set({ loading: true, error: null });
         try {
-            const user = FIREBASE_AUTH.currentUser;
+            const user = auth.currentUser;
             if (!user) throw new Error("User not authenticated");
 
-            const newExerciseRef = ref(FIREBASE_DATABASE, `users/${user.uid}/active-workouts/${workoutId}/${exerciseId}`);
+            const newExerciseRef = ref(database, `users/${user.uid}/active-workouts/${workoutId}/${exerciseId}`);
 
             const newExercise: ActiveExercise = {
                 id: exerciseId,
@@ -87,7 +86,7 @@ const useWorkoutStore = create<WorkoutState>((set, get) => ({
     stopActiveWorkout: async () => {
         set({ loading: true, error: null });
         try {
-            const user = FIREBASE_AUTH.currentUser;
+            const user = auth.currentUser;
             const activeWorkout = get().activeWorkout;
             if (!user || !activeWorkout) return;
 
@@ -96,7 +95,7 @@ const useWorkoutStore = create<WorkoutState>((set, get) => ({
                 [`users/${user.uid}//active-workouts/${activeWorkout.workoutId}/${activeWorkout.id}/endTime`]: Date.now(),
             };
 
-            await update(ref(FIREBASE_DATABASE), updates);
+            await update(ref(database), updates);
             set({ activeWorkout: null, loading: false });
         } catch (error) {
             set({

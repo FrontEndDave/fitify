@@ -45,10 +45,10 @@ const Hero = () => {
             )}
 
             {user && !loading ? (
-                <View className='flex flex-row items-center justify-between w-full px-5 gap-5'>
+                <View className='flex flex-row items-center justify-between w-full px-5 gap-5 h-24'>
                     <View className='bg-[#F5F5F5] p-4 rounded-2xl flex-1'>
                         <View className='flex flex-row items-start gap-3'>
-                            <View className='bg-success-500 rounded-sm h-5 w-[0.35rem]  mt-1' />
+                            <View className='bg-success-500 rounded-sm h-5 w-[0.35rem] mt-1' />
                             <View className='flex flex-col'>
                                 <Text className='font-manrope-bold text-2xl text-secondary-500'>{formatTime(user?.totalMinutes ?? 0)}</Text>
                                 <Text className='font-manrope-medium text-lg text-secondary-400'>{t("settings.time")}</Text>

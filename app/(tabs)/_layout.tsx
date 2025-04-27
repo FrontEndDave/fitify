@@ -2,6 +2,7 @@ import React from "react";
 import { ActiveDiscoverIcon, DiscoverIcon } from "@/assets/svg/Discover";
 import { ActiveHomeIcon, HomeIcon } from "@/assets/svg/Home";
 import { ActiveSettingsIcon, SettingsIcon } from "@/assets/svg/Settings";
+import { ActiveChatIcon, ChatIcon } from "@/assets/svg/Chat";
 import { Tabs } from "expo-router";
 
 const _layout = () => {
@@ -53,6 +54,28 @@ const _layout = () => {
                                 />
                             ) : (
                                 <DiscoverIcon
+                                    width={28}
+                                    height={28}
+                                />
+                            )}
+                        </>
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name='chat-welcome'
+                options={{
+                    headerShown: false,
+                    title: "Personal Treiner",
+                    tabBarIcon: ({ focused }: { focused: boolean }) => (
+                        <>
+                            {focused ? (
+                                <ActiveChatIcon
+                                    width={28}
+                                    height={28}
+                                />
+                            ) : (
+                                <ChatIcon
                                     width={28}
                                     height={28}
                                 />
