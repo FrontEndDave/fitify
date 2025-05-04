@@ -1,18 +1,17 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
-import RightArrow from "@/assets/svg/RightArrow";
 import PersonLiftingWeights from "@/assets/svg/PersonLiftingWeights";
-import ProgressCircle from "./ProgressCircle";
 import colors from "@/constants/colors";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { Text, View } from "react-native";
+import ProgressCircle from "./ProgressCircle";
 
-type GoalCardProps = {
+type WorkoutCardrops = {
     title: string;
     exercise: number;
     progress: number;
 };
 
-const WorkoutCard = ({ title, exercise, progress }: GoalCardProps) => {
+const WorkoutCard = ({ title, exercise, progress }: WorkoutCardrops) => {
     const { t } = useTranslation();
 
     return (

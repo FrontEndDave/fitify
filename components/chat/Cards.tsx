@@ -1,5 +1,7 @@
-import { FlatList, View, Text } from "react-native";
+import { FlatList, View, Text, Dimensions } from "react-native";
 import { useTranslation } from "react-i18next";
+
+const { width: screenWidth } = Dimensions.get("window");
 
 const data = [
     {
@@ -27,11 +29,18 @@ const data = [
 export default function Cards() {
     const { t } = useTranslation();
 
+    const isSmallPhone = screenWidth <= 405;
+
     const renderItem = ({ item }) => (
         <View className='justify-start items-start rounded-3xl h-[160px] w-[49%] mb-2 p-6 bg-white'>
             <Text className='text-3xl mb-2'>{item.icon}</Text>
-            <Text className='text-lg font-bold text-start mb-1'>{t(item.title)}</Text>
-            <Text className='text-sm text-start text-gray-600'>{t(item.description)}</Text>
+            <Text className='text-lg font-bold text-start mb-1 leading-5'>{t(item.title)}</Text>
+            <Text
+                className='text-sm text-start text-gray-600'
+                numberOfLines={isSmallPhone ? 2 : undefined}
+                ellipsizeMode='tail'>
+                {t(item.description)}
+            </Text>
         </View>
     );
 

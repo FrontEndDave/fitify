@@ -1,51 +1,31 @@
-import { onAuthStateChanged, signInAnonymously } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { get, ref, set } from "firebase/database";
 import { auth, database } from "./config";
 
-let userInitializationPromise: Promise<unknown> | null = null;
+const initializeUser = async ({ email, password }: { email: string; password: string }) => {
+    const login = await signInWithEmailAndPassword(auth, email, password);
 
-const initializeUser = async () => {
-    if (userInitializationPromise) {
-        return userInitializationPromise;
+    if (login.user) {
+        const user = auth.currentUser;
+
+        const userRef = ref(database, `users/${user.uid}`);
+        const snapshot = await get(userRef);
+
+        if (!snapshot.exists()) {
+            await set(userRef, {
+                uid: user.uid,
+                createdAt: Date.now(),
+                totalCalories: 0,
+                totalMinutes: 0,
+                weight: null,
+                height: null,
+                completedExercises: {},
+                dailyActivity: {},
+            });
+        }
+    } else {
+        console.log("Login failed");
     }
-
-    userInitializationPromise = new Promise((resolve, reject) => {
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                unsubscribe();
-                resolve(user);
-            } else {
-                try {
-                    const userCredential = await signInAnonymously(auth);
-
-                    const userRef = ref(database, `users/${userCredential.user.uid}`);
-                    const snapshot = await get(userRef);
-
-                    if (!snapshot.exists()) {
-                        await set(userRef, {
-                            uid: userCredential.user.uid,
-                            createdAt: Date.now(),
-                            totalCalories: 0,
-                            totalMinutes: 0,
-                            weight: null,
-                            height: null,
-                            completedExercises: {},
-                            dailyActivity: {},
-                        });
-                    }
-
-                    unsubscribe();
-                    resolve(userCredential.user);
-                } catch (error) {
-                    unsubscribe();
-                    console.error("Błąd podczas inicjalizacji użytkownika:", error);
-                    reject(error);
-                }
-            }
-        });
-    });
-
-    return userInitializationPromise;
 };
 
 const getUserData = async () => {
@@ -71,4 +51,4 @@ const getUserData = async () => {
     return userData;
 };
 
-export { initializeUser, getUserData };
+export { getUserData, initializeUser };

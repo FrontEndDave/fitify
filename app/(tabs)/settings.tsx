@@ -1,10 +1,9 @@
 import Hero from "@/components/settings/Hero";
 import Settings from "@/components/settings/Settings";
-import React from "react";
 import { ScrollView, StatusBar, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-const profile = () => {
+const Profile = () => {
     return (
         <SafeAreaProvider>
             <StatusBar
@@ -24,4 +23,4 @@ const profile = () => {
     );
 };
 
-export default profile;
+export default Profile;

@@ -1,11 +1,11 @@
-import { View, Text, TouchableOpacity, Dimensions } from "react-native";
-import React from "react";
 import PersonLiftingWeights from "@/assets/svg/PersonLiftingWeights";
 import { SecondGradient } from "@/assets/svg/SecGradient";
-import Svg, { FeColorMatrix, Filter, Image } from "react-native-svg";
-import { router } from "expo-router";
 import { useExercises } from "@/hooks/useExercises";
+import { router } from "expo-router";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { Dimensions, Text, TouchableOpacity, View } from "react-native";
+import Svg, { FeColorMatrix, Filter, Image } from "react-native-svg";
 
 const ScreenHeight = Dimensions.get("window").height;
 

@@ -1,17 +1,24 @@
-import { Stack } from "expo-router";
-import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import "./globals.css";
-import { useEffect } from "react";
 
-import "@/services/i18next";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFonts } from "expo-font";
+import { Stack } from "expo-router";
+
 import i18n from "@/services/i18next";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { initializeUser } from "@/services/firebase/user";
+
 import useTimeSpentTracker from "@/hooks/useTimeSpentTracker";
+import { auth } from "@/services/firebase/config";
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
+import "./globals.css";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+    const [initializing, setInitializing] = useState(true);
+    const [user, setUser] = useState<any | null>(null);
+
     const [loaded, error] = useFonts({
         "Manrope-ExtraBold": require("../assets/fonts/Manrope-ExtraBold.ttf"), // 800
         "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"), // 700
@@ -22,30 +29,17 @@ export default function RootLayout() {
         "Manrope-ExtraLight": require("../assets/fonts/Manrope-ExtraLight.ttf"), // 200
     });
 
-    useEffect(() => {
-        if (error) throw error;
-    }, [error]);
-
-    const timeSpentMinutes = useTimeSpentTracker();
+    useTimeSpentTracker();
 
     useEffect(() => {
-        if (loaded) {
+        if (loaded && !error) {
             const initializeApp = async () => {
                 await fetchLanguage();
-                await initializeUser();
                 SplashScreen.hideAsync();
             };
             initializeApp();
         }
-    }, [loaded]);
-
-    if (!loaded) {
-        return null;
-    }
-
-    if (!loaded) {
-        return null;
-    }
+    }, [loaded, error]);
 
     const fetchLanguage = async () => {
         const savedLanguage = await AsyncStorage.getItem("appLanguage");
@@ -54,46 +48,47 @@ export default function RootLayout() {
         }
     };
 
+    useEffect(() => {
+        const initializeApp = async () => {
+            const unsubscribe = onAuthStateChanged(auth, (user) => {
+                setUser(user);
+                if (initializing) setInitializing(false);
+            });
+
+            return unsubscribe;
+        };
+
+        if (loaded) {
+            initializeApp();
+        }
+    }, [initializing, loaded]);
+
+    if (initializing) {
+        return null;
+    }
+
     return (
         <SafeAreaProvider>
-            <RootLayoutNav />
+            <RootLayoutNav user={user} />
         </SafeAreaProvider>
     );
 }
 
-function RootLayoutNav() {
+function RootLayoutNav({ user }: { user: any | null }) {
     return (
-        <Stack>
-            <Stack.Screen
-                name='(tabs)'
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen
-                name='workout-details/[name]'
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen
-                name='workout/[name]'
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen
-                name='exercises'
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen
-                name='(settings)'
-                options={{
-                    headerShown: false,
-                }}
-            />
+        <Stack screenOptions={{ headerShown: false, animation: "default" }}>
+            {user ? (
+                <>
+                    <Stack.Screen name='(tabs)' />
+                    <Stack.Screen name='workout-details/[name]' />
+                    <Stack.Screen name='workout/[name]' />
+                    <Stack.Screen name='exercises' />
+                    <Stack.Screen name='chat' />
+                    <Stack.Screen name='(settings)' />
+                </>
+            ) : (
+                <Stack.Screen name='(auth)' />
+            )}
         </Stack>
     );
 }

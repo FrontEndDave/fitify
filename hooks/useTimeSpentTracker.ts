@@ -1,13 +1,12 @@
-import { useState, useEffect, useRef } from "react";
-import { AppState, AppStateStatus } from "react-native";
-import { useUser } from "./useUser";
-import "firebase/database";
 import { database } from "@/services/firebase/config";
 import { get, ref, set, update } from "firebase/database";
+import { useEffect, useRef, useState } from "react";
+import { AppState, AppStateStatus } from "react-native";
+import { useUser } from "./useUser";
 
 const useTimeSpentTracker = () => {
     const [timeSpentMinutes, setTimeSpentMinutes] = useState<number>(0);
-    const intervalRef = useRef<NodeJS.Timeout | null>(null);
+    const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
     const appStateRef = useRef(AppState.currentState);
     const { user } = useUser();
     const isMounted = useRef(true);

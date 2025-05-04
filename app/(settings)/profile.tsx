@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native";
 
-const profile = () => {
+const Profile = () => {
     const { t } = useTranslation();
 
     return (
@@ -15,4 +15,4 @@ const profile = () => {
     );
 };
 
-export default profile;
+export default Profile;

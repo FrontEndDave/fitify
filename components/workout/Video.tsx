@@ -1,8 +1,8 @@
-import { View, Text, Dimensions } from "react-native";
-import React from "react";
 import { useEvent } from "expo";
-import { useVideoPlayer, VideoView } from "expo-video";
 import { LinearGradient } from "expo-linear-gradient";
+import { useVideoPlayer, VideoView } from "expo-video";
+import React from "react";
+import { Dimensions, View } from "react-native";
 import ExerciseDetails from "./ExerciseDetails";
 
 const ScreenHeight = Dimensions.get("screen").height;
@@ -10,14 +10,21 @@ const ScreenHeight = Dimensions.get("screen").height;
 const videoSource = "https://video-previews.elements.envatousercontent.com/69528e41-1ef1-48e6-9226-1b56ac753426/watermarked_preview/watermarked_preview.mp4";
 
 interface VideoProps {
-    handleSwipeUp: (event: any) => void;
     videoUrl: string;
-    reps: number;
-    sets: number;
-    duration: number;
+    // reps: number;
+    // sets: number;
+    // duration: number;
+    exerciseData: {
+        name: string;
+        video: string;
+        sets: number;
+        reps: number;
+        duration: number;
+        episodes: number;
+    };
 }
 
-const Video = ({ handleSwipeUp, videoUrl, reps, sets, duration }: VideoProps) => {
+const Video = ({ videoUrl, exerciseData }: VideoProps) => {
     const player = useVideoPlayer(videoSource, (player) => {
         player.loop = true;
         player.muted = true;
@@ -49,10 +56,9 @@ const Video = ({ handleSwipeUp, videoUrl, reps, sets, duration }: VideoProps) =>
             <ExerciseDetails
                 isPlaying={isPlaying}
                 player={player}
-                handleSwipeUp={handleSwipeUp}
-                reps={reps}
-                sets={sets}
-                duration={duration}
+                reps={exerciseData.reps}
+                sets={exerciseData.sets}
+                duration={exerciseData.duration}
             />
         </View>
     );

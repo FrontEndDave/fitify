@@ -1,9 +1,8 @@
-import React from "react";
-import { Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import ProgressCircle from "../common/ProgressCircle";
-import CountingText from "../common/CountingText";
 import { useTranslation } from "react-i18next";
+import { Text, View } from "react-native";
+import CountingText from "../common/CountingText";
+import ProgressCircle from "../common/ProgressCircle";
 
 export default function WorkoutProgress() {
     const { t } = useTranslation();

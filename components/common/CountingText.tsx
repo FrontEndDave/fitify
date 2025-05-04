@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing } from "react-native-reanimated";
+import { useEffect, useState } from "react";
 import { Text as RNText } from "react-native";
+import Animated, { Easing, useSharedValue, withTiming } from "react-native-reanimated";
 
 const AnimatedText = Animated.createAnimatedComponent(RNText);
 

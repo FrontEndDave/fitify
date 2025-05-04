@@ -1,11 +1,16 @@
-import React from "react";
+import { ActiveChatIcon, ChatIcon } from "@/assets/svg/Chat";
 import { ActiveDiscoverIcon, DiscoverIcon } from "@/assets/svg/Discover";
 import { ActiveHomeIcon, HomeIcon } from "@/assets/svg/Home";
 import { ActiveSettingsIcon, SettingsIcon } from "@/assets/svg/Settings";
-import { ActiveChatIcon, ChatIcon } from "@/assets/svg/Chat";
-import { Tabs } from "expo-router";
+import { useAuth } from "@/hooks/useAuth";
+import { Redirect, Tabs } from "expo-router";
 
-const _layout = () => {
+const Layout = () => {
+    const { user, loading } = useAuth();
+
+    if (loading) return null;
+    if (!user) return <Redirect href='/(auth)/login' />;
+
     return (
         <Tabs
             screenOptions={{
@@ -110,4 +115,4 @@ const _layout = () => {
     );
 };
 
-export default _layout;
+export default Layout;

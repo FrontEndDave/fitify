@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Exercise } from "../types";
 import { exerciseService } from "../services/firebase/exercises";
+import { Exercise } from "../types";
 
 export const useExerciseByName = (name: string) => {
     const [exercise, setExercise] = useState<Exercise | null>(null);

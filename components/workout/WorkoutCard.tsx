@@ -1,8 +1,7 @@
-import { View, Text, TouchableOpacity, ImageBackground } from "react-native";
-import React from "react";
-import { VideoIcon } from "@/assets/svg/Video";
-import { CompleteIcon, IncompleteIcon } from "@/assets/svg/Status";
 import { PlayIcon } from "@/assets/svg/Controls";
+import { CompleteIcon, IncompleteIcon } from "@/assets/svg/Status";
+import { VideoIcon } from "@/assets/svg/Video";
+import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 
 interface EpisodeCardProps {
     title: string;

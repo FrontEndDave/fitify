@@ -1,11 +1,10 @@
-import { View, StatusBar, ScrollView } from "react-native";
-import React from "react";
 import DetailsHero from "@/components/common/DetailsHero";
 import List from "@/components/exercises/List";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
+import { ScrollView, StatusBar, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const exercises = () => {
+const Exercises = () => {
     const { t } = useTranslation();
 
     return (
@@ -26,4 +25,4 @@ const exercises = () => {
     );
 };
 
-export default exercises;
+export default Exercises;

@@ -1,10 +1,9 @@
-import { SafeAreaView, ScrollView, StatusBar, Text, View } from "react-native";
-import React from "react";
 import Hero from "@/components/discover/Hero";
-import PopularExercises from "@/components/discover/PopularExercises";
 import OurCollection from "@/components/discover/OurCollection";
+import PopularExercises from "@/components/discover/PopularExercises";
+import { SafeAreaView, ScrollView, StatusBar, View } from "react-native";
 
-const discover = () => {
+const Discover = () => {
     return (
         <SafeAreaView className='flex-1 w-full bg-background'>
             <StatusBar
@@ -22,4 +21,4 @@ const discover = () => {
     );
 };
 
-export default discover;
+export default Discover;

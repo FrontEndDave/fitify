@@ -1,8 +1,7 @@
-import { initializeApp } from "firebase/app";
-// @ts-ignore
-import { getReactNativePersistence, initializeAuth } from "firebase/auth";
-import { forceWebSockets, getDatabase } from "firebase/database";
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
+import { initializeApp } from "firebase/app";
+import { getReactNativePersistence, initializeAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
@@ -16,12 +15,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig, "fitness-app");
 
-forceWebSockets();
-
 const auth = initializeAuth(app, {
     persistence: getReactNativePersistence(ReactNativeAsyncStorage),
 });
 
 const database = getDatabase(app);
 
-export { database, auth };
+export { auth, database };

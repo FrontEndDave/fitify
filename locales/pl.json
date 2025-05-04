@@ -20,7 +20,6 @@
         "language": "Język",
         "notifications": "Powiadomienia",
         "dark-mode": "Tryb ciemny",
-        "delete-account": "Usuń konto",
         "time": "Spędzony czas",
         "total-workouts": "Liczba treningów",
         "join": "Członek od"
@@ -40,7 +39,17 @@
         "all-exercises": "Wszystkie ćwiczenia",
         "swipe": "Przesuń w górę, by zobaczyć więcej",
         "duration": "Czas trwania",
-        "exercise": "Ćwiczenie"
+        "exercise": "Ćwiczenie",
+        "completed_title": "Gratulacje!",
+        "completed_message": "Ukończyłeś wszystkie serie!",
+        "completed": "Ukończono",
+        "rest": "Przerwa",
+        "workout": "Ćwiczenie",
+        "sets": "serii",
+        "reps_sets": "Powtórzenia/Serie",
+        "rest_time": "Czas na przerwę",
+        "exercise_time": "Czas na ćwiczenie",
+        "set": "Seria"
     },
     "profile": {
         "title": "Edytuj Profil",
@@ -77,7 +86,7 @@
         "button": "Rozpocznij czat",
         "subtitle": "<gray>Cześć {{user}},</gray> jak mogę Ci dziś pomóc?",
         "message": "💪 Cześć! Jestem Twoim wirtualnym trenerem. Zapytaj mnie o cokolwiek związanego z fitnessem!",
-        "placeholder": "Napisz wiadomość...",
+        "placeholder": "Zadaj mi pytanie...",
         "you": "Ty",
         "workout": "Plany treningowe",
         "workout_description": "Twórz i dostosowuj plany treningowe do swoich potrzeb.",

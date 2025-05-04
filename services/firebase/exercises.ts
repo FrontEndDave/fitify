@@ -1,6 +1,6 @@
-import { database } from "./config";
-import { ref, onValue, query, orderByChild, equalTo, get } from "firebase/database";
+import { equalTo, get, onValue, orderByChild, query, ref } from "firebase/database";
 import { Exercise } from "../../types";
+import { database } from "./config";
 
 const exercisePaths = {
     exercises: () => "exercises/",

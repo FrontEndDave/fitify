@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import Animated, { Easing, useAnimatedProps, useSharedValue, withTiming } from "react-native-reanimated";
 import Svg, { Circle } from "react-native-svg";
-import Animated, { useSharedValue, useAnimatedProps, withTiming, Easing } from "react-native-reanimated";
 
 interface ProgressCircleProps {
     size: number;

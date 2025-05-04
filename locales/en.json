@@ -20,7 +20,6 @@
         "language": "Language",
         "notifications": "Notifications",
         "dark-mode": "Dark Mode",
-        "delete-account": "Delete Account",
         "time": "Time Spent",
         "total-workouts": "Total Workouts",
         "join": "Member Since"
@@ -74,9 +73,18 @@
     },
     "chat": {
         "title": "Personal Trainer",
-        "subtitle": "<gray>Hi {{user}},</gray> How can I help you today?",
+        "button": "Start Chat",
+        "subtitle": "<gray>Hi {{user}},</gray> how can I help you today?",
         "message": "💪 Hi! I'm your virtual trainer. Ask me anything related to fitness!",
-        "placeholder": "Type your message here...",
-        "you": "You"
+        "placeholder": "Ask me a question...",
+        "you": "You",
+        "workout": "Workout Plans",
+        "workout_description": "Create and customize workout plans to fit your needs.",
+        "nutrition": "Nutrition Plans",
+        "nutrition_description": "Discover nutrition plans that will help you achieve your goals.",
+        "progress": "Progress",
+        "progress_description": "Track your progress and achievements.",
+        "exercise_tutorials": "Exercise Tutorials",
+        "exercise_tutorials_description": "Instructional videos and proper exercise techniques."
     }
 }

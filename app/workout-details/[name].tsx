@@ -1,11 +1,10 @@
-import { ActivityIndicator, ScrollView, StatusBar, Text, View } from "react-native";
-import React from "react";
-import { useLocalSearchParams } from "expo-router";
-import Hero from "@/components/workout-details/Hero";
 import Description from "@/components/workout-details/Description";
-import WorkoutButton from "@/components/workout-details/WorkoutButton";
 import Episodes from "@/components/workout-details/Episodes";
+import Hero from "@/components/workout-details/Hero";
+import WorkoutButton from "@/components/workout-details/WorkoutButton";
 import { useExerciseByName } from "@/hooks/useExerciseByName";
+import { useLocalSearchParams } from "expo-router";
+import { ActivityIndicator, ScrollView, StatusBar, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const WorkoutDetails = () => {

@@ -1,7 +1,6 @@
 import React from "react";
-import NotificationIcon from "@/assets/svg/Notification";
-import { Image, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
+import { Text, View } from "react-native";
 
 export default function Hero() {
     const { t } = useTranslation();

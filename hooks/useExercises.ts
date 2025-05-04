@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Exercise } from "../types";
 import { exerciseService } from "../services/firebase/exercises";
+import { Exercise } from "../types";
 
 export const useExercises = () => {
     const [exercises, setExercises] = useState<Exercise[]>([]);

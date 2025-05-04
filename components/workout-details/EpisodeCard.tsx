@@ -1,6 +1,9 @@
-import React from "react";
-import { View, Text, TouchableOpacity, ImageBackground } from "react-native";
 import { router } from "expo-router";
+import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
+
+import { PlayIcon } from "@/assets/svg/Controls";
+import { CompleteIcon, IncompleteIcon } from "@/assets/svg/Status";
+import { VideoIcon } from "@/assets/svg/Video";
 
 function formatExerciseTime(milliseconds: number): string {
     const totalSeconds = Math.floor(milliseconds / 1000);
@@ -9,10 +12,6 @@ function formatExerciseTime(milliseconds: number): string {
 
     return seconds > 0 ? `${minutes} min ${seconds} s` : `${minutes} min`;
 }
-
-import { PlayIcon } from "@/assets/svg/Controls";
-import { VideoIcon } from "@/assets/svg/Video";
-import { CompleteIcon, IncompleteIcon } from "@/assets/svg/Status";
 
 interface EpisodeCardProps {
     episodes: any[];

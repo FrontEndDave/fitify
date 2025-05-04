@@ -1,11 +1,11 @@
-import RightArrow from "@/assets/svg/RightArrow";
+import SendIcon from "@/assets/svg/Send";
 import Message from "@/components/chat/Message";
 import Response from "@/components/chat/Response";
 import DetailsHero from "@/components/common/DetailsHero";
-import React, { useEffect, useState } from "react";
-import { ActivityIndicator, StatusBar, TextInput, TouchableOpacity, View, KeyboardAvoidingView, Platform, FlatList } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { fetch } from "expo/fetch";
+import React, { useState } from "react";
+import { ActivityIndicator, FlatList, KeyboardAvoidingView, Platform, StatusBar, TextInput, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import Constants from "expo-constants";
 import { useTranslation } from "react-i18next";
@@ -136,63 +136,69 @@ const ChatScreen = () => {
 
     return (
         <SafeAreaView
-            edges={["top"]}
+            edges={["top", "left", "right", "bottom"]}
             className='flex-1 w-full bg-background'>
             <StatusBar
                 barStyle='dark-content'
                 animated
             />
-            <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
-                keyboardVerticalOffset={Platform.OS === "ios" ? 85 : 0}
-                className='flex-1'>
-                <View className='flex-1 px-6'>
-                    <DetailsHero text={t("chat.title")} />
 
-                    <FlatList
-                        className='mt-2'
-                        ref={flatListRef}
-                        data={messages}
-                        keyExtractor={(item) => item.id}
-                        renderItem={({ item }) =>
-                            item.type === "user" ? (
-                                <Message
-                                    message={item.text}
-                                    timestamp={item.timestamp}
-                                />
-                            ) : (
-                                <Response
-                                    text={item.text}
-                                    timestamp={item.timestamp}
-                                />
-                            )
-                        }
-                        contentContainerStyle={{ paddingBottom: 80 }}
-                        onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
-                        onLayout={() => flatListRef.current?.scrollToEnd({ animated: true })}
-                    />
+            <View className='flex-1 flex h-full flex-col justify-between relative px-6'>
+                <DetailsHero text={t("chat.title")} />
 
-                    <View className='flex-row items-center gap-2 mb-4'>
+                <FlatList
+                    className='mt-2'
+                    ref={flatListRef}
+                    data={messages}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) =>
+                        item.type === "user" ? (
+                            <Message
+                                message={item.text}
+                                timestamp={item.timestamp}
+                            />
+                        ) : (
+                            <Response
+                                text={item.text}
+                                timestamp={item.timestamp}
+                            />
+                        )
+                    }
+                    contentContainerStyle={{ paddingBottom: 80 }}
+                    onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
+                    onLayout={() => flatListRef.current?.scrollToEnd({ animated: true })}
+                />
+
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === "ios" ? "padding" : "height"}
+                    keyboardVerticalOffset={Platform.OS === "ios" ? 75 : 0}
+                    className='will-change-transform transition-all duration-100'>
+                    <View className='flex flex-row items-center justify-between w-full h-fit max-h-16'>
                         <TextInput
                             value={inputText}
                             onChangeText={setInputText}
-                            className='flex-1 p-4 bg-slate-200 rounded-2xl'
-                            placeholder='Ask anything...'
+                            className='flex-1 h-full placeholder:text-secondary-500 bg-white/70 rounded-full border border-secondary-200 px-4 flex items-center justify-center '
+                            placeholder={t("chat.placeholder")}
                             onSubmitEditing={handleSend}
                             editable={!isSending}
-                            multiline
-                            blurOnSubmit={false}
                         />
 
                         <TouchableOpacity
                             onPress={handleSend}
-                            disabled={isSending}
-                            className='p-2'>
-                            {isSending ? <ActivityIndicator color='#64748b' /> : <RightArrow />}
+                            disabled={isSending || !inputText}
+                            className='h-full w-auto aspect-square bg-black rounded-full ml-2 flex justify-center items-center'>
+                            {isSending ? (
+                                <ActivityIndicator color='#64748b' />
+                            ) : (
+                                <SendIcon
+                                    width={22}
+                                    height={22}
+                                />
+                            )}
                         </TouchableOpacity>
                     </View>
-                </View>
-            </KeyboardAvoidingView>
+                </KeyboardAvoidingView>
+            </View>
         </SafeAreaView>
     );
 };

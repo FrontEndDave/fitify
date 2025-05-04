@@ -1,7 +1,7 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import * as Localization from "expo-localization";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Localization from "expo-localization";
+import * as i18n from "i18next";
+import { initReactI18next } from "react-i18next";
 
 import translationEn from "@/locales/en.json";
 import translationPl from "@/locales/pl.json";
@@ -24,6 +24,10 @@ const initI18n = async () => {
         fallbackLng: "pl",
         interpolation: {
             escapeValue: false,
+        },
+        compatibilityJSON: "v4",
+        react: {
+            useSuspense: false,
         },
     });
 };

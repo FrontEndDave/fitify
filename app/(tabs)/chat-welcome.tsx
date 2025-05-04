@@ -1,14 +1,11 @@
-import { Button, StatusBar, View } from "react-native";
+import { StatusBar, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { useTranslation } from "react-i18next";
-import Hero from "@/components/chat/Hero";
 import Cards from "@/components/chat/Cards";
 import ChatButton from "@/components/chat/ChatButton";
+import Hero from "@/components/chat/Hero";
 
 const ChatWelcomeScreen = () => {
-    const { t } = useTranslation();
-
     return (
         <SafeAreaView
             edges={["top", "left", "right", "bottom"]}
