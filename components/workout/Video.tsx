@@ -22,12 +22,13 @@ interface VideoProps {
         reps: number;
         duration: number;
         episodes: number;
+        kcalPerMinute: number;
     };
 }
 
 const Video = ({ workoutName, videoUrl, exerciseData }: VideoProps) => {
-    const { activeWorkout, completeEpisode, resetWorkout } = useActiveWorkout(workoutName);
-    const { addExercise } = useDailyStats();
+    const { activeWorkout, completeEpisode } = useActiveWorkout(workoutName);
+    const { addCompletedEpisode } = useDailyStats();
 
     const player = useVideoPlayer(videoSource, (player) => {
         player.loop = true;
@@ -35,22 +36,20 @@ const Video = ({ workoutName, videoUrl, exerciseData }: VideoProps) => {
         player.play();
     });
 
-    console.log(exerciseData);
-
     const { isPlaying } = useEvent(player, "playingChange", { isPlaying: player.playing });
+
     const handleExerciseComplete = () => {
         completeEpisode(exerciseData.name);
 
-        addExercise(workoutName, 5, exerciseData.duration);
+        addCompletedEpisode(exerciseData.name, exerciseData.kcalPerMinute, exerciseData.duration, exerciseData.sets, exerciseData.reps);
 
         const doneCount = (activeWorkout?.completedEpisodes?.length || 0) + 1;
         const totalCount = activeWorkout?.totalEpisodes || 0;
 
         if (doneCount >= totalCount) {
-            resetWorkout();
-            router.replace(`/workout-details/${workoutName}`);
+            router.back();
         } else {
-            router.replace(`/workout-details/${workoutName}`);
+            router.back();
         }
     };
 

@@ -1,7 +1,7 @@
 {
-    "see-more": "See More",
-    "see-less": "See Less",
-    "welcome-back": "Welcome Back",
+    "see-more": "See more",
+    "see-less": "See less",
+    "welcome-back": "Welcome back",
     "hero-title": "How’s your workout vibe today?",
     "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     "workout-progress": {
@@ -12,11 +12,13 @@
         "title": "Today's Activity",
         "steps": "Steps",
         "water": "Water",
-        "calories": "Calories"
+        "calories": "Calories",
+        "no-exercise": "No Exercise",
+        "no-exercise-description": "Start a workout"
     },
     "settings": {
         "title": "Settings",
-        "logout": "Log Out",
+        "logout": "Logout",
         "language": "Language",
         "notifications": "Notifications",
         "dark-mode": "Dark Mode",
@@ -25,26 +27,36 @@
         "join": "Member Since"
     },
     "info": {
-        "title": "App Information",
+        "title": "App Info",
         "authors": "Authors",
-        "technology": "Technologies",
-        "technology-content": "The app was created using React Native, Expo, Firebase, and Redux.",
+        "technology": "Technology",
+        "technology-content": "The app was built using React Native, Expo, Firebase, and Redux.",
         "version": "Version",
         "description": "Description",
-        "description-content": "FitApp was created to help users monitor their physical activity and maintain a healthy lifestyle."
+        "description-content": "FitApp was created to help users track their physical activity and maintain a healthy lifestyle."
     },
     "workout": {
-        "title": "My Exercises",
+        "title": "My Workouts",
         "exercises": "exercises",
         "all-exercises": "All Exercises",
         "swipe": "Swipe up to see more",
         "duration": "Duration",
-        "exercise": "Exercise"
+        "exercise": "Exercise",
+        "completed_title": "Congratulations!",
+        "completed_message": "You've completed all sets!",
+        "completed": "Completed",
+        "rest": "Rest",
+        "workout": "Workout",
+        "sets": "sets",
+        "reps_sets": "Reps/Sets",
+        "rest_time": "Rest Time",
+        "exercise_time": "Exercise Time",
+        "set": "Set"
     },
     "profile": {
         "title": "Edit Profile",
         "subtitle": "Account Information",
-        "name": "Name",
+        "name": "First Name",
         "email": "Email",
         "phone": "Phone",
         "address": "Address",
@@ -54,10 +66,10 @@
     },
     "language": {
         "title": "Set Language",
-        "subtitle": "Choose a Language",
+        "subtitle": "Choose a language",
         "english": "English",
         "polish": "Polish",
-        "SearchPlaceholder": "Search Language"
+        "SearchPlaceholder": "Search language"
     },
     "discover": {
         "title": "Discover",
@@ -69,22 +81,23 @@
         "description": "Description",
         "episodes": "All Exercises",
         "continue": "Continue Workout",
-        "start": "Start Workout"
+        "start": "Start Workout",
+        "finish": "Finish Workout"
     },
     "chat": {
         "title": "Personal Trainer",
         "button": "Start Chat",
         "subtitle": "<gray>Hi {{user}},</gray> how can I help you today?",
-        "message": "💪 Hi! I'm your virtual trainer. Ask me anything related to fitness!",
+        "message": "💪 Hi! I'm your virtual trainer. Ask me anything about fitness!",
         "placeholder": "Ask me a question...",
         "you": "You",
         "workout": "Workout Plans",
         "workout_description": "Create and customize workout plans to fit your needs.",
         "nutrition": "Nutrition Plans",
-        "nutrition_description": "Discover nutrition plans that will help you achieve your goals.",
+        "nutrition_description": "Discover nutrition plans to help you reach your goals.",
         "progress": "Progress",
         "progress_description": "Track your progress and achievements.",
         "exercise_tutorials": "Exercise Tutorials",
-        "exercise_tutorials_description": "Instructional videos and proper exercise techniques."
+        "exercise_tutorials_description": "Tutorial videos and proper technique instructions"
     }
 }

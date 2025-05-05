@@ -12,7 +12,9 @@
         "title": "Dzisiejsza aktywność",
         "steps": "Kroki",
         "water": "Woda",
-        "calories": "Kalorie"
+        "calories": "Kalorie",
+        "no-exercise": "Brak ćwiczeń",
+        "no-exercise-description": "Rozpocznij trening"
     },
     "settings": {
         "title": "Ustawienia",
@@ -79,7 +81,8 @@
         "description": "Opis",
         "episodes": "Wszystkie cwiczenia",
         "continue": "Kontynuuj trening",
-        "start": "Rozpocznij trening"
+        "start": "Rozpocznij trening",
+        "finish": "Zakończ trening"
     },
     "chat": {
         "title": "Trener Personalny",

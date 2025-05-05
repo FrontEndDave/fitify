@@ -1,11 +1,15 @@
 import { auth, database } from "@/services/firebase/config";
-import { onValue, ref, set, update } from "firebase/database";
+import { get, onValue, ref, set, update } from "firebase/database";
 import { useEffect, useState } from "react";
 
 type ActiveWorkoutData = {
     startedAt: number;
     completedEpisodes: string[];
     totalEpisodes: number;
+};
+
+export type ActiveWorkoutWithName = ActiveWorkoutData & {
+    workoutName: string;
 };
 
 export const useActiveWorkout = (workoutName: string) => {
@@ -32,6 +36,20 @@ export const useActiveWorkout = (workoutName: string) => {
             completedEpisodes: [],
             totalEpisodes: episodes.length,
         });
+
+        const userRef = ref(database, `users/${user.uid}`);
+        get(userRef)
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    update(userRef, {
+                        totalWorkouts: (data.totalWorkouts || 0) + 1,
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching user data:", error);
+            });
     };
 
     const completeEpisode = (episodeName: string) => {
@@ -48,4 +66,24 @@ export const useActiveWorkout = (workoutName: string) => {
     };
 
     return { activeWorkout, startWorkout, completeEpisode, resetWorkout };
+};
+export const useAllActiveWorkoutsArray = () => {
+    const [workouts, setWorkouts] = useState<ActiveWorkoutWithName[]>([]);
+    const user = auth.currentUser;
+
+    useEffect(() => {
+        if (!user) return;
+        const allRef = ref(database, `users/${user.uid}/activeWorkout`);
+        const unsubscribe = onValue(allRef, (snapshot) => {
+            const data: Record<string, ActiveWorkoutData> = snapshot.val() || {};
+            const arr: ActiveWorkoutWithName[] = Object.entries(data).map(([workoutName, meta]) => ({
+                workoutName,
+                ...meta,
+            }));
+            setWorkouts(arr);
+        });
+        return () => unsubscribe();
+    }, [user]);
+
+    return { workouts };
 };

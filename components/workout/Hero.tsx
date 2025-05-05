@@ -12,7 +12,7 @@ export default function Hero({ title }: HeroProps) {
     return (
         <View className='mt-5 px-6 relative'>
             <View className='flex flex-row justify-between items-center'>
-                <TouchableOpacity onPress={() => router.back()}>
+                <TouchableOpacity onPress={() => router.replace("/(tabs)/discover")}>
                     <LeftArrow />
                 </TouchableOpacity>
                 <Text className='font-manrope-extrabold text-xl text-primary'>{title}</Text>

@@ -3,7 +3,7 @@ import { get, ref, set } from "firebase/database";
 import { auth, database } from "./config";
 
 const initializeUser = async ({ email, password }: { email: string; password: string }) => {
-    const login = await signInWithEmailAndPassword(auth, email, password);
+    const login = await signInWithEmailAndPassword(auth, email.toLowerCase(), password);
 
     if (login.user) {
         const user = auth.currentUser;
@@ -15,10 +15,8 @@ const initializeUser = async ({ email, password }: { email: string; password: st
             await set(userRef, {
                 uid: user.uid,
                 createdAt: Date.now(),
-                totalCalories: 0,
                 totalMinutes: 0,
-                weight: null,
-                height: null,
+                totalWorkouts: 0,
                 completedExercises: {},
                 dailyActivity: {},
             });

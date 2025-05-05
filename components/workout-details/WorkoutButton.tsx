@@ -1,6 +1,7 @@
 import { useActiveWorkout } from "@/hooks/useActiveWorkout";
 import { useRouter } from "expo-router";
-import { Button } from "react-native";
+import { useTranslation } from "react-i18next";
+import { Text, TouchableOpacity, View } from "react-native";
 
 interface Props {
     name: string;
@@ -8,8 +9,9 @@ interface Props {
 }
 
 const WorkoutButton = ({ name, exercise }: Props) => {
+    const { t } = useTranslation();
     const router = useRouter();
-    const { activeWorkout, startWorkout } = useActiveWorkout(name);
+    const { activeWorkout, startWorkout, resetWorkout } = useActiveWorkout(name);
 
     const handlePress = () => {
         const episodeNames = exercise.episodes.filter(Boolean).map((ep: any) => ep.name);
@@ -22,6 +24,12 @@ const WorkoutButton = ({ name, exercise }: Props) => {
 
         const firstEpisode = incompleteEpisode || episodeNames[0];
         const targetEpisode = exercise.episodes.find((ep: any) => ep?.name === firstEpisode);
+
+        if (activeWorkout) {
+            if (activeWorkout.totalEpisodes === activeWorkout.completedEpisodes?.length) {
+                resetWorkout();
+            }
+        }
 
         router.push({
             pathname: "/workout/[name]",
@@ -38,10 +46,13 @@ const WorkoutButton = ({ name, exercise }: Props) => {
     };
 
     return (
-        <Button
-            title={activeWorkout ? "Kontynuuj ćwiczenie" : "Rozpocznij ćwiczenie"}
-            onPress={handlePress}
-        />
+        <View className='px-6'>
+            <TouchableOpacity
+                onPress={handlePress}
+                className='rounded-full bg-success-400 w-full py-4 px-6 fixed bottom-0 z-50'>
+                <Text className='font-bold text-xl text-primary text-center leading-8'>{t(activeWorkout ? "workout-details.continue" : "workout-details.start")}</Text>
+            </TouchableOpacity>
+        </View>
     );
 };
 

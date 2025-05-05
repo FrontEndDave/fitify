@@ -30,7 +30,7 @@ const Workout = () => {
                     animated
                 />
                 <GestureHandlerRootView style={{ flex: 1 }}>
-                    <Hero title={Array.isArray(parms.name) ? parms.name.join(", ") : parms.name || "Default Title"} />
+                    <Hero title={Array.isArray(parms.name) ? parms.name.join(", ") : parms.name || ""} />
                     <Video
                         exerciseData={exerciseData}
                         videoUrl={exerciseData.video}

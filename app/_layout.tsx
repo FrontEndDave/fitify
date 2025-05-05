@@ -63,7 +63,7 @@ export default function RootLayout() {
         }
     }, [initializing, loaded]);
 
-    if (initializing) {
+    if (initializing || !loaded) {
         return null;
     }
 
@@ -77,7 +77,12 @@ export default function RootLayout() {
 function RootLayoutNav({ user }: { user: any | null }) {
     return (
         <Stack screenOptions={{ headerShown: false, animation: "default" }}>
-            {user ? (
+            <Stack.Screen
+                name='(auth)'
+                options={{ presentation: "modal" }}
+            />
+
+            {user && (
                 <>
                     <Stack.Screen name='(tabs)' />
                     <Stack.Screen name='workout-details/[name]' />
@@ -86,8 +91,6 @@ function RootLayoutNav({ user }: { user: any | null }) {
                     <Stack.Screen name='chat' />
                     <Stack.Screen name='(settings)' />
                 </>
-            ) : (
-                <Stack.Screen name='(auth)' />
             )}
         </Stack>
     );

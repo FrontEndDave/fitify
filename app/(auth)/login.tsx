@@ -1,7 +1,7 @@
 import AuthHero from "@/components/auth/Hero";
 import LoginForm, { LoginFormData } from "@/components/auth/LoginForm";
 import { auth } from "@/services/firebase/config";
-import initializeUser from "@/services/firebase/user";
+import { initializeUser } from "@/services/firebase/user";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ScrollView } from "react-native";
@@ -21,6 +21,7 @@ const Login = () => {
     });
     const onSubmit = async (data: LoginFormData) => {
         try {
+            setLoading(true);
             initializeUser(data);
             console.log("User logged in successfully");
 

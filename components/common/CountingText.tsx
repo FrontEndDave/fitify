@@ -1,30 +1,36 @@
-import { useEffect, useState } from "react";
-import { Text as RNText } from "react-native";
-import Animated, { Easing, useSharedValue, withTiming } from "react-native-reanimated";
+import PropTypes from "prop-types";
+import React, { useEffect, useRef, useState } from "react";
+import { Animated, Text } from "react-native";
 
-const AnimatedText = Animated.createAnimatedComponent(RNText);
-
-type CountingTextProps = {
-    value: string;
-    customStyle?: string;
-};
-
-export default function CountingText({ value, customStyle }: CountingTextProps) {
-    const count = useSharedValue(0);
-    const [displayValue, setDisplayValue] = useState(value);
+export default function CountingText({ value, duration = 1000, style, formatter }) {
+    const animated = useRef(new Animated.Value(0)).current;
+    const [displayValue, setDisplayValue] = useState(0);
 
     useEffect(() => {
-        count.value = withTiming(65, {
-            duration: 2000,
-            easing: Easing.out(Easing.linear),
+        animated.setValue(0);
+        const listener = animated.addListener(({ value: v }) => {
+            setDisplayValue(Math.floor(v));
         });
 
-        const interval = setInterval(() => {
-            setDisplayValue(`${Math.round(count.value)}%`);
-        }, 50);
+        Animated.timing(animated, {
+            toValue: value,
+            duration,
+            useNativeDriver: false,
+        }).start();
 
-        return () => clearInterval(interval);
-    }, []);
+        return () => {
+            animated.removeListener(listener);
+        };
+    }, [value, duration, animated]);
 
-    return <AnimatedText className={customStyle}>{displayValue}</AnimatedText>;
+    const text = formatter ? formatter(displayValue) : String(displayValue);
+
+    return <Text style={style}>{text}</Text>;
 }
+
+CountingText.propTypes = {
+    value: PropTypes.number.isRequired,
+    duration: PropTypes.number,
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    formatter: PropTypes.func,
+};
