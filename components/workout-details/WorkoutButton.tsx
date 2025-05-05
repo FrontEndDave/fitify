@@ -1,31 +1,48 @@
-import { Exercise } from "@/types";
-import { router } from "expo-router";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity, View } from "react-native";
+import { useActiveWorkout } from "@/hooks/useActiveWorkout";
+import { useRouter } from "expo-router";
+import { Button } from "react-native";
 
-export default function WorkoutButton({ name, exerciseId, exercise }: { name: string; exerciseId: string; exercise: Exercise }) {
-    const { t } = useTranslation();
+interface Props {
+    name: string;
+    exercise: any;
+}
+
+const WorkoutButton = ({ name, exercise }: Props) => {
+    const router = useRouter();
+    const { activeWorkout, startWorkout } = useActiveWorkout(name);
+
+    const handlePress = () => {
+        const episodeNames = exercise.episodes.filter(Boolean).map((ep: any) => ep.name);
+
+        if (!activeWorkout) {
+            startWorkout(episodeNames);
+        }
+
+        const incompleteEpisode = episodeNames.find((epName: string) => !(activeWorkout?.completedEpisodes || []).includes(epName));
+
+        const firstEpisode = incompleteEpisode || episodeNames[0];
+        const targetEpisode = exercise.episodes.find((ep: any) => ep?.name === firstEpisode);
+
+        router.push({
+            pathname: "/workout/[name]",
+            params: {
+                name: targetEpisode.name,
+                video: targetEpisode.video || "",
+                sets: targetEpisode.sets || 0,
+                reps: targetEpisode.reps || 0,
+                duration: targetEpisode.duration * 60 * 1000 || 8 * 60 * 1000,
+                kcal: exercise.kcalPerMinute,
+                workoutName: exercise.name,
+            },
+        });
+    };
 
     return (
-        <View className='px-6'>
-            <TouchableOpacity
-                onPress={() =>
-                    router.push({
-                        pathname: "/workout/[name]",
-                        params: {
-                            name: exercise.episodes[0].name,
-                            video: exercise.episodes[0].video,
-                            reps: exercise.episodes[0].reps ?? 6,
-                            sets: exercise.episodes[0].sets ?? 2,
-                            episodes: JSON.stringify(exercise.episodes),
-                            duration: 1000 * 60 * (exercise.episodes[0].duration ?? 2),
-                        },
-                    })
-                }
-                className='rounded-full bg-success-400 w-full py-4 px-6 fixed bottom-0 z-50'>
-                <Text className='font-bold text-xl text-primary text-center leading-8'>{t("workout-details.start")}</Text>
-            </TouchableOpacity>
-        </View>
+        <Button
+            title={activeWorkout ? "Kontynuuj ćwiczenie" : "Rozpocznij ćwiczenie"}
+            onPress={handlePress}
+        />
     );
-}
+};
+
+export default WorkoutButton;

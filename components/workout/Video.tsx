@@ -1,5 +1,8 @@
+import { useActiveWorkout } from "@/hooks/useActiveWorkout";
+import { useDailyStats } from "@/hooks/useDailyStats";
 import { useEvent } from "expo";
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
 import { useVideoPlayer, VideoView } from "expo-video";
 import React from "react";
 import { Dimensions, View } from "react-native";
@@ -10,10 +13,8 @@ const ScreenHeight = Dimensions.get("screen").height;
 const videoSource = "https://video-previews.elements.envatousercontent.com/69528e41-1ef1-48e6-9226-1b56ac753426/watermarked_preview/watermarked_preview.mp4";
 
 interface VideoProps {
+    workoutName: string;
     videoUrl: string;
-    // reps: number;
-    // sets: number;
-    // duration: number;
     exerciseData: {
         name: string;
         video: string;
@@ -24,14 +25,34 @@ interface VideoProps {
     };
 }
 
-const Video = ({ videoUrl, exerciseData }: VideoProps) => {
+const Video = ({ workoutName, videoUrl, exerciseData }: VideoProps) => {
+    const { activeWorkout, completeEpisode, resetWorkout } = useActiveWorkout(workoutName);
+    const { addExercise } = useDailyStats();
+
     const player = useVideoPlayer(videoSource, (player) => {
         player.loop = true;
         player.muted = true;
         player.play();
     });
 
+    console.log(exerciseData);
+
     const { isPlaying } = useEvent(player, "playingChange", { isPlaying: player.playing });
+    const handleExerciseComplete = () => {
+        completeEpisode(exerciseData.name);
+
+        addExercise(workoutName, 5, exerciseData.duration);
+
+        const doneCount = (activeWorkout?.completedEpisodes?.length || 0) + 1;
+        const totalCount = activeWorkout?.totalEpisodes || 0;
+
+        if (doneCount >= totalCount) {
+            resetWorkout();
+            router.replace(`/workout-details/${workoutName}`);
+        } else {
+            router.replace(`/workout-details/${workoutName}`);
+        }
+    };
 
     return (
         <View className='flex-1 flex justify-start items-center h-full'>
@@ -59,6 +80,7 @@ const Video = ({ videoUrl, exerciseData }: VideoProps) => {
                 reps={exerciseData.reps}
                 sets={exerciseData.sets}
                 duration={exerciseData.duration}
+                onExerciseComplete={handleExerciseComplete}
             />
         </View>
     );

@@ -54,7 +54,6 @@ const WorkoutDetails = () => {
             </ScrollView>
             <WorkoutButton
                 name={exercise.name}
-                exerciseId={exercise.episodes[0].name}
                 exercise={exercise}
             />
         </SafeAreaView>

@@ -10,9 +10,10 @@ type ExerciseDetailsProps = {
     player: any;
     reps: number;
     sets: number;
+    onExerciseComplete: () => void;
 };
 
-const ExerciseDetails = ({ player, reps, sets, duration }: ExerciseDetailsProps) => {
+const ExerciseDetails = ({ player, reps, sets, duration, onExerciseComplete }: ExerciseDetailsProps) => {
     const { t } = useTranslation();
     const [isTimerActive, setIsTimerActive] = useState(true);
     const [timeLeft, setTimeLeft] = useState(duration);
@@ -26,6 +27,14 @@ const ExerciseDetails = ({ player, reps, sets, duration }: ExerciseDetailsProps)
         setIsRestPeriod(false);
         setCurrentSet(1);
     }, [duration, sets]);
+
+    useEffect(() => {
+        if (timeLeft === 0) {
+            player.pause();
+            setIsTimerActive(false);
+            onExerciseComplete();
+        }
+    }, [onExerciseComplete, player, timeLeft]);
 
     useEffect(() => {
         let interval: ReturnType<typeof setInterval>;

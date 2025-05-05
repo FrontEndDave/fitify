@@ -33,6 +33,22 @@ export interface User {
     createdAt: number;
     totalCalories: number;
     totalMinutes: number;
+    activeWorkout: {
+        workoutId: string;
+        currentExerciseIndex: number;
+        startTime: number;
+    } | null;
+    completedWorkouts: {
+        [workoutId: string]: {
+            [exerciseId: string]: boolean;
+        };
+    };
+    dailyStats: {
+        [date: string]: {
+            calories: number;
+            exercises: string[];
+        };
+    };
 }
 
 export type FirebaseExercisePaths = {
