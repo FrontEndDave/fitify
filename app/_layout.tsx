@@ -3,14 +3,14 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 
-import i18n from "@/services/i18next";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import useTimeSpentTracker from "@/hooks/useTimeSpentTracker";
 import { auth } from "@/services/firebase/config";
+import i18next, { initI18n } from "@/services/i18next";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { I18nextProvider } from "react-i18next";
 import "./globals.css";
 
 SplashScreen.preventAutoHideAsync();
@@ -18,6 +18,13 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState<any | null>(null);
+
+    useEffect(() => {
+        (async () => {
+            await initI18n();
+            setInitializing(true);
+        })();
+    }, []);
 
     const [loaded, error] = useFonts({
         "Manrope-ExtraBold": require("../assets/fonts/Manrope-ExtraBold.ttf"), // 800
@@ -34,19 +41,12 @@ export default function RootLayout() {
     useEffect(() => {
         if (loaded && !error) {
             const initializeApp = async () => {
-                await fetchLanguage();
                 SplashScreen.hideAsync();
+                console.log(i18next);
             };
             initializeApp();
         }
     }, [loaded, error]);
-
-    const fetchLanguage = async () => {
-        const savedLanguage = await AsyncStorage.getItem("appLanguage");
-        if (savedLanguage) {
-            await i18n.changeLanguage(savedLanguage);
-        }
-    };
 
     useEffect(() => {
         const initializeApp = async () => {
@@ -69,7 +69,9 @@ export default function RootLayout() {
 
     return (
         <SafeAreaProvider>
-            <RootLayoutNav user={user} />
+            <I18nextProvider i18n={i18next}>
+                <RootLayoutNav user={user} />
+            </I18nextProvider>
         </SafeAreaProvider>
     );
 }

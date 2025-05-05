@@ -4,6 +4,16 @@
     "welcome-back": "Welcome back",
     "hero-title": "How’s your workout vibe today?",
     "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "auth": {
+        "login": {
+            "tilte": "Zaloguj się",
+            "description": "Zaloguj się, aby uzyskać dostęp do swojego konta"
+        },
+        "register": {
+            "title": "Zarejestruj się",
+            "description": "Utwórz nowe konto, aby rozpocząć swoją podróż!"
+        }
+    },
     "workout-progress": {
         "title": "Workout Progress",
         "completed": "Completed"
@@ -99,5 +109,16 @@
         "progress_description": "Track your progress and achievements.",
         "exercise_tutorials": "Exercise Tutorials",
         "exercise_tutorials_description": "Tutorial videos and proper technique instructions"
+    },
+    "errors": {
+        "nameTooShort": "Name must be at least 2 characters",
+        "nameTooLong": "Name must be at most 50 characters",
+        "invalidEmail": "Invalid email address",
+        "passwordTooShort": "Password must be at least 8 characters",
+        "passwordMissingUppercase": "Include at least one uppercase letter",
+        "passwordMissingNumber": "Include at least one number",
+        "passwordsDontMatch": "Passwords do not match",
+        "emailInUse": "This email is already registered",
+        "serverError": "Server error, please try again later"
     }
 }

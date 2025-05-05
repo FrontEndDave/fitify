@@ -4,6 +4,28 @@
     "welcome-back": "Witaj ponownie",
     "hero-title": "Jaki masz dzisiaj nastrój treningowy?",
     "months": ["Sty", "Lut", "Mar", "Kwi", "Maj", "Cze", "Lip", "Sie", "Wrz", "Paź", "Lis", "Gru"],
+    "auth": {
+        "alreadyHaveAccount": "Masz już konto?",
+        "dontHaveAccount": "Nie masz jeszcze konta?",
+        "login": {
+            "title": "Zaloguj się",
+            "description": "Zaloguj się, aby uzyskać dostęp do swojego konta",
+            "button": "Zaloguj się"
+        },
+        "register": {
+            "title": "Zarejestruj się",
+            "description": "Utwórz nowe konto, aby rozpocząć swoją podróż!",
+            "full-name": "Imię i nazwisko",
+            "full-name-placeholder": "Wpisz swoje imię i nazwisko",
+            "email": "Email",
+            "email-placeholder": "Wpisz swój adres email",
+            "password": "Hasło",
+            "password-placeholder": "Wpisz swoje hasło",
+            "confirm-password": "Potwierdź hasło",
+            "confirm-password-placeholder": "Potwierdź swoje hasło",
+            "button": "Zarejestruj się"
+        }
+    },
     "workout-progress": {
         "title": "Postępy w treningu",
         "completed": "Ukończono"
@@ -99,5 +121,16 @@
         "progress_description": "Monitoruj swoje postępy i osiągnięcia.",
         "exercise_tutorials": "Instrukcje ćwiczeń",
         "exercise_tutorials_description": "Filmy instruktażowe i prawidłowa technika wykonania"
+    },
+    "errors": {
+        "nameTooShort": "Imię musi mieć co najmniej 2 znaki",
+        "nameTooLong": "Imię może mieć maksymalnie 50 znaków",
+        "invalidEmail": "Nieprawidłowy adres e-mail",
+        "passwordTooShort": "Hasło musi mieć co najmniej 8 znaków",
+        "passwordMissingUppercase": "Hasło musi zawierać przynajmniej jedną wielką literę",
+        "passwordMissingNumber": "Hasło musi zawierać przynajmniej jedną cyfrę",
+        "passwordsDontMatch": "Hasła nie są zgodne",
+        "emailInUse": "Ten e-mail jest już zarejestrowany",
+        "serverError": "Błąd serwera, spróbuj ponownie później"
     }
 }

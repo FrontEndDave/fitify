@@ -25,10 +25,7 @@ export default function AuthLayout() {
         <Stack
             screenOptions={{
                 headerShown: false,
-                animation: "default",
-                contentStyle: {
-                    backgroundColor: "transparent",
-                },
+                animation: "slide_from_right",
             }}
             initialRouteName='login'>
             <Stack.Screen
