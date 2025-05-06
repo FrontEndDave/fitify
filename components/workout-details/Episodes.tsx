@@ -1,6 +1,6 @@
 import { VideoIcon } from "@/assets/svg/Video";
 import { useDailyStats } from "@/hooks/useDailyStats";
-import { Episode } from "@/types";
+import { Exercise } from "@/types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
@@ -23,7 +23,7 @@ function formatExerciseTime(milliseconds: number): string {
     return seconds > 0 ? `${minutes} min ${seconds} s` : `${minutes} min`;
 }
 
-export default function Episodes({ episode }: Episode) {
+export default function Episodes({ exercise, name }: { exercise: Exercise; name: string }) {
     const { t } = useTranslation();
     const { stats } = useDailyStats();
 
@@ -41,24 +41,22 @@ export default function Episodes({ episode }: Episode) {
                         height={14}
                         color={"#6C7278"}
                     />
-                    <Text className='font-manrope-medium text-[17px] text-secondary-400 tracking-tight'>{formatExerciseTime(getEpisodeTime(episode))}</Text>
+                    <Text className='font-manrope-medium text-[17px] text-secondary-400 tracking-tight'>{formatExerciseTime(getEpisodeTime(exercise.episodes))}</Text>
                 </View>
             </View>
 
             <View className='flex flex-col gap-3 items-center justify-center mt-4 pb-5'>
-                {episode.map((item, key) => {
+                {exercise.episodes.map((item, key) => {
                     const isCompleted = stats.episodes.some((episode) => episode.name === item.name);
 
                     return (
                         <EpisodeCard
+                            exercise={exercise}
                             key={key}
-                            episodes={episode}
-                            title={item.name}
-                            reps={item.reps}
-                            sets={item.sets}
-                            completed={isCompleted}
+                            name={name}
+                            isCompleted={isCompleted}
                             time={item.duration * 60 * 1000}
-                            video={item.video}
+                            title={item.name}
                             thumbnail={
                                 item.thumbnail ??
                                 "https://res.cloudinary.com/peloton-cycle/image/fetch/f_auto,c_limit,w_3840,q_90/https://images.ctfassets.net/6ilvqec50fal/JdeBsAsNI2XepyM4IDL1U/ef2c96e26f7c3af5bce6db428cd1237f/Screenshot_2024-03-21_at_12.36.05_PM.png"

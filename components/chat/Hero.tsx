@@ -1,10 +1,10 @@
-import { Text, View } from "react-native";
+import { useUser } from "@/hooks/useUser";
 import { useTranslation } from "react-i18next";
+import { Text, View } from "react-native";
 
 export default function Hero() {
     const { t } = useTranslation();
-
-    const rawText = t("chat.subtitle", { user: "Dawid" });
+    const { user, loading } = useUser();
 
     const parseFormattedText = (text: string) => {
         const parts = text.split(/(<gray>|<\/gray>)/g);
@@ -22,13 +22,17 @@ export default function Hero() {
                         color: isGray ? "#6C7278" : "#000000",
                         fontWeight: "bold",
                         lineHeight: 50,
-                        fontSize: 42,
+                        fontSize: 38,
                     }}>
                     {part}
                 </Text>
             );
         });
     };
+
+    if (loading || !user.displayName) return null;
+
+    const rawText = t("chat.subtitle", { user: user.displayName.split(" ")[0] });
 
     return (
         <View className='flex felx-row items-start justify-between mt-4 pb-7 px-6'>

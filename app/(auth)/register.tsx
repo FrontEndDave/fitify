@@ -1,10 +1,11 @@
 import AuthHero from "@/components/auth/Hero";
 import RegisterForm from "@/components/auth/RegisterForm";
+import { initializeUser } from "@/services/firebase/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { KeyboardAvoidingView, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { z } from "zod";
 
@@ -43,11 +44,18 @@ const Register = () => {
     });
 
     const onSubmit = async (data: RegisterFormData) => {
+        if (!data) return;
+
         try {
-            // await registerWithEmail(data.email, data.password, { displayName: data.name });
-            router.replace("/");
+            const result = await initializeUser({
+                email: data.email.toLowerCase(),
+                password: data.password,
+                name: data.name,
+            });
+            console.log("User registered successfully", result);
         } catch (err: any) {
-            if (err.code === "auth/email-already-in-use") {
+            console.log("Register failed", err);
+            if (err === "auth/email-already-in-use") {
                 setError("email", { message: t("errors.emailInUse") });
             } else {
                 setError("root", { message: t("errors.serverError") });
@@ -57,27 +65,32 @@ const Register = () => {
 
     return (
         <SafeAreaView
-            edges={["left", "right"]}
+            edges={["left", "right", "bottom"]}
             className='bg-background flex-1 w-full'>
-            <ScrollView
-                showsVerticalScrollIndicator={false}
-                bounces={false}
-                contentContainerStyle={{ flexGrow: 1 }}>
-                <AuthHero
-                    title={t("auth.register.title")}
-                    description={t("auth.register.description")}
-                />
-
-                <RegisterForm
-                    control={control}
-                    handleSubmit={handleSubmit}
-                    onSubmit={onSubmit}
-                    errors={errors}
-                    isSubmitting={isSubmitting}
-                />
-
-                {errors.root && <Text className='text-error-500 text-center mt-4'>{errors.root.message}</Text>}
-            </ScrollView>
+            <KeyboardAvoidingView
+                behavior={"padding"}
+                className='flex-1'>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    bounces={false}
+                    contentContainerStyle={{
+                        flexGrow: 1,
+                        paddingBottom: 20,
+                    }}>
+                    <AuthHero
+                        title={t("auth.register.title")}
+                        description={t("auth.register.description")}
+                    />
+                    <RegisterForm
+                        control={control}
+                        handleSubmit={handleSubmit}
+                        onSubmit={onSubmit}
+                        errors={errors}
+                        isSubmitting={isSubmitting}
+                    />
+                    {errors.root && <Text className='text-error-500 text-center mt-4'>{errors.root.message}</Text>}
+                </ScrollView>
+            </KeyboardAvoidingView>
 
             <View className='w-full flex-row items-center justify-center py-8'>
                 <Text className='font-manrope-medium text-lg text-secondary-400'>{t("auth.alreadyHaveAccount")}</Text>

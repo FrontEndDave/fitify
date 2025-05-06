@@ -1,9 +1,10 @@
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 
 import { PlayIcon } from "@/assets/svg/Controls";
 import { CompleteIcon, IncompleteIcon } from "@/assets/svg/Status";
 import { VideoIcon } from "@/assets/svg/Video";
+import { useActiveWorkout } from "@/hooks/useActiveWorkout";
 
 function formatExerciseTime(milliseconds: number): string {
     const totalSeconds = Math.floor(milliseconds / 1000);
@@ -14,28 +15,54 @@ function formatExerciseTime(milliseconds: number): string {
 }
 
 interface EpisodeCardProps {
-    episodes: any[];
-    title: string;
-    time: number;
-    completed: boolean;
+    exercise: any;
+    name: string;
     thumbnail?: string;
-    video?: string;
-    reps?: number;
-    sets?: number;
+    isCompleted: boolean;
+    time: number;
+    title: string;
 }
 
-export default function EpisodeCard({ title, time, completed, thumbnail, video, reps, sets, episodes }: EpisodeCardProps) {
+export default function EpisodeCard({ exercise, name, thumbnail, isCompleted, time, title }: EpisodeCardProps) {
+    const router = useRouter();
+    const { activeWorkout, startWorkout, resetWorkout } = useActiveWorkout(name);
+
+    const handlePress = () => {
+        const episodeNames = exercise.episodes.filter(Boolean).map((ep: any) => ep.name);
+
+        if (!activeWorkout) {
+            startWorkout(episodeNames);
+        }
+
+        const firstEpisode = title;
+        const targetEpisode = exercise.episodes.find((ep: any) => ep?.name === firstEpisode);
+
+        if (activeWorkout) {
+            if (activeWorkout.totalEpisodes === activeWorkout.completedEpisodes?.length) {
+                resetWorkout();
+            }
+        }
+
+        router.push({
+            pathname: "/workout/[name]",
+            params: {
+                name: targetEpisode.name,
+                video: targetEpisode.video || "",
+                sets: targetEpisode.sets || 0,
+                reps: targetEpisode.reps || 0,
+                duration: targetEpisode.duration * 60 * 1000 || 8 * 60 * 1000,
+                kcal: exercise.kcalPerMinute,
+                workoutName: exercise.name,
+            },
+        });
+    };
+
     return (
         <TouchableOpacity
-            onPress={() =>
-                router.push({
-                    pathname: "/workout/[name]",
-                    params: { name: title, video: video, reps: reps ?? 6, sets: sets ?? 2, episodes: JSON.stringify(episodes), duration: time },
-                })
-            }
+            onPress={handlePress}
             className='bg-primary w-full p-4 rounded-2xl flex flex-row items-center justify-between'>
             <View className='flex flex-row items-center gap-2.5'>
-                {completed ? (
+                {isCompleted ? (
                     <CompleteIcon
                         width={28}
                         height={28}

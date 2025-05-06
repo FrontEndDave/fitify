@@ -1,4 +1,6 @@
 import { RegisterFormData } from "@/app/(auth)/register";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useState } from "react";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, Text, TextInput, TouchableOpacity, View } from "react-native";
@@ -13,6 +15,15 @@ interface RegisterFormProps {
 
 const RegisterForm = ({ control, handleSubmit, onSubmit, errors, isSubmitting }: RegisterFormProps) => {
     const { t } = useTranslation();
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword((prev) => !prev);
+    };
+    const toggleConfirmPasswordVisibility = () => {
+        setShowConfirmPassword((prev) => !prev);
+    };
 
     const renderError = (field: keyof RegisterFormData) => {
         if (!errors[field]) return null;
@@ -34,6 +45,7 @@ const RegisterForm = ({ control, handleSubmit, onSubmit, errors, isSubmitting }:
                             onBlur={onBlur}
                             onChangeText={onChange}
                             value={value}
+                            autoCapitalize='words'
                         />
                     )}
                 />
@@ -68,16 +80,26 @@ const RegisterForm = ({ control, handleSubmit, onSubmit, errors, isSubmitting }:
                     name='password'
                     render={({ field: { onChange, onBlur, value } }) => (
                         <TextInput
-                            secureTextEntry
+                            secureTextEntry={showPassword}
                             placeholder={t("auth.register.password-placeholder")}
                             placeholderTextColor='#ACB5BB'
-                            className='border border-secondary-200 rounded-full p-5 h-15 font-manrope-medium text-lg text-secondary-500'
+                            className='border border-secondary-200 rounded-full p-5 h-15 font-manrope-medium text-lg text-secondary-500 overflow-hidden'
                             onBlur={onBlur}
                             onChangeText={onChange}
                             value={value}
                         />
                     )}
                 />
+                <TouchableOpacity
+                    onPress={togglePasswordVisibility}
+                    className='absolute right-6 top-1/2 transform -translate-y-1/2'
+                    hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
+                    <MaterialCommunityIcons
+                        name={showPassword ? "eye-off" : "eye"}
+                        size={24}
+                        color='#666'
+                    />
+                </TouchableOpacity>
                 {renderError("password")}
             </View>
 
@@ -88,16 +110,26 @@ const RegisterForm = ({ control, handleSubmit, onSubmit, errors, isSubmitting }:
                     name='confirmPassword'
                     render={({ field: { onChange, onBlur, value } }) => (
                         <TextInput
-                            secureTextEntry
+                            secureTextEntry={showConfirmPassword}
                             placeholder={t("auth.register.confirm-password-placeholder")}
                             placeholderTextColor='#ACB5BB'
-                            className='border border-secondary-200 rounded-full p-5  h-15 font-manrope-medium text-lg text-secondary-500'
+                            className='border border-secondary-200 rounded-full p-5 h-15 font-manrope-medium text-lg text-secondary-500 overflow-hidden'
                             onBlur={onBlur}
                             onChangeText={onChange}
                             value={value}
                         />
                     )}
                 />
+                <TouchableOpacity
+                    onPress={toggleConfirmPasswordVisibility}
+                    className='absolute right-6 top-1/2 transform -translate-y-1/2'
+                    hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
+                    <MaterialCommunityIcons
+                        name={showConfirmPassword ? "eye-off" : "eye"}
+                        size={24}
+                        color='#666'
+                    />
+                </TouchableOpacity>
                 {renderError("confirmPassword")}
             </View>
 

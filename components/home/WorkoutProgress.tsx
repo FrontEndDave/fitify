@@ -28,7 +28,7 @@ export default function WorkoutProgress() {
                 className='flex-1'>
                 <View className='w-full h-full rounded-3xl flex flex-row justify-between items-center px-5'>
                     <View className='flex flex-col gap-2.5 items-start'>
-                        <View className='bg-gray-700 px-2 py-1 rounded-full'>
+                        <View className='bg-gray-700 px-3 py-1 rounded-full'>
                             <Text className='font-manrope-semibold text-md text-white'>
                                 {monthName} {dayOfMonth}
                             </Text>

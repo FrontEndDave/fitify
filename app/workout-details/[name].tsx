@@ -4,12 +4,14 @@ import Hero from "@/components/workout-details/Hero";
 import WorkoutButton from "@/components/workout-details/WorkoutButton";
 import { useExerciseByName } from "@/hooks/useExerciseByName";
 import { useLocalSearchParams } from "expo-router";
+import i18next from "i18next";
 import { ActivityIndicator, ScrollView, StatusBar, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const WorkoutDetails = () => {
     const { name } = useLocalSearchParams();
     const { exercise, loading, error } = useExerciseByName(String(name));
+    const language = i18next.language;
 
     if (loading) {
         return (
@@ -48,8 +50,11 @@ const WorkoutDetails = () => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View className='flex-1 px-6 mt-20'>
                     <Hero exercise={exercise} />
-                    <Description content={exercise.description} />
-                    <Episodes episode={exercise.episodes} />
+                    <Description content={language === "pl" ? exercise.plDescription : exercise.description} />
+                    <Episodes
+                        name={exercise.name}
+                        exercise={exercise}
+                    />
                 </View>
             </ScrollView>
             <WorkoutButton

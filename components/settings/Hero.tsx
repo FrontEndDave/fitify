@@ -39,7 +39,7 @@ const Hero = () => {
 
             {user ? (
                 <View className='flex justify-center items-center'>
-                    <Text className='font-manrope-bold text-4xl text-secondary-500'>Dawid Piela</Text>
+                    <Text className='font-manrope-bold text-4xl text-secondary-500'>{user.displayName}</Text>
                     <Text className='font-manrope-medium text-lg text-secondary-400'>
                         {t("settings.join")} {new Date(user.createdAt).toLocaleDateString(t("language.polish") === "Polski" ? "pl" : "en", { year: "numeric", month: "long", day: "numeric" })}
                     </Text>

@@ -5,6 +5,7 @@ export interface Exercise {
     accentColor: string;
     textColor: string;
     description: string;
+    plDescription: string;
     exercises: number;
     image: string;
     episodes: {
@@ -30,6 +31,7 @@ export interface Episode {
 
 export interface User {
     uid: string;
+    name: string;
     createdAt: number;
     totalCalories: number;
     totalMinutes: number;

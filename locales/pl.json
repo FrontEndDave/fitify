@@ -10,7 +10,11 @@
         "login": {
             "title": "Zaloguj się",
             "description": "Zaloguj się, aby uzyskać dostęp do swojego konta",
-            "button": "Zaloguj się"
+            "button": "Zaloguj się",
+            "email": "Email",
+            "email-placeholder": "Wpisz swój adres email",
+            "password": "Hasło",
+            "password-placeholder": "Wpisz swoje hasło"
         },
         "register": {
             "title": "Zarejestruj się",
@@ -52,10 +56,10 @@
         "title": "Informacje o Aplikacji",
         "authors": "Autorzy",
         "technology": "Technologie",
-        "technology-content": "Aplikacja została stworzona przy użyciu React Native, Expo, Firebase oraz Redux.",
+        "technology-content": "Aplikacja została stworzona przy użyciu React Native, Expo, Firebase oraz inegracji OpenAI\n\nBiblioteki: React Hook Form, Zod, React Native Reanimated oraz wiele innych.",
         "version": "Wersja",
         "description": "Opis",
-        "description-content": "Aplikacja FitApp została stworzona w celu pomocy użytkownikom w monitorowaniu ich aktywności fizycznej oraz zdrowego trybu życia."
+        "description-content": "Aplikacja FitnesApp została stworzona na konkurs \"Złota Apka\". Jej celem jest pomoc użytkownikowi w monitorowaniu aktywności fizycznej oraz zdrowego trybu życia. Aplikacja oferuję chat z wirtualnym trenerem, który pomoże w doborze ćwiczeń oraz planów żywieniowych. Aplikacja jest dostępna w języku polskim i angielskim."
     },
     "workout": {
         "title": "Moje Ćwiczenia",
@@ -75,16 +79,24 @@
         "exercise_time": "Czas na ćwiczenie",
         "set": "Seria"
     },
+    "collection": {
+        "full-body-title": "Siła całego ciała",
+        "full-body-description": "Kompletny trening na wzmocnienie całego ciała.",
+        "core-abs-title": "Core i mięśnie brzucha",
+        "core-abs-description": "Wzmocnij korpus i wyrzeźbij brzuch.",
+        "lower-body-title": "Siła dolnych partii",
+        "lower-body-description": "Wzmocnij i ukształtuj nogi oraz pośladki.",
+        "upper-body-title": "Trening górnych partii",
+        "upper-body-description": "Wzmocnij ramiona, klatkę piersiową i plecy.",
+        "hiit-title": "HIIT Cardio Challenge",
+        "hiit-description": "Szybko spal kalorie dzięki intensywnym ruchom."
+    },
     "profile": {
         "title": "Edytuj Profil",
         "subtitle": "Informacje o koncie",
-        "name": "Imię",
-        "email": "Email",
-        "phone": "Telefon",
-        "address": "Adres",
-        "city": "Miasto",
-        "country": "Kraj",
-        "zip": "Kod pocztowy"
+        "username": "Nazwa użytkownika",
+        "username-placeholder": "Wpisz swoją nazwę użytkownika",
+        "saveChanges": "Zapisz zmiany"
     },
     "language": {
         "title": "Ustaw Język",
@@ -131,6 +143,7 @@
         "passwordMissingNumber": "Hasło musi zawierać przynajmniej jedną cyfrę",
         "passwordsDontMatch": "Hasła nie są zgodne",
         "emailInUse": "Ten e-mail jest już zarejestrowany",
-        "serverError": "Błąd serwera, spróbuj ponownie później"
+        "serverError": "Błąd serwera, spróbuj ponownie później",
+        "invalidCredentials": "Nieprawidłowe dane logowania"
     }
 }

@@ -1,22 +1,41 @@
+import AppIcon from "@/assets/svg/AppIcon";
+import { useUser } from "@/hooks/useUser";
 import React from "react";
-import { Image, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
+import { Text, View } from "react-native";
 
 export default function Hero() {
     const { t } = useTranslation();
+    const { user, loading } = useUser();
 
     return (
         <View className='mt-3 w-full'>
             <View className='flex-row justify-between items-center w-full'>
                 <View className='flex-row items-center gap-3'>
-                    <Image
-                        source={{ uri: "https://t3.ftcdn.net/jpg/06/78/09/78/240_F_678097871_G7OpoHQmiZTj4bHB7YW2HoH1syWfCbB9.jpg" }}
-                        className='w-[52px] h-[52px] rounded-full'
-                    />
-                    <View>
-                        <Text className='font-manrope-medium text-lg text-secondary-400 leading-7'>{t("welcome-back")}</Text>
-                        <Text className='font-manrope-bold text-2xl text-secondary-500 leading-7'>Dawid Piela!</Text>
-                    </View>
+                    {loading || !user.displayName ? (
+                        <>
+                            <View className='w-[52px] h-[52px] rounded-full bg-secondary-200 animate-pulse'></View>
+                            <View>
+                                <View className='w-[100px] h-[20px] bg-secondary-200 animate-pulse mb-2 rounded-md'></View>
+                                <View className='w-[150px] h-[20px] bg-secondary-200 animate-pulse mb-2 rounded-md'></View>
+                            </View>
+                        </>
+                    ) : (
+                        <>
+                            <View className='w-[52px] h-[52px] rounded-full bg-success-500 flex justify-center items-center'>
+                                <AppIcon
+                                    fill='#fff'
+                                    width={28}
+                                    height={28}
+                                    transform='rotate(-35)'
+                                />
+                            </View>
+                            <View>
+                                <Text className='font-manrope-medium text-lg text-secondary-400 leading-7'>{t("welcome-back")}</Text>
+                                <Text className='font-manrope-bold text-2xl text-secondary-500 leading-7'>{user.displayName || "Loading"}!</Text>
+                            </View>
+                        </>
+                    )}
                 </View>
             </View>
 

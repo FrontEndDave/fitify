@@ -16,8 +16,6 @@ export const resources = {
 export async function initI18n() {
     let lng = await AsyncStorage.getItem(STORAGE_KEY);
 
-    console.log("Current language:", lng);
-
     if (!lng) {
         lng = Localization.getLocales()[0]?.languageCode || "pl";
     }

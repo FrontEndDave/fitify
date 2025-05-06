@@ -2,16 +2,32 @@
     "see-more": "See more",
     "see-less": "See less",
     "welcome-back": "Welcome back",
-    "hero-title": "How’s your workout vibe today?",
+    "hero-title": "What’s your workout mood today?",
     "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     "auth": {
+        "alreadyHaveAccount": "Already have an account?",
+        "dontHaveAccount": "Don’t have an account yet?",
         "login": {
-            "tilte": "Zaloguj się",
-            "description": "Zaloguj się, aby uzyskać dostęp do swojego konta"
+            "title": "Log in",
+            "description": "Log in to access your account",
+            "button": "Log in",
+            "email": "Email",
+            "email-placeholder": "Enter your email address",
+            "password": "Password",
+            "password-placeholder": "Enter your password"
         },
         "register": {
-            "title": "Zarejestruj się",
-            "description": "Utwórz nowe konto, aby rozpocząć swoją podróż!"
+            "title": "Sign up",
+            "description": "Create a new account to start your journey!",
+            "full-name": "Full name",
+            "full-name-placeholder": "Enter your full name",
+            "email": "Email",
+            "email-placeholder": "Enter your email address",
+            "password": "Password",
+            "password-placeholder": "Enter your password",
+            "confirm-password": "Confirm password",
+            "confirm-password-placeholder": "Confirm your password",
+            "button": "Sign up"
         }
     },
     "workout-progress": {
@@ -19,64 +35,72 @@
         "completed": "Completed"
     },
     "today-activity": {
-        "title": "Today's Activity",
+        "title": "Today’s Activity",
         "steps": "Steps",
         "water": "Water",
         "calories": "Calories",
-        "no-exercise": "No Exercise",
+        "no-exercise": "No exercises",
         "no-exercise-description": "Start a workout"
     },
     "settings": {
         "title": "Settings",
-        "logout": "Logout",
+        "logout": "Log out",
         "language": "Language",
         "notifications": "Notifications",
-        "dark-mode": "Dark Mode",
-        "time": "Time Spent",
-        "total-workouts": "Total Workouts",
-        "join": "Member Since"
+        "dark-mode": "Dark mode",
+        "time": "Time spent",
+        "total-workouts": "Total workouts",
+        "join": "Member since"
     },
     "info": {
-        "title": "App Info",
+        "title": "App Information",
         "authors": "Authors",
-        "technology": "Technology",
-        "technology-content": "The app was built using React Native, Expo, Firebase, and Redux.",
+        "technology": "Technologies",
+        "technology-content": "The app was built using React Native, Expo, Firebase, and OpenAI integration.\n\nLibraries: React Hook Form, Zod, React Native Reanimated, and many others.",
         "version": "Version",
         "description": "Description",
-        "description-content": "FitApp was created to help users track their physical activity and maintain a healthy lifestyle."
+        "description-content": "FitnesApp was created for the “Golden App” contest. Its purpose is to help users track their physical activity and maintain a healthy lifestyle. The app features a chat with a virtual trainer to assist with exercise selection and meal planning. The app is available in both Polish and English."
     },
     "workout": {
         "title": "My Workouts",
         "exercises": "exercises",
-        "all-exercises": "All Exercises",
+        "all-exercises": "All exercises",
         "swipe": "Swipe up to see more",
         "duration": "Duration",
         "exercise": "Exercise",
         "completed_title": "Congratulations!",
-        "completed_message": "You've completed all sets!",
+        "completed_message": "You have completed all sets!",
         "completed": "Completed",
         "rest": "Rest",
         "workout": "Workout",
         "sets": "sets",
         "reps_sets": "Reps/Sets",
-        "rest_time": "Rest Time",
-        "exercise_time": "Exercise Time",
+        "rest_time": "Rest time",
+        "exercise_time": "Exercise time",
         "set": "Set"
+    },
+    "collection": {
+        "full-body-title": "Full Body Strength",
+        "full-body-description": "A complete workout to build overall strength.",
+        "core-abs-title": "Core & Abs Blast",
+        "core-abs-description": "Strengthen your core and sculpt your abs.",
+        "lower-body-title": "Lower Body Power",
+        "lower-body-description": "Strengthen and tone legs and glutes.",
+        "upper-body-title": "Upper Body Burn",
+        "upper-body-description": "Boost strength in arms, chest, and back.",
+        "hiit-title": "HIIT Cardio Challenge",
+        "hiit-description": "Burn calories fast with high-intensity moves."
     },
     "profile": {
         "title": "Edit Profile",
         "subtitle": "Account Information",
-        "name": "First Name",
-        "email": "Email",
-        "phone": "Phone",
-        "address": "Address",
-        "city": "City",
-        "country": "Country",
-        "zip": "Zip Code"
+        "username": "Username",
+        "username-placeholder": "Enter your username",
+        "saveChanges": "Save changes"
     },
     "language": {
         "title": "Set Language",
-        "subtitle": "Choose a language",
+        "subtitle": "Choose Language",
         "english": "English",
         "polish": "Polish",
         "SearchPlaceholder": "Search language"
@@ -89,36 +113,37 @@
     "workout-details": {
         "title": "Workout Details",
         "description": "Description",
-        "episodes": "All Exercises",
-        "continue": "Continue Workout",
-        "start": "Start Workout",
-        "finish": "Finish Workout"
+        "episodes": "All exercises",
+        "continue": "Continue workout",
+        "start": "Start workout",
+        "finish": "Finish workout"
     },
     "chat": {
         "title": "Personal Trainer",
-        "button": "Start Chat",
+        "button": "Start chat",
         "subtitle": "<gray>Hi {{user}},</gray> how can I help you today?",
-        "message": "💪 Hi! I'm your virtual trainer. Ask me anything about fitness!",
+        "message": "💪 Hi! I’m your virtual trainer. Ask me anything fitness-related!",
         "placeholder": "Ask me a question...",
         "you": "You",
-        "workout": "Workout Plans",
-        "workout_description": "Create and customize workout plans to fit your needs.",
-        "nutrition": "Nutrition Plans",
-        "nutrition_description": "Discover nutrition plans to help you reach your goals.",
+        "workout": "Workout plans",
+        "workout_description": "Create and customize workout plans to suit your needs.",
+        "nutrition": "Meal plans",
+        "nutrition_description": "Discover meal plans to help you reach your goals.",
         "progress": "Progress",
         "progress_description": "Track your progress and achievements.",
-        "exercise_tutorials": "Exercise Tutorials",
-        "exercise_tutorials_description": "Tutorial videos and proper technique instructions"
+        "exercise_tutorials": "Exercise tutorials",
+        "exercise_tutorials_description": "Instructional videos and proper technique guides"
     },
     "errors": {
-        "nameTooShort": "Name must be at least 2 characters",
-        "nameTooLong": "Name must be at most 50 characters",
+        "nameTooShort": "Name must be at least 2 characters long",
+        "nameTooLong": "Name can be up to 50 characters long",
         "invalidEmail": "Invalid email address",
-        "passwordTooShort": "Password must be at least 8 characters",
-        "passwordMissingUppercase": "Include at least one uppercase letter",
-        "passwordMissingNumber": "Include at least one number",
+        "passwordTooShort": "Password must be at least 8 characters long",
+        "passwordMissingUppercase": "Password must contain at least one uppercase letter",
+        "passwordMissingNumber": "Password must contain at least one number",
         "passwordsDontMatch": "Passwords do not match",
         "emailInUse": "This email is already registered",
-        "serverError": "Server error, please try again later"
+        "serverError": "Server error, please try again later",
+        "invalidCredentials": "Invalid login credentials"
     }
 }

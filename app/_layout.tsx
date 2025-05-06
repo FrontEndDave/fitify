@@ -42,7 +42,6 @@ export default function RootLayout() {
         if (loaded && !error) {
             const initializeApp = async () => {
                 SplashScreen.hideAsync();
-                console.log(i18next);
             };
             initializeApp();
         }

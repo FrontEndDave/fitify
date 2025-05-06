@@ -20,6 +20,40 @@ export const useUser = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
+    const refreshUser = async () => {
+        try {
+            setLoading(true);
+            const authUser = auth.currentUser;
+            if (!authUser) {
+                setUser(null);
+                return;
+            }
+
+            const userRef = ref(database, `users/${authUser.uid}`);
+            onValue(userRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    const dbData = snapshot.val();
+                    const mergedUser: UserData = {
+                        uid: authUser.uid,
+                        email: authUser.email,
+                        displayName: dbData.name || authUser.displayName,
+                        createdAt: dbData.createdAt,
+                        totalCalories: dbData.totalCalories || 0,
+                        totalMinutes: dbData.totalMinutes || 0,
+                        totalWorkouts: dbData.totalWorkouts || 0,
+                        completedExercises: dbData.completedExercises || {},
+                        dailyActivity: dbData.dailyActivity || {},
+                    };
+                    setUser(mergedUser);
+                }
+                setLoading(false);
+            });
+        } catch (err) {
+            setError(err instanceof Error ? err.message : "Unknown error");
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
         let unsubscribeDb: () => void = () => {};
 
@@ -45,7 +79,7 @@ export const useUser = () => {
                                 const mergedUser: UserData = {
                                     uid: authUser.uid,
                                     email: authUser.email,
-                                    displayName: authUser.displayName,
+                                    displayName: dbData.name,
                                     createdAt: dbData.createdAt,
                                     totalCalories: dbData.totalCalories || 0,
                                     totalMinutes: dbData.totalMinutes || 0,
@@ -81,5 +115,5 @@ export const useUser = () => {
         };
     }, []);
 
-    return { user, loading, error };
+    return { user, loading, error, refreshUser };
 };
