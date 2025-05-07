@@ -47,15 +47,14 @@ const Register = () => {
         if (!data) return;
 
         try {
-            const result = await initializeUser({
+            await initializeUser({
                 email: data.email.toLowerCase(),
                 password: data.password,
                 name: data.name,
             });
-            console.log("User registered successfully", result);
+            router.replace("/(tabs)");
         } catch (err: any) {
-            console.log("Register failed", err);
-            if (err === "auth/email-already-in-use") {
+            if (err === "EMAIL_EXISTS") {
                 setError("email", { message: t("errors.emailInUse") });
             } else {
                 setError("root", { message: t("errors.serverError") });

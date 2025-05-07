@@ -1,12 +1,14 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ref, set } from "firebase/database";
-import { auth, database } from "./config";
+import { database } from "./config";
 import { getUserData } from "./user";
 
 export const updateWorkoutProgress = async (workoutId: string, exerciseId: string) => {
-    const user = auth.currentUser;
+    const user = await AsyncStorage.getItem("uid");
+
     if (!user) return;
 
-    const progressRef = ref(database, `users/${user.uid}/completedWorkouts/${workoutId}/${exerciseId}`);
+    const progressRef = ref(database, `users/${user}/completedWorkouts/${workoutId}/${exerciseId}`);
     await set(progressRef, true);
 };
 
@@ -16,9 +18,9 @@ export const getCurrentWorkout = async () => {
 };
 
 export const resetWorkoutProgress = async (workoutId: string) => {
-    const user = auth.currentUser;
+    const user = await AsyncStorage.getItem("uid");
     if (!user) return;
 
-    const progressRef = ref(database, `users/${user.uid}/completedWorkouts/${workoutId}`);
+    const progressRef = ref(database, `users/${user}/completedWorkouts/${workoutId}`);
     await set(progressRef, null);
 };

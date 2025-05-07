@@ -1,19 +1,8 @@
-import { auth } from "@/services/firebase/config";
+import { useUser } from "@/hooks/useUser";
 import { Redirect, Stack } from "expo-router";
-import { onAuthStateChanged } from "firebase/auth";
-import { useEffect, useState } from "react";
 
 export default function AuthLayout() {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user);
-            setLoading(false);
-        });
-        return unsubscribe;
-    }, []);
+    const { user, loading } = useUser();
 
     if (loading) return null;
 

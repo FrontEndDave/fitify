@@ -30,7 +30,7 @@ const Video = ({ workoutName, videoUrl, exerciseData }: VideoProps) => {
     const { activeWorkout, completeEpisode } = useActiveWorkout(workoutName);
     const { addCompletedEpisode } = useDailyStats();
 
-    const player = useVideoPlayer(videoSource, (player) => {
+    const player = useVideoPlayer(videoUrl ? videoUrl : videoSource, (player) => {
         player.loop = true;
         player.muted = true;
         player.play();

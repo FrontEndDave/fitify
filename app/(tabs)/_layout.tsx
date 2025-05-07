@@ -2,11 +2,11 @@ import { ActiveChatIcon, ChatIcon } from "@/assets/svg/Chat";
 import { ActiveDiscoverIcon, DiscoverIcon } from "@/assets/svg/Discover";
 import { ActiveHomeIcon, HomeIcon } from "@/assets/svg/Home";
 import { ActiveSettingsIcon, SettingsIcon } from "@/assets/svg/Settings";
-import { useAuth } from "@/hooks/useAuth";
+import { useUser } from "@/hooks/useUser";
 import { Redirect, Tabs } from "expo-router";
 
 const Layout = () => {
-    const { user, loading } = useAuth();
+    const { user, loading } = useUser();
 
     if (loading) return null;
     if (!user) return <Redirect href='/(auth)/login' />;

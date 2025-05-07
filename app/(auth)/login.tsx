@@ -1,5 +1,6 @@
 import AuthHero from "@/components/auth/Hero";
 import LoginForm from "@/components/auth/LoginForm";
+import { useUser } from "@/hooks/useUser";
 import { loginUser } from "@/services/firebase/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
@@ -19,6 +20,7 @@ export type LoginFormData = z.infer<ReturnType<typeof createSchema>>;
 
 const Login = () => {
     const { t } = useTranslation();
+    const { refreshUser } = useUser();
     const schema = createSchema(t);
 
     const {
@@ -37,10 +39,9 @@ const Login = () => {
     const onSubmit = async (data: LoginFormData) => {
         try {
             await loginUser({ email: data.email.toLowerCase(), password: data.password });
-            router.replace("/");
+            router.replace("/(tabs)");
         } catch (err: any) {
-            console.log(err);
-            if (err === "auth/user-not-found" || err === "auth/wrong-password" || err === "auth/invalid-credential") {
+            if (err === "INVALID_LOGIN_CREDENTIALS") {
                 setError("password", { message: t("errors.invalidCredentials") });
             } else {
                 setError("root", { message: t("errors.serverError") });

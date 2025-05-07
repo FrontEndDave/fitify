@@ -1,8 +1,7 @@
 import { useUser } from "@/hooks/useUser";
-import { auth } from "@/services/firebase/config";
 import formatTime from "@/utils/formatTime";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
-import { signOut } from "firebase/auth";
 import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -14,7 +13,7 @@ const Hero = () => {
 
     const handleLogout = async () => {
         try {
-            await signOut(auth);
+            await AsyncStorage.removeItem("uid");
             router.replace("/(auth)/login");
         } catch (error) {
             console.error("Error signing out: ", error);

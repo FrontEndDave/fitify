@@ -1,6 +1,4 @@
-import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 import { initializeApp } from "firebase/app";
-import { getReactNativePersistence, initializeAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
@@ -15,10 +13,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig, "fitness-app");
 
-const auth = initializeAuth(app, {
-    persistence: getReactNativePersistence(ReactNativeAsyncStorage),
-});
-
 const database = getDatabase(app);
 
-export { auth, database };
+export { database };

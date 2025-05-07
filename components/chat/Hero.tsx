@@ -30,9 +30,10 @@ export default function Hero() {
         });
     };
 
-    if (loading || !user.displayName) return null;
+    if (loading || !user) return null;
 
-    const rawText = t("chat.subtitle", { user: user.displayName.split(" ")[0] });
+    const userName = user?.displayName ? user.displayName.split(" ")[0] : "Użytkowniku";
+    const rawText = t("chat.subtitle", { user: userName });
 
     return (
         <View className='flex felx-row items-start justify-between mt-4 pb-7 px-6'>

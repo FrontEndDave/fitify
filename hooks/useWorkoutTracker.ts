@@ -1,12 +1,13 @@
-import { auth, database } from "@/services/firebase/config";
+import { database } from "@/services/firebase/config";
 import { DailyStats, Episode, WorkoutProgress } from "@/types/exercise";
 import { get, onValue, ref, update } from "firebase/database";
 import { useEffect, useState } from "react";
+import { useUser } from "./useUser";
 
 const useWorkoutProgress = (workoutName: string) => {
     const [progress, setProgress] = useState<WorkoutProgress | null>(null);
     const [dailyStats, setDailyStats] = useState<DailyStats | null>(null);
-    const user = auth.currentUser;
+    const { user } = useUser();
 
     useEffect(() => {
         if (!user) return;

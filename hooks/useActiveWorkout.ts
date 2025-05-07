@@ -1,6 +1,7 @@
-import { auth, database } from "@/services/firebase/config";
+import { database } from "@/services/firebase/config";
 import { get, onValue, ref, set, update } from "firebase/database";
 import { useEffect, useState } from "react";
+import { useUser } from "./useUser";
 
 type ActiveWorkoutData = {
     startedAt: number;
@@ -14,10 +15,11 @@ export type ActiveWorkoutWithName = ActiveWorkoutData & {
 
 export const useActiveWorkout = (workoutName: string) => {
     const [activeWorkout, setActiveWorkout] = useState<ActiveWorkoutData | null>(null);
-    const user = auth.currentUser;
+    const { user, loading } = useUser();
 
     useEffect(() => {
         if (!user) return;
+        if (loading) return;
 
         const workoutRef = ref(database, `users/${user.uid}/activeWorkout/${workoutName}`);
         const unsubscribe = onValue(workoutRef, (snapshot) => {
@@ -26,7 +28,7 @@ export const useActiveWorkout = (workoutName: string) => {
         });
 
         return () => unsubscribe();
-    }, [user, workoutName]);
+    }, [user, workoutName, loading]);
 
     const startWorkout = (episodes: string[]) => {
         if (!user) return;
@@ -69,7 +71,7 @@ export const useActiveWorkout = (workoutName: string) => {
 };
 export const useAllActiveWorkoutsArray = () => {
     const [workouts, setWorkouts] = useState<ActiveWorkoutWithName[]>([]);
-    const user = auth.currentUser;
+    const { user } = useUser();
 
     useEffect(() => {
         if (!user) return;
@@ -82,7 +84,6 @@ export const useAllActiveWorkoutsArray = () => {
             }));
             setWorkouts(arr);
         });
-        return () => unsubscribe();
     }, [user]);
 
     return { workouts };

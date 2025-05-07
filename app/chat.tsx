@@ -7,28 +7,9 @@ import React, { useState } from "react";
 import { ActivityIndicator, FlatList, KeyboardAvoidingView, Platform, StatusBar, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Constants from "expo-constants";
 import { useTranslation } from "react-i18next";
 
-const API_URL = "https://api.routes.expo.app";
-
-const generateAPIUrl = (relativePath: string) => {
-    console.log("Constants", Constants.experienceUrl);
-
-    const origin = Constants?.experienceUrl?.replace("exp://", "http://") || API_URL;
-
-    const path = relativePath.startsWith("/") ? relativePath : `/${relativePath}`;
-
-    if (process.env.NODE_ENV === "development") {
-        return origin?.concat(path);
-    }
-
-    if (!API_URL) {
-        throw new Error("API_URL environment variable is not defined");
-    }
-
-    return API_URL.concat(path);
-};
+const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
 
 interface MessageItem {
     id: string;
@@ -61,7 +42,6 @@ const ChatScreen = () => {
             timestamp: new Date(),
         };
 
-        // Tymczasowa wiadomość bota
         const tempBotMessage: MessageItem = {
             id: "temp",
             type: "bot",
@@ -72,7 +52,7 @@ const ChatScreen = () => {
         setMessages((prev) => [...prev, userMessage, tempBotMessage]);
 
         try {
-            const response = await fetch(generateAPIUrl("/api/ai"), {
+            const response = await fetch(`${BACKEND_URL}/api/ai`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -80,7 +60,9 @@ const ChatScreen = () => {
                 body: JSON.stringify({ content: inputText }),
             });
 
-            if (!response.ok) throw new Error("Request failed");
+            if (!response.ok) {
+                return null;
+            }
 
             const reader = response.body?.getReader();
             const decoder = new TextDecoder();

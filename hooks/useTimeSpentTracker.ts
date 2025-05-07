@@ -8,23 +8,18 @@ const useTimeSpentTracker = () => {
     const [timeSpentMinutes, setTimeSpentMinutes] = useState<number>(0);
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
     const appStateRef = useRef(AppState.currentState);
-    const { user } = useUser();
-    const isMounted = useRef(true);
+
+    const { user, loading } = useUser();
 
     useEffect(() => {
+        if (!user || loading) return;
+
         const loadSavedTime = async () => {
             try {
-                const userId = user?.uid;
-                if (userId) {
-                    const userRef = ref(database, `users/${user.uid}`);
-                    const snapshot = await get(userRef);
-
-                    if (snapshot.exists()) {
-                        const data = snapshot.val();
-                        setTimeSpentMinutes(data.totalMinutes);
-                    } else {
-                        console.warn("Brak danych użytkownika.");
-                    }
+                const userRef = ref(database, `users/${user.uid}`);
+                const snapshot = await get(userRef);
+                if (snapshot.exists()) {
+                    setTimeSpentMinutes(snapshot.val().totalMinutes || 0);
                 }
             } catch (error) {
                 console.error("Error loading time from Firebase:", error);
@@ -32,41 +27,47 @@ const useTimeSpentTracker = () => {
         };
 
         loadSavedTime();
-        return () => {
-            isMounted.current = false;
-        };
-    }, [user]);
+    }, [user, loading]);
 
     useEffect(() => {
-        const handleAppStateChange = async (nextAppState: AppStateStatus) => {
+        if (!user || loading) {
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+                intervalRef.current = null;
+            }
+            return;
+        }
+
+        const handleAppStateChange = (nextAppState: AppStateStatus) => {
             if (appStateRef.current.match(/inactive|background/) && nextAppState === "active") {
-                if (user?.uid) {
-                    const userRef = ref(database, `users/${user.uid}`);
-                    set(userRef, {
-                        totalMinutes: timeSpentMinutes,
-                    });
-                }
+                set(ref(database, `users/${user.uid}`), { totalMinutes: timeSpentMinutes });
             }
 
             if (nextAppState === "active") {
                 if (intervalRef.current) clearInterval(intervalRef.current);
+
                 intervalRef.current = setInterval(() => {
-                    update(ref(database, `users/${user?.uid}`), {
+                    update(ref(database, `users/${user.uid}`), {
                         totalMinutes: timeSpentMinutes + 1,
                     });
                     setTimeSpentMinutes((prev) => prev + 1);
                 }, 60 * 1000);
             }
+
+            appStateRef.current = nextAppState;
         };
 
-        const subscription = AppState.addEventListener("change", handleAppStateChange);
+        const sub = AppState.addEventListener("change", handleAppStateChange);
         handleAppStateChange(AppState.currentState);
 
         return () => {
-            subscription.remove();
-            if (intervalRef.current) clearInterval(intervalRef.current);
+            sub.remove();
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+                intervalRef.current = null;
+            }
         };
-    }, [user, timeSpentMinutes]);
+    }, [user, timeSpentMinutes, loading]);
 
     return timeSpentMinutes;
 };

@@ -13,17 +13,7 @@
             "bundleIdentifier": "com.bacon.bacomponents",
             "infoPlist": {
                 "NSAppTransportSecurity": {
-                    "NSExceptionDomains": {
-                        "firebaseapp.com": {
-                            "NSIncludesSubdomains": true,
-                            "NSTemporaryExceptionAllowsInsecureHTTPLoads": true,
-                            "NSTemporaryExceptionMinimumTLSVersion": "TLSv1.2"
-                        },
-                        "googleapis.com": {
-                            "NSIncludesSubdomains": true,
-                            "NSTemporaryExceptionAllowsInsecureHTTPLoads": true
-                        }
-                    }
+                    "NSAllowsArbitraryLoads": true
                 }
             }
         },

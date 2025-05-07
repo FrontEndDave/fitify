@@ -1,57 +1,91 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { get, ref, set } from "firebase/database";
-import { auth, database } from "./config";
+import { database } from "./config";
+
+const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
 
 const initializeUser = async ({ email, password, name }: { email: string; password: string; name: string }) => {
     try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email.toLowerCase(), password);
-        const user = userCredential.user;
+        const res = await fetch(`${BACKEND_URL}/api/register`, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password, name }),
+        });
 
-        await updateProfile(user, { displayName: "Dawid Piela" });
+        const userCredential = await res.json();
+
+        if (!res.ok) {
+            return Promise.reject(userCredential.error);
+        }
+
+        if (!userCredential) {
+            throw new Error("User not found");
+        }
+
+        if (!userCredential.localId) {
+            throw new Error("User ID not found");
+        }
+
+        await AsyncStorage.setItem("uid", userCredential.localId);
+
+        const userRef = ref(database, `users/${userCredential.localId}`);
+        const userData = {
+            uid: userCredential.localId,
+            name: name,
+            createdAt: Date.now(),
+            totalCalories: 0,
+            totalMinutes: 0,
+            totalWorkouts: 0,
+            completedExercises: {},
+            dailyActivity: {},
+        };
 
         try {
-            if (userCredential.user) {
-                const user = auth.currentUser;
-
-                const userRef = ref(database, `users/${user.uid}`);
-
-                await set(userRef, {
-                    uid: user.uid,
-                    name,
-                    createdAt: Date.now(),
-                    totalMinutes: 0,
-                    totalWorkouts: 0,
-                    completedExercises: {},
-                    dailyActivity: {},
-                });
-
-                return userCredential.user;
-            }
+            await set(userRef, userData);
         } catch (error) {
-            console.log("Error creating user in database", error);
-            return Promise.reject(error);
+            console.error("Error setting user data:", error);
+            throw new Error("Failed to set user data");
         }
-    } catch (error) {
-        return Promise.reject(error.code);
+        return userData;
+    } catch (err) {
+        return Promise.reject(typeof err === "string" ? err : err);
     }
 };
 
 const loginUser = async ({ email, password }: { email: string; password: string }) => {
     try {
-        await signInWithEmailAndPassword(auth, email.toLowerCase(), password);
+        const res = await fetch(`${BACKEND_URL}/api/login`, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const userCredential = await res.json();
+
+        if (!res.ok) {
+            return Promise.reject(userCredential.error);
+        }
+
+        await AsyncStorage.setItem("uid", userCredential.localId);
     } catch (error) {
         return Promise.reject(error.code);
     }
 };
 
 const getUserData = async () => {
-    const user = auth.currentUser;
+    const userUid = await AsyncStorage.getItem("uid");
 
-    if (!user) {
+    if (!userUid) {
         return null;
     }
 
-    const userRef = ref(database, `users/${user.uid}`);
+    const userRef = ref(database, `users/${userUid}`);
     const snapshot = await get(userRef);
 
     if (!snapshot.exists()) {
@@ -65,14 +99,10 @@ const getUserData = async () => {
 
 const updateUsername = async (newName: string) => {
     try {
-        const user = auth.currentUser;
-        if (!user) throw new Error("User not authenticated");
+        const userUid = await AsyncStorage.getItem("uid");
+        if (!userUid) throw new Error("User not authenticated");
 
-        await updateProfile(user, {
-            displayName: newName,
-        });
-
-        const userRef = ref(database, `users/${user.uid}/name`);
+        const userRef = ref(database, `users/${userUid}/name`);
         await set(userRef, newName);
 
         return true;

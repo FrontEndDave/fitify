@@ -32,7 +32,7 @@ const RegisterForm = ({ control, handleSubmit, onSubmit, errors, isSubmitting }:
 
     return (
         <View className='p-8 mt-5 flex-col gap-6 w-full'>
-            <View className='relative'>
+            <View className='relative h-18'>
                 <Text className='absolute left-6 -top-2 z-10 bg-background px-1 text-secondary-300 font-manrope-medium'>{t("auth.register.full-name")}</Text>
                 <Controller
                     control={control}
@@ -41,7 +41,7 @@ const RegisterForm = ({ control, handleSubmit, onSubmit, errors, isSubmitting }:
                         <TextInput
                             placeholder={t("auth.register.full-name-placeholder")}
                             placeholderTextColor='#ACB5BB'
-                            className='border border-secondary-200 rounded-full p-5 h-15 font-manrope-medium text-lg text-secondary-500'
+                            className='border border-secondary-200 rounded-full p-5 h-[60px] font-manrope-medium text-lg text-secondary-500'
                             onBlur={onBlur}
                             onChangeText={onChange}
                             value={value}
@@ -52,7 +52,7 @@ const RegisterForm = ({ control, handleSubmit, onSubmit, errors, isSubmitting }:
                 {renderError("name")}
             </View>
 
-            <View className='relative'>
+            <View className='relative h-18'>
                 <Text className='absolute left-6 -top-2 z-10 bg-background px-1 text-secondary-300 font-manrope-medium'>{t("auth.register.email")}</Text>
                 <Controller
                     control={control}
@@ -62,7 +62,7 @@ const RegisterForm = ({ control, handleSubmit, onSubmit, errors, isSubmitting }:
                             placeholder={t("auth.register.email-placeholder")}
                             keyboardType='email-address'
                             placeholderTextColor='#ACB5BB'
-                            className='border border-secondary-200 rounded-full p-5 h-15 font-manrope-medium text-lg text-secondary-500'
+                            className='border border-secondary-200 rounded-full p-5 h-18 font-manrope-medium text-lg text-secondary-500'
                             onBlur={onBlur}
                             onChangeText={onChange}
                             value={value}
@@ -73,20 +73,24 @@ const RegisterForm = ({ control, handleSubmit, onSubmit, errors, isSubmitting }:
                 {renderError("email")}
             </View>
 
-            <View className='relative'>
+            <View className='relative h-18'>
                 <Text className='absolute left-6 -top-2 z-10 bg-background px-1 text-secondary-300 font-manrope-medium'>{t("auth.register.password")}</Text>
                 <Controller
                     control={control}
                     name='password'
                     render={({ field: { onChange, onBlur, value } }) => (
                         <TextInput
-                            secureTextEntry={showPassword}
+                            autoCorrect={false}
+                            secureTextEntry={!showPassword}
                             placeholder={t("auth.register.password-placeholder")}
                             placeholderTextColor='#ACB5BB'
-                            className='border border-secondary-200 rounded-full p-5 h-15 font-manrope-medium text-lg text-secondary-500 overflow-hidden'
+                            className='border border-secondary-200 rounded-full p-5 h-18 font-manrope-medium text-lg text-secondary-500 overflow-hidden'
                             onBlur={onBlur}
                             onChangeText={onChange}
                             value={value}
+                            autoComplete='off'
+                            importantForAutofill='no'
+                            textContentType='oneTimeCode'
                         />
                     )}
                 />
@@ -103,20 +107,24 @@ const RegisterForm = ({ control, handleSubmit, onSubmit, errors, isSubmitting }:
                 {renderError("password")}
             </View>
 
-            <View className='relative'>
+            <View className='relative h-16'>
                 <Text className='absolute left-6 -top-2 z-10 bg-background px-1 text-secondary-300 font-manrope-medium'>{t("auth.register.confirm-password")}</Text>
                 <Controller
                     control={control}
                     name='confirmPassword'
                     render={({ field: { onChange, onBlur, value } }) => (
                         <TextInput
-                            secureTextEntry={showConfirmPassword}
+                            autoCorrect={false}
+                            secureTextEntry={!showConfirmPassword}
                             placeholder={t("auth.register.confirm-password-placeholder")}
                             placeholderTextColor='#ACB5BB'
-                            className='border border-secondary-200 rounded-full p-5 h-15 font-manrope-medium text-lg text-secondary-500 overflow-hidden'
+                            className='border border-secondary-200 rounded-full p-5 h-16 font-manrope-medium text-lg text-secondary-500 overflow-hidden'
                             onBlur={onBlur}
                             onChangeText={onChange}
                             value={value}
+                            autoComplete='off'
+                            importantForAutofill='no'
+                            textContentType='oneTimeCode'
                         />
                     )}
                 />
@@ -136,7 +144,7 @@ const RegisterForm = ({ control, handleSubmit, onSubmit, errors, isSubmitting }:
             <TouchableOpacity
                 onPress={handleSubmit(onSubmit)}
                 disabled={isSubmitting}
-                className={`rounded-full w-full py-4 ${isSubmitting ? "bg-success-200" : "bg-success-400"}`}>
+                className={`rounded-full w-full mt-4 py-4 ${isSubmitting ? "bg-success-200" : "bg-success-400"}`}>
                 {isSubmitting ? (
                     <ActivityIndicator
                         size='small'

@@ -1,11 +1,12 @@
-import { auth, database } from "@/services/firebase/config";
+import { database } from "@/services/firebase/config";
 import { format } from "date-fns";
 import { onValue, ref, update } from "firebase/database";
 import { useEffect, useState } from "react";
+import { useUser } from "./useUser";
 
 export const useDailyStats = () => {
-    const user = auth.currentUser;
     const today = format(new Date(), "yyyy-MM-dd");
+    const { user, loading } = useUser();
 
     const [stats, setStats] = useState<{
         calories: number;
@@ -16,7 +17,7 @@ export const useDailyStats = () => {
     });
 
     useEffect(() => {
-        if (!user) return;
+        if (loading) return;
         const statsRef = ref(database, `users/${user.uid}/dailyActivity/${today}`);
 
         const unsubscribe = onValue(statsRef, (snapshot) => {
@@ -25,10 +26,9 @@ export const useDailyStats = () => {
         });
 
         return () => unsubscribe();
-    }, [user, today]);
+    }, [today, user, loading]);
 
     const addCompletedEpisode = (exerciseName: string, kcalPerMinute: number, durationMs: number, sets: number, reps: number) => {
-        if (!user) return;
         const statsRef = ref(database, `users/${user.uid}/dailyActivity/${today}`);
 
         const durationMinutes = durationMs / 1000 / 60;
