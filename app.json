@@ -38,10 +38,7 @@
             "typedRoutes": true
         },
         "extra": {
-            "router": {},
-            "eas": {
-                "projectId": "33db9917-e40b-4db9-bb2e-23425bff4a8d"
-            }
+            "router": {}
         },
         "owner": "dawidpiela"
     }
