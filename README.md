@@ -16,6 +16,7 @@ Aplikacja mobilna wykonana na konkurs "Złota Apka", pozwala użytkownikom na ś
 - Node.js 22.x+
 - Yarn/pnpm (`npm install -g pnpm`)
 - Expo Go na urządzeniu lub emulator IOS
+- W przypadku emulatora IOS [CocoaPods](https://cocoapods.org/)
 
 ## Instalacja i uruchomienie 🚀
 ```bash
